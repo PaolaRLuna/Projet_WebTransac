@@ -26,7 +26,7 @@
                 </ul>
                 </li>
                 
-                <li><a href="contact.php">Contact</a></li>
+                <li><a href="contact.php">Contactez-nous</a></li>
                 <li><a class="getstarted" href="membres.php">Se connecter</a></li>
                 <li><a class="getstarted" href="inscription.php">S'inscrire</a></li>
             </ul>
