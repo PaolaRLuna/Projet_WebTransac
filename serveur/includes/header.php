@@ -14,7 +14,7 @@
                     <li><a href="#">Pâtes fraîches</a></li>
                     <li><a href="#">Sauces</a></li>
                     <li><a href="#">Fromages</a></li>
-                    <li><a href="#">Prêt-à-manger</a></li>
+                    <li><a href="#">Prêts-à-manger</a></li>
                 </ul>
                 </li>
 
