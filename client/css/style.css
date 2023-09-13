@@ -25,12 +25,12 @@ body {
   h6 {
     font-family: "Raleway", sans-serif;
   }
-/*   
+  
   #main {
     margin-top: 70px;
     z-index: 3;
     position: relative;
-  } */
+  }
   
   /*--------------------------------------------------------------
   # Back to top button
@@ -98,12 +98,6 @@ body {
     float: left;
   }
 
-  #panier {
-    margin-left: 60px;
-    margin-top: 25px;
-    max-height: 50px;
-  }
-
   #header .logo .text-light {
     width: 100%;
     font-family: 'Bradley Hand', sans-serif;
@@ -114,6 +108,11 @@ body {
     margin-top: 30px;
   }
 
+  #panier {
+    margin-left: 40px;
+    margin-top: 25px;
+    max-height: 50px;
+  }
   /*--------------------------------------------------------------
   # Navigation Menu
   --------------------------------------------------------------*/
@@ -122,7 +121,7 @@ body {
   */
   .navbar {
     padding: 0;
-    margin-left: 350px;
+    margin-left: 320px;
     margin-top: 5px;
   }
   
@@ -164,7 +163,6 @@ body {
   .navbar .active:focus,
   .navbar li:hover>a {
     color: #2f23db;
-    text-decoration: underline;
   }
   
   .navbar .getstarted,
@@ -235,17 +233,6 @@ body {
     left: 100%;
     visibility: visible;
   }
-  
-  @media (max-width: 1366px) {
-    .navbar .dropdown .dropdown ul {
-      left: -90%;
-    }
-  
-    .navbar .dropdown .dropdown:hover>ul {
-      left: -100%;
-    }
-  }
-
 
 /*--------------------------------------------------------------
 # Hero Section
@@ -257,7 +244,7 @@ body {
     background-size: cover;
     position: relative;
     margin-bottom: -140px;
-    z-index: 1;
+    /* z-index: 1; */
   }
   
   #hero:before {
@@ -297,31 +284,6 @@ body {
     font-size: 24px;
   }
   
-  #hero .btn-get-started {
-    font-family: "Raleway", sans-serif;
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 1px;
-    display: inline-block;
-    padding: 8px 28px;
-    border-radius: 50px;
-    transition: 0.5s;
-    margin: 10px;
-    border: 2px solid #94c045;
-    text-transform: uppercase;
-    color: #fff;
-  }
-  
-  #hero .btn-get-started:hover {
-    background: #94c045;
-  }
-  
-  @media (min-width: 1024px) {
-    #hero {
-      background-attachment: fixed;
-    }
-  }
-  
   @media (max-width: 768px) {
     #hero {
       height: 100vh;
@@ -343,16 +305,35 @@ body {
     }
   }
   
-  @media (max-height: 500px) {
-    #hero {
-      height: 120vh;
-    }
-  }
   
+/*--------------------------------------------------------------
+# Produits vedette
+--------------------------------------------------------------*/
+  .about .container {
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    padding-bottom: 15px;
+    background: #fff;
+  }
+
+  #entete1 {
+    margin-top:50px;
+  }
+
+  .categorie {
+    margin: auto;
+  }
+
+  .cards_produits {
+    margin-top:20px;
+    display: flex;
+    justify-content: space-around;
+  }
+
+
   /*--------------------------------------------------------------
   # Features
-  --------------------------------------------------------------*/
-  .features .card {
+  /* --------------------------------------------------------------*/
+  /* .features .card {
     border: 0;
     padding: 160px 20px 20px 20px;
     position: relative;
@@ -407,13 +388,13 @@ body {
   .features .card:hover .card-title a,
   .features .card:hover .card-text {
     color: #fff;
-  }
+  } */
   
   
   /*--------------------------------------------------------------
   # Pricing
   --------------------------------------------------------------*/
-  .pricing .box {
+  /*.pricing .box {
     padding: 20px;
     background: #fff;
     text-align: center;
@@ -521,144 +502,8 @@ body {
     background: #94c045;
     color: #fff;
   }
-  
-  /*--------------------------------------------------------------
-  # Contact
-  --------------------------------------------------------------*/
-  .contact .info {
-    width: 100%;
-    background: #fff;
-  }
-  
-  .contact .info i {
-    font-size: 20px;
-    color: #94c045;
-    float: left;
-    width: 44px;
-    height: 44px;
-    background: #f0f6e5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .contact .info h4 {
-    padding: 0 0 0 60px;
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #3c4133;
-  }
-  
-  .contact .info p {
-    padding: 0 0 0 60px;
-    margin-bottom: 0;
-    font-size: 14px;
-    color: #717a60;
-  }
-  
-  .contact .info .email,
-  .contact .info .phone {
-    margin-top: 40px;
-  }
-  
-  .contact .info .email:hover i,
-  .contact .info .address:hover i,
-  .contact .info .phone:hover i {
-    background: #94c045;
-    color: #fff;
-  }
-  
-  .contact .php-email-form {
-    width: 100%;
-    background: #fff;
-  }
-  
-  .contact .php-email-form .form-group {
-    padding-bottom: 8px;
-  }
-  
-  .contact .php-email-form .error-message {
-    display: none;
-    color: #fff;
-    background: #ed3c0d;
-    text-align: left;
-    padding: 15px;
-    font-weight: 600;
-  }
-  
-  .contact .php-email-form .error-message br+br {
-    margin-top: 25px;
-  }
-  
-  .contact .php-email-form .sent-message {
-    display: none;
-    color: #fff;
-    background: #18d26e;
-    text-align: center;
-    padding: 15px;
-    font-weight: 600;
-  }
-  
-  .contact .php-email-form .loading {
-    display: none;
-    background: #fff;
-    text-align: center;
-    padding: 15px;
-  }
-  
-  .contact .php-email-form .loading:before {
-    content: "";
-    display: inline-block;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    margin: 0 10px -6px 0;
-    border: 3px solid #18d26e;
-    border-top-color: #eee;
-    animation: animate-loading 1s linear infinite;
-  }
-  
-  .contact .php-email-form input,
-  .contact .php-email-form textarea {
-    border-radius: 0;
-    box-shadow: none;
-    font-size: 14px;
-  }
-  
-  .contact .php-email-form input {
-    height: 44px;
-  }
-  
-  .contact .php-email-form textarea {
-    padding: 10px 12px;
-  }
-  
-  .contact .php-email-form button[type=submit] {
-    background: #94c045;
-    border: 0;
-    padding: 10px 24px;
-    color: #fff;
-    transition: 0.4s;
-    border-radius: 50px;
-  }
-  
-  .contact .php-email-form button[type=submit]:hover {
-    background: #aacd6b;
-  }
-  
-  @keyframes animate-loading {
-    0% {
-      transform: rotate(0deg);
-    }
-  
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  
+   */
+
   
   /*--------------------------------------------------------------
   # Footer
