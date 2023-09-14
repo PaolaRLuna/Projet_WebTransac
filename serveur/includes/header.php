@@ -35,4 +35,7 @@
         <div class="panier">
             <a href="panier.php"><img src="client/images/general/panier.png" alt="voir le panier" id="panier"></a>
         </div>
+        <div class="favoris">
+            <a href="favoris.php"><img src="client/images/general/like.png" alt="voir les favoris" id="favoris"></a>
+        </div>
 </header>
