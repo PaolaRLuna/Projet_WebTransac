@@ -11,10 +11,11 @@
     <script src="client/utilitaires/bootstrap-5.3.0-alpha1-dist/js/bootstrap.min.js"></script>
     <script src="client/js/global.js"></script>
 
+    <script src="client/js/global.js"></script>
     <link href="client/css/style.css" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/bradley-hand-2" rel="stylesheet">
 </head>
-<body>
+<body onLoad>
 
     <?php
         require_once('serveur/includes/header.php');
@@ -78,7 +79,7 @@
                             </ul>
                             <div class="card-body">
                                 <a href="#" class="card-link">Ajouter au panier</a>
-                                <a href="#" class="card-link"><img src="client/images/general/notlike.png" alt="ajouter aux favoris"></a>
+                                <a class="card-link" onclick='switchLike();'><img class="etat-like" src="client/images/general/notlike.png" alt="ajouter aux favoris"></a>
                             </div>
                         </div>
 
@@ -93,7 +94,7 @@
                             </ul>
                             <div class="card-body">
                                 <a href="#" class="card-link">Ajouter au panier</a>
-                                <a href="#" class="card-link"><img src="client/images/general/notlike.png" alt="ajouter aux favoris"></a>
+                                <a href="#" class="card-link" onclick="switchLike()"><img class="etat-like" src="client/images/general/notlike.png" alt="ajouter aux favoris"></a>
                             </div>
                         </div>
 
@@ -108,7 +109,7 @@
                             </ul>
                             <div class="card-body">
                                 <a href="#" class="card-link">Ajouter au panier</a>
-                                <a href="#" class="card-link"><img src="client/images/general/notlike.png" alt="ajouter aux favoris"></a>
+                                <a href="#" class="card-link" onclick="switchLike()"><img class="etat-like" src="client/images/general/notlike.png" alt="ajouter aux favoris"></a>
                             </div>
                         </div>
 
