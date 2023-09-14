@@ -4,29 +4,28 @@
         <div class="row">
 
           <div class="col-lg-3 col-md-6 footer-info">
-            <h3>Serenity</h3>
-            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus. Scelerisque felis imperdiet proin fermentum leo. Amet volutpat consequat mauris nunc congue.</p>
+            <h3>Pâte-à-Pouf</h3>
+            <p>Chez Pâte-à-Pouf, nous sommes plus qu'un simple centre de plats à emporter et plus qu'une épicerie de produits spécialisée. Nous sommes une communauté. Une famille. Et nous prenons toujours soin de notre famille!</p>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Useful Links</h4>
+            <h4>Service à la clientèle</h4>
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Terms of service</a></li>
-              <li><a href="#">Privacy policy</a></li>
+              <li><a href="#">Conditions générales</a></li>
+              <li><a href="#">Politique de confidentialité</a></li>
+              <li><a href="#">Carrières</a></li>
+              <li><a href="#">FAQ</a></li>
             </ul>
           </div>
 
           <div class="col-lg-3 col-md-6 footer-contact">
             <h4>Contactez-nous</h4>
             <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
+              555 5e avenue <br>
+              Montréal, Québec<br>
+              Canada <a href=""><img src="client/images/general/localisation.png"></a><br><br>
+              <strong>Téléphone:</strong><a id="tel"> +1 514 555 5555</a><br>
+              <strong>Courriel:</strong><a id="email" href="mailto:pate-a-pouf@info.com"> pate-a-pouf@info.com</a><br>
             </p>
 
             <div>
@@ -51,7 +50,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Pâte-à-Pouf</span></strong>. Tous droits réservés.
+        2023 &copy; Copyright <strong><span>Pâte-à-Pouf</span></strong>. Tous droits réservés.
       </div>
     </div>
   </footer>

@@ -34,49 +34,19 @@ body {
   }
   
   /*--------------------------------------------------------------
-  # Back to top button
-  --------------------------------------------------------------*/
-  /* .back-to-top {
-    position: fixed;
-    visibility: hidden;
-    opacity: 0;
-    right: 15px;
-    bottom: 15px;
-    z-index: 996;
-    background: #94c045;
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
-    transition: all 0.4s;
-  }
-  
-  .back-to-top i {
-    font-size: 28px;
-    color: #fff;
-    line-height: 0;
-  }
-  
-  .back-to-top:hover {
-    background: #a6ca63;
-    color: #fff;
-  }
-  
-  .back-to-top.active {
-    visibility: visible;
-    opacity: 1;
-  } */
-  
-  /*--------------------------------------------------------------
   # Header
   --------------------------------------------------------------*/
   #header {
     height: 100px;
-    background: #141611;
+    background: #141611b9;
     color:#fff;
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
     display: flex;
-    margin-top: 50px;
-    /* position: absolute; */
+    position: fixed; 
+    top: 0px; 
+    width: 100%; 
+    z-index: 300;
+    
   }
 
   #header .logo h1 a,
@@ -103,14 +73,14 @@ body {
 
   #panier {
     margin-left: 40px;
-    margin-top: 25px;
+    margin-top: 33px;
     max-height: 40px;
   }
 
   #favoris {
     height: 20px;
     margin-left: 30px;
-    margin-top: 39px;
+    margin-top: 43px;
     margin-right: 50px;
   }
 
@@ -191,7 +161,7 @@ body {
     z-index: 99;
     opacity: 0;
     visibility: hidden;
-    background: rgb(126, 122, 122);
+    background: #141611cc;
     box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
     transition: 0.3s;
   }
@@ -201,13 +171,11 @@ body {
   }
   
   .navbar .dropdown ul a {
-    padding: 10px 20px;
-    font-size: 15px;
+    padding: 5px 20px;
+    font-size: 22px;
     text-transform: none;
-  }
-  
-  .navbar .dropdown ul a i {
-    font-size: 12px;
+    letter-spacing: 1.5px;
+    font-size: smaller;
   }
   
   .navbar .dropdown ul a:hover,
@@ -236,7 +204,7 @@ body {
   }
 
 /*--------------------------------------------------------------
-# Hero Section
+# Section image d'accueil
 --------------------------------------------------------------*/
 #hero {
     width: 100%;
@@ -334,6 +302,13 @@ body {
   }
 
   /*--------------------------------------------------------------
+  # Actions sur produits
+  --------------------------------------------------------------*/
+  /* .etat-like{
+
+  } */
+
+  /*--------------------------------------------------------------
   # Footer
   --------------------------------------------------------------*/
   #footer {
@@ -344,7 +319,14 @@ body {
   }
   
   .liens {
-    max-width: 40px;
+    width: 30px;
+    margin-right: 5px;
+  }
+
+  #tel, #email {
+    cursor: pointer;
+    text-decoration: underline;
+    color:#fff;
   }
   
   #footer .footer-top {
@@ -357,48 +339,15 @@ body {
   }
   
   #footer .footer-top .footer-info h3 {
-    font-size: 26px;
+    font-size: 30px;
     margin: 0 0 10px 0;
     padding: 2px 0 2px 0;
     line-height: 1;
     font-weight: 600;
     letter-spacing: 3px;
     color: #9fc658;
-  }
-  
-  #footer .footer-top .footer-info p {
-    font-size: 14px;
-    line-height: 24px;
-    margin-bottom: 0;
-    font-family: "Raleway", sans-serif;
-    color: #fff;
-  }
-  
-  #footer .footer-top .social-links a {
-    display: inline-block;
-    background: #3c4133;
-    color: #fff;
-    line-height: 1;
-    margin-right: 4px;
-    border-radius: 50%;
-    text-align: center;
-    width: 36px;
-    height: 36px;
-    transition: 0.3s;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  #footer .footer-top .social-links a i {
-    line-height: 0;
-    font-size: 16px;
-  }
-  
-  #footer .footer-top .social-links a:hover {
-    background: #94c045;
-    color: #fff;
-    text-decoration: none;
+    font-family: 'Bradley Hand', sans-serif;
+    font-style: oblique;
   }
   
   #footer .footer-top h4 {
@@ -429,10 +378,6 @@ body {
     width: 60px;
   }
   
-  #footer .footer-top .footer-links {
-    margin-bottom: 30px;
-  }
-  
   #footer .footer-top .footer-links ul {
     list-style: none;
     padding: 5px 0 0 0;
@@ -458,6 +403,7 @@ body {
   
   #footer .footer-top .footer-contact p {
     line-height: 26px;
+    padding: 0 0 10px 0;
   }
   
   #footer .footer-top .footer-newsletter {
@@ -491,4 +437,3 @@ body {
     text-align: center;
     padding-top: 30px;
   }
-  
