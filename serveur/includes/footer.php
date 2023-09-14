@@ -23,7 +23,7 @@
             <p>
               555 5e avenue <br>
               Montréal, Québec<br>
-              Canada <a href=""><img src="client/images/general/localisation.png"></a><br><br>
+              Canada <a id="carte" onClick='montrerCarte();'><img src="client/images/general/localisation.png"></a><br><br>
               <strong>Téléphone:</strong><a id="tel"> +1 514 555 5555</a><br>
               <strong>Courriel:</strong><a id="email" href="mailto:pate-a-pouf@info.com"> pate-a-pouf@info.com</a><br>
             </p>
@@ -53,4 +53,7 @@
         2023 &copy; Copyright <strong><span>Pâte-à-Pouf</span></strong>. Tous droits réservés.
       </div>
     </div>
+
+    <div id="carteForm"></div>
+
   </footer>
