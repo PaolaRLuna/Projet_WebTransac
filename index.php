@@ -37,29 +37,29 @@
                     <h2 id="entete1">Découvrez nos produits par catégories...</h2>
                     <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
                         <div class="count-box py-5">
-                        <a href="#"><img class="categorie" src="client/images/general/pate.png"></a>
-                        <p>Pâtes fraîches</p>
+                        <a href="#"><img class="categorie-img" src="client/images/general/pate.png"></a>
+                        <p class="categorie">Pâtes fraîches</p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
                         <div class="count-box py-5">
-                        <a href="#"><img class="categorie" src="client/images/general/sauce.png"></a>
-                        <p>Sauces</p>
+                        <a href="#"><img class="categorie-img" src="client/images/general/sauce.png"></a>
+                        <p class="categorie">Sauces</p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
                         <div class="count-box pb-5 pt-0 pt-lg-5">
-                        <a href="#"><img class="categorie" src="client/images/general/fromage.png"></a>
-                        <p>Fromages</p>
+                        <a href="#"><img class="categorie-img" src="client/images/general/fromage.png"></a>
+                        <p class="categorie">Fromages</p>
                         </div>
                     </div>
 
                     <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
                         <div class="count-box pb-5 pt-0 pt-lg-5">
-                        <a href="#"><img class="categorie" src="client/images/general/plat.png"></a>
-                        <p>Prêts-à-manger</p>
+                        <a href="#"><img class="categorie-img" src="client/images/general/plat.png"></a>
+                        <p class="categorie">Prêts-à-manger</p>
                         </div>
                     </div>
 
@@ -68,9 +68,9 @@
 
                     <div class="cards_produits">
                         <div class="card" style="width: 18rem;">
-                            <img src="client/images/general/test.jpg" class="card-img-top" alt="...">
+                            <a href="#"><img src="client/images/general/test.jpg" class="card-img-top"></a>
                             <div class="card-body">
-                                <h5 class="card-title">Gnocchi di patate duri frais</h5>
+                                <a href="#"><h5 class="card-title">Gnocchi di patate duri frais</h5></a>
                                 <p class="card-text"><b>Ingrédients :</b> Farine enrichie, fécule de pomme de terre, pommes de terre, sel.</p>
                             </div>
                             <ul class="list-group list-group-flush">
@@ -83,32 +83,46 @@
                         </div>
 
                         <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
+                            <a href="#"><img src="client/images/general/test.jpg" class="card-img-top"></a>
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                <a href="#"><h5 class="card-title">Gnocchi di patate duri frais</h5></a>
+                                <p class="card-text"><b>Ingrédients :</b> Farine enrichie, fécule de pomme de terre, pommes de terre, sel.</p>
                             </div>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item">An item</li>
-                                <li class="list-group-item">A second item</li>
-                                <li class="list-group-item">A third item</li>
+                                <li class="list-group-item">5.25$ / (500g)</li>
                             </ul>
                             <div class="card-body">
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
+                                <a href="#" class="card-link">Ajouter au panier</a>
+                                <a href="#" class="card-link"><img src="client/images/general/notlike.png" alt="ajouter aux favoris"></a>
                             </div>
                         </div>
+
+                        <div class="card" style="width: 18rem;">
+                            <a href="#"><img src="client/images/general/test.jpg" class="card-img-top"></a>
+                            <div class="card-body">
+                                <a href="#"><h5 class="card-title">Gnocchi di patate duri frais</h5></a>
+                                <p class="card-text"><b>Ingrédients :</b> Farine enrichie, fécule de pomme de terre, pommes de terre, sel.</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">5.25$ / (500g)</li>
+                            </ul>
+                            <div class="card-body">
+                                <a href="#" class="card-link">Ajouter au panier</a>
+                                <a href="#" class="card-link"><img src="client/images/general/notlike.png" alt="ajouter aux favoris"></a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 </div>
 
-
-
-
-
             </div>
         </section>
     </main>
+
+    <?php
+        require_once('serveur/includes/footer.php');
+    ?>
 
 </body>
 </html>

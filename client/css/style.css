@@ -30,6 +30,7 @@ body {
     margin-top: 70px;
     z-index: 3;
     position: relative;
+    height: 900px;
   }
   
   /*--------------------------------------------------------------
@@ -66,29 +67,21 @@ body {
   } */
   
   /*--------------------------------------------------------------
-  # Disable AOS delay on mobile
-  --------------------------------------------------------------*/
-  /* @media screen and (max-width: 768px) {
-    [data-aos-delay] {
-      transition-delay: 0 !important;
-    }
-  } */
-  
-  /*--------------------------------------------------------------
   # Header
   --------------------------------------------------------------*/
   #header {
     height: 100px;
-    background: #fff;
+    background: #141611;
+    color:#fff;
     box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-    /* opacity: 0.8; */
     display: flex;
     margin-top: 50px;
+    /* position: absolute; */
   }
 
   #header .logo h1 a,
   #header .logo h1 a:hover {
-    color: #3c4133;
+    color: #fff;
     text-decoration: none;
   }
   
@@ -111,8 +104,16 @@ body {
   #panier {
     margin-left: 40px;
     margin-top: 25px;
-    max-height: 50px;
+    max-height: 40px;
   }
+
+  #favoris {
+    height: 20px;
+    margin-left: 30px;
+    margin-top: 39px;
+    margin-right: 50px;
+  }
+
   /*--------------------------------------------------------------
   # Navigation Menu
   --------------------------------------------------------------*/
@@ -146,7 +147,7 @@ body {
     font-family: "Raleway", sans-serif;
     font-size: 18px;
     font-weight: 600;
-    color: #565e49;
+    color: #fff;
     white-space: nowrap;
     transition: 0.3s;
   }
@@ -162,12 +163,12 @@ body {
   .navbar .active,
   .navbar .active:focus,
   .navbar li:hover>a {
-    color: #2f23db;
+    color: #9fc658;
   }
   
   .navbar .getstarted,
   .navbar .getstarted:focus {
-    background: #2f23db;
+    background: #9fc658;
     padding: 8px 25px;
     margin-left: 30px;
     border-radius: 50px;
@@ -177,7 +178,7 @@ body {
   .navbar .getstarted:hover,
   .navbar .getstarted:focus:hover {
     color: #fff;
-    background: #2f23db;
+    background: #9fc658;
   }
   
   .navbar .dropdown ul {
@@ -190,7 +191,7 @@ body {
     z-index: 99;
     opacity: 0;
     visibility: hidden;
-    background: #fff;
+    background: rgb(126, 122, 122);
     box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
     transition: 0.3s;
   }
@@ -212,7 +213,7 @@ body {
   .navbar .dropdown ul a:hover,
   .navbar .dropdown ul .active:hover,
   .navbar .dropdown ul li:hover>a {
-    color: #2f23db;
+    color: #9fc658;
   }
   
   .navbar .dropdown:hover>ul {
@@ -244,7 +245,6 @@ body {
     background-size: cover;
     position: relative;
     margin-bottom: -140px;
-    /* z-index: 1; */
   }
   
   #hero:before {
@@ -320,199 +320,31 @@ body {
   }
 
   .categorie {
+    width: 100%;
     margin: auto;
+    text-align: center;
   }
 
   .cards_produits {
     margin-top:20px;
+    margin-right: 125px;
     display: flex;
     justify-content: space-around;
+    margin-bottom: 50px;
   }
 
-
-  /*--------------------------------------------------------------
-  # Features
-  /* --------------------------------------------------------------*/
-  /* .features .card {
-    border: 0;
-    padding: 160px 20px 20px 20px;
-    position: relative;
-    width: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-  }
-  
-  .features .card-body {
-    z-index: 10;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 15px 30px;
-    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-    transition: 0.3s;
-    transition: ease-in-out 0.4s;
-    border-radius: 5px;
-  }
-  
-  .features .card-title {
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 15px;
-  }
-  
-  .features .card-title a {
-    color: #3c4133;
-  }
-  
-  .features .card-text {
-    color: #5e5e5e;
-  }
-  
-  .features .read-more a {
-    color: #777777;
-    text-transform: uppercase;
-    font-weight: 600;
-    font-size: 12px;
-    transition: 0.4s;
-  }
-  
-  .features .read-more a:hover {
-    text-decoration: underline;
-  }
-  
-  .features .card:hover .card-body {
-    background: #94c045;
-  }
-  
-  .features .card:hover .read-more a,
-  .features .card:hover .card-title,
-  .features .card:hover .card-title a,
-  .features .card:hover .card-text {
-    color: #fff;
-  } */
-  
-  
-  /*--------------------------------------------------------------
-  # Pricing
-  --------------------------------------------------------------*/
-  /*.pricing .box {
-    padding: 20px;
-    background: #fff;
-    text-align: center;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.12);
-    border-radius: 5px;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .pricing h3 {
-    font-weight: 400;
-    margin: -20px -20px 20px -20px;
-    padding: 20px 15px;
-    font-size: 16px;
-    font-weight: 600;
-    color: #777777;
-    background: #f8f8f8;
-  }
-  
-  .pricing h4 {
-    font-size: 36px;
-    color: #94c045;
-    font-weight: 600;
-    font-family: "Poppins", sans-serif;
-    margin-bottom: 20px;
-  }
-  
-  .pricing h4 sup {
-    font-size: 20px;
-    top: -15px;
-    left: -3px;
-  }
-  
-  .pricing h4 span {
-    color: #bababa;
-    font-size: 16px;
-    font-weight: 300;
-  }
-  
-  .pricing ul {
-    padding: 0;
-    list-style: none;
-    color: #444444;
-    text-align: center;
-    line-height: 20px;
-    font-size: 14px;
-  }
-  
-  .pricing ul li {
-    padding-bottom: 16px;
-  }
-  
-  .pricing ul i {
-    color: #94c045;
-    font-size: 18px;
-    padding-right: 4px;
-  }
-  
-  .pricing ul .na {
-    color: #ccc;
-    text-decoration: line-through;
-  }
-  
-  .pricing .btn-wrap {
-    margin: 20px -20px -20px -20px;
-    padding: 20px 15px;
-    background: #f8f8f8;
-    text-align: center;
-  }
-  
-  .pricing .btn-buy {
-    background: #94c045;
-    display: inline-block;
-    padding: 6px 35px 8px 35px;
-    border-radius: 4px;
-    color: #fff;
-    transition: none;
-    font-size: 14px;
-    font-weight: 400;
-    font-family: "Raleway", sans-serif;
-    font-weight: 600;
-    box-shadow: 0 3px 7px rgba(148, 192, 69, 0.4);
-    transition: 0.3s;
-  }
-  
-  .pricing .btn-buy:hover {
-    background: #aacd6b;
-  }
-  
-  .pricing .featured h3 {
-    color: #fff;
-    background: #94c045;
-    box-shadow: 0 3px 7px rgba(148, 192, 69, 0.4);
-  }
-  
-  .pricing .advanced {
-    width: 200px;
-    position: absolute;
-    top: 18px;
-    right: -68px;
-    transform: rotate(45deg);
-    z-index: 1;
-    font-size: 14px;
-    padding: 1px 0 3px 0;
-    background: #94c045;
-    color: #fff;
-  }
-   */
-
-  
   /*--------------------------------------------------------------
   # Footer
   --------------------------------------------------------------*/
-  /* #footer {
+  #footer {
     background: #141611;
     padding: 0 0 30px 0;
     color: #fff;
     font-size: 14px;
+  }
+  
+  .liens {
+    max-width: 40px;
   }
   
   #footer .footer-top {
@@ -660,9 +492,3 @@ body {
     padding-top: 30px;
   }
   
-  #footer .credits {
-    padding-top: 10px;
-    text-align: center;
-    font-size: 13px;
-    color: #fff;
-  } */
