@@ -376,7 +376,10 @@ body {
   .modal-body {
     display: flex;
     justify-content: space-around;
-    padding: 0%;
+  }
+
+  .form-check{
+    margin-left: 30px;
   }
 
   #footer .footer-top {
