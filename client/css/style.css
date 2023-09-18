@@ -353,13 +353,13 @@ body {
     margin-right: 5px;
   }
 
-  #tel, #email {
+  #telp, #emailp {
     cursor: pointer;
     text-decoration: underline;
     color:#fff;
   }
 
-  #email:hover, #tel:hover {
+  #emailp:hover, #telp:hover {
     color: #94c045;
   }
   
