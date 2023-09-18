@@ -10,18 +10,12 @@
     <link rel="stylesheet" href="client/utilitaires/bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css">
     <script src="client/utilitaires/jquery-3.6.3.min.js"></script>
     <script src="client/utilitaires/bootstrap-5.3.0-alpha1-dist/js/bootstrap.min.js"></script>
-<<<<<<< Updated upstream
-=======
+
     <link rel="stylesheet" href="client/css/style.css?v=<?php echo time(); ?>">
     <script src="client/js/global.js"></script>
     <script src="client/js/vue.js"></script>
-    <script src="client/js/cards.js"></script>
     <script src="client/js/localisation-carte.js"></script>
->>>>>>> Stashed changes
 
-    <script src="client/js/global.js"></script>
-    <script src="client/js/localisation-carte.js"></script>
-    <link href="client/css/style.css" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/bradley-hand-2" rel="stylesheet">
 
 <body onload="initialisation();">
@@ -124,6 +118,8 @@
     <?php
         require_once('serveur/includes/footer.php');
     ?>
+
+    <div id="idForms" class="container">
 
 </body>
 </html>
