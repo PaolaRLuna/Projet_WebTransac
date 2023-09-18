@@ -27,7 +27,7 @@
                 </li>
                 
                 <li><a href="contact.php">Contactez-nous</a></li>
-                <li><a class="getstarted" href="javascript:montrerFormConnexionMembre();">Se connecter</a></li>
+                <li><a class="getstarted" href="javascript:montrerFormConnexion();">Se connecter</a></li>
                 <li><a class="getstarted" href="javascript:montrerFormEnregMembre();">S'inscrire</a></li>
             </ul>
         </nav>
