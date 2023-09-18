@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="client/utilitaires/bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css">
     <script src="client/utilitaires/jquery-3.6.3.min.js"></script>
     <script src="client/utilitaires/bootstrap-5.3.0-alpha1-dist/js/bootstrap.min.js"></script>
+
     <link rel="stylesheet" href="client/css/style.css?v=<?php echo time(); ?>">
     <script src="client/js/global.js"></script>
     <script src="client/js/vue.js"></script>
@@ -74,73 +75,38 @@
                         </div>
 
                         <div class="cards_produits">
-
-                            <div class="card" style="width: 18rem;">
-                                <a href="#"><img src="client/images/general/test.jpg" class="card-img-top"></a>
-                                <div class="card-body">
-                                    <a href="#"><h5 class="card-title">Gnocchi di patate duri frais</h5></a>
-                                    <p class="card-text"><b>Ingrédients :</b> Farine enrichie, fécule de pomme de terre, pommes de terre, sel.</p>
-                                </div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">5.25$ / (500g)</li>
-                                    </ul>
-                                    <nav class = "qte">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link moins">-</a></li>
-                                            <li class="page-item"><a contenteditable="true" class="page-link">1</a></li>
-                                            <li class="page-item"><a class="page-link plus">+</a></li>
+                            <?php
+                                $produits = glob('client/images/produits/*.jpg');
+                               
+                                foreach ($produits as $produit) {
+                                    $chemin = 'client/images/produits/';
+                                    $src = $chemin.basename($produit);
+                                    echo '<div class="card" style="width: 18rem;">
+                                        <a href="#"><img src='.$src.' class="card-img-top"></a>
+                                        
+                                        <div class="card-body">
+                                            <a href="#"><h5 class="card-title">Gnocchi di patate duri frais</h5></a>
+                                            <p class="card-text"><b>Ingrédients :</b> Farine enrichie, fécule de pomme de terre, pommes de terre, sel.</p>
+                                        </div>
+                            
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">5.25$ / (500g)</li>
                                         </ul>
-                                    </nav>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Ajouter au panier</a>
-                                    <p class="card-fav"><img class="etat-like" src="client/images/general/notlike.png" alt="ajouter aux favoris"></p>
-                                </div>
-                            </div>
-
-                            <div class="card" style="width: 18rem;">
-                                <a href="#"><img src="client/images/general/test.jpg" class="card-img-top"></a>
-                                <div class="card-body">
-                                    <a href="#"><h5 class="card-title">Gnocchi di patate duri frais</h5></a>
-                                    <p class="card-text"><b>Ingrédients :</b> Farine enrichie, fécule de pomme de terre, pommes de terre, sel.</p>
-                                </div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">5.25$ / (500g)</li>
-                                    </ul>
-                                    <nav class = "qte">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link moins">-</a></li>
-                                            <li class="page-item"><a contenteditable="true" class="page-link">1</a></li>
-                                            <li class="page-item"><a class="page-link plus">+</a></li>
-                                        </ul>
-                                    </nav>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Ajouter au panier</a>
-                                    <p class="card-fav"><img class="etat-like" src="client/images/general/notlike.png" alt="ajouter aux favoris"></p>
-                                </div>
-                            </div>
-
-                            <div class="card" style="width: 18rem;">
-                                <a href="#"><img src="client/images/general/test.jpg" class="card-img-top"></a>
-                                <div class="card-body">
-                                    <a href="#"><h5 class="card-title">Gnocchi di patate duri frais</h5></a>
-                                    <p class="card-text"><b>Ingrédients :</b> Farine enrichie, fécule de pomme de terre, pommes de terre, sel.</p>
-                                </div>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">5.25$ / (500g)</li>
-                                    </ul>
-                                    <nav class = "qte">
-                                        <ul class="pagination">
-                                            <li class="page-item"><a class="page-link moins">-</a></li>
-                                            <li class="page-item"><a contenteditable="true" class="page-link">1</a></li>
-                                            <li class="page-item"><a class="page-link plus">+</a></li>
-                                        </ul>
-                                    </nav>
-                                <div class="card-body">
-                                    <a href="#" class="card-link">Ajouter au panier</a>
-                                    <p class="card-fav"><img class="etat-like" src="client/images/general/notlike.png" alt="ajouter aux favoris"></p>
-                                </div>
-                            </div>
-
+                                        <nav class = "qte">
+                                            <ul class="pagination">
+                                                <li class="page-item"><a class="page-link moins">-</a></li>
+                                                <li class="page-item"><a contenteditable="true" class="page-link">1</a></li>
+                                                <li class="page-item"><a class="page-link plus">+</a></li>
+                                            </ul>
+                                        </nav>
+                            
+                                        <div class="card-body">
+                                            <a href="#" class="card-link">Ajouter au panier</a>
+                                            <p class="card-fav"><img class="etat-like" src="client/images/general/notlike.png" alt="ajouter aux favoris"></p>
+                                        </div>
+                                        </div>';
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
