@@ -90,7 +90,7 @@ const modalConnexionUtilisateurs = () => {
                 </div>
                 <div class="modal-body">
                     <!-- Formulaire connexion -->
-                    <form class="row g-3" id="formConnexion" action="serveur/membre/connexion.php" method="POST">
+                    <form class="row g-3" id="formConnexion" action="serveur/connexion/controleurConnexion.php" method="POST">
                             <div class="col-md-6">
                                 <label for="courriel" class="form-label">Courriel :</label>
                                 <input type="email" class="form-control" id="courrielco" name="courrielco" value="" required>
@@ -99,6 +99,7 @@ const modalConnexionUtilisateurs = () => {
                                 <label for="pass" class="form-label">Mot Passe :</label>
                                 <input type="password" class="form-control" pattern="[A-Za-z0-9_\$#\-]{6,10}$" id="passwordco" name="passwordco" required>
                             </div>
+                            <input type="hidden" name="action" value="connexion">
                             <div class="col-12">
                                 <button class="btn btn-primary" type="submit">Connexion</button>
                                 <span id="msge"></span>
