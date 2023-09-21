@@ -1,3 +1,9 @@
+<?php
+    if(isset($_COOKIE["PHPSESSID"])){
+        unset($_COOKIE["PHPSESSID"]);
+    }
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
