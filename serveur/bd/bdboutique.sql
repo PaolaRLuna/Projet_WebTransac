@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 15 sep. 2023 à 03:47
+-- Généré le : jeu. 21 sep. 2023 à 20:04
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `bdboutique`
 --
-CREATE DATABASE IF NOT EXISTS `bdboutique` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `bdboutique`;
 
 -- --------------------------------------------------------
 
@@ -30,7 +28,7 @@ USE `bdboutique`;
 --
 
 CREATE TABLE `connexion` (
-  `idc` int(11) NOT NULL,
+  `idm` int(11) NOT NULL,
   `courriel` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `mot de passe` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `rôle` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
@@ -41,7 +39,7 @@ CREATE TABLE `connexion` (
 -- Déchargement des données de la table `connexion`
 --
 
-INSERT INTO `connexion` (`idc`, `courriel`, `mot de passe`, `rôle`, `statut`) VALUES
+INSERT INTO `connexion` (`idm`, `courriel`, `mot de passe`, `rôle`, `statut`) VALUES
 (1, 'e2296787@cmaisonneuve.qc.ca', '123', 'A', 'A'),
 (2, 'e2296702@cmaisonneuve.qc.ca', '456', 'M', 'A'),
 (3, 'e2296507@cmaisonneuve.qc.ca', '789', 'E', 'A'),
@@ -59,7 +57,7 @@ CREATE TABLE `membres` (
   `prénom` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `courriel` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `sexe` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `date de naissance` varchar(12) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+  `date de naissance` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -80,7 +78,7 @@ INSERT INTO `membres` (`idm`, `nom`, `prénom`, `courriel`, `sexe`, `date de nai
 -- Index pour la table `connexion`
 --
 ALTER TABLE `connexion`
-  ADD PRIMARY KEY (`idc`);
+  ADD KEY `connexion_idm_FK` (`idm`);
 
 --
 -- Index pour la table `membres`
@@ -93,16 +91,20 @@ ALTER TABLE `membres`
 --
 
 --
--- AUTO_INCREMENT pour la table `connexion`
---
-ALTER TABLE `connexion`
-  MODIFY `idc` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT pour la table `membres`
 --
 ALTER TABLE `membres`
   MODIFY `idm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+  -- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `connexion`
+--
+ALTER TABLE `connexion`
+  ADD CONSTRAINT `connexion_idm_FK` FOREIGN KEY (`idm`) REFERENCES `membres` (`idm`);
+COMMIT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
