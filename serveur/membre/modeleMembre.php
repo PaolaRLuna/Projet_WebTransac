@@ -27,14 +27,16 @@
                 $stmt = $connexion->prepare($requete);
                 $stmt->bind_param("iss", $idm,$courriel,$mdp);
                 $stmt->execute();
-                $msg="<h3>Membre ".$membre->getPrenom().", ".$membre->getNom()." bien enregistré.<h3>";
+                $msg="Membre ".$membre->getPrenom().", ".$membre->getNom()." bien enregistré";
             } else { // Courriel existe déjà
-                $msg = "<br><b style='color:red'>Ce courriel est déja utilisé</b></br>";
+                $msg = "Ce courriel est déja utilisé";
             }
         }catch(Exception $e) {
             $msg = 'Erreur : '.$e->getMessage().'<br>';
         }finally{
-            return $msg;
+            header("Location: ../../index.php?msg=$msg");
+            exit();
+            
         }
     }
 ?>

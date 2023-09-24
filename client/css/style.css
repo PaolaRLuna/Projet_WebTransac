@@ -361,6 +361,10 @@ body {
     font-size: 0.8em;
   }
 
+  .modal-body-bg{
+    background-color: white;
+  }
+
   /*--------------------------------------------------------------
   # Footer
   --------------------------------------------------------------*/
@@ -514,6 +518,10 @@ body {
   #footer .copyright {
     text-align: center;
     padding-top: 30px;
+  }
+
+  .modal-body-bg{
+    background-color: #eff3e7 !important;
   }
 
  

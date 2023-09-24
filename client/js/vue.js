@@ -8,7 +8,7 @@ const modalEnregMembres = () => {
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Enregistrement d'un membre</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body modalpad">
+                <div class="modal-body modal-body-bg">
                     <!-- Formulaire enregistrer Membre -->
                     <form id="formEnregMembre" action="serveur/membre/enregistrerMembre.php" method="POST" enctype="multipart/form-data" class="row g-3" onSubmit="return validerFormEnreg();">
                         <div class="col-md-6">
@@ -57,6 +57,10 @@ const modalEnregMembres = () => {
                             <label for="cpassword" class="form-label">Confirmation mot de passe :</label>
                             <input type="password" class="form-control is-valid" id="cpassword" name="cpassword" required pattern="^[A-Za-z0-9_\$#\-]{6,10}$">
                         </div>
+                        <div class="col-md-12">
+                            <label for="photo" class="form-label">Photo</label>
+                            <input type="file" class="form-control is-valid" id="photo" name="photo[]">
+                        </div>
                         <div class="col-12 btn-enreg">
                         <br>
                             <button class="btn btn-primary" type="submit">S'enregistrer</button>
@@ -88,7 +92,7 @@ const modalConnexionUtilisateurs = () => {
                     <h2 class="modal-title fs-5" id="ModalConnexionLabel">Connexion</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body modal-body-bg">
                     <!-- Formulaire connexion -->
                     <form class="row g-3" id="formConnexion" action="serveur/connexion/controleurConnexion.php" method="POST">
                             <div class="col-md-6">
