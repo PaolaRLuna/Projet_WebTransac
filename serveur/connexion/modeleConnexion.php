@@ -22,30 +22,30 @@
                     $stmt->execute();
                     $reponse =   $stmt->get_result();
                     $ligne2 = $reponse->fetch_object();
+                    $_SESSION['prenom'] = $ligne2->prenom;
+                    $_SESSION['nom'] = $ligne2->nom;
+                    $_SESSION['photo'] = "../membre/photos/".$ligne2->photo;
                     //Si c'est un membre
                     if($ligne->role == 'M'){
                         $_SESSION['role'] = 'M';
-                        $_SESSION['prenom'] = $ligne2->prenom;
-                        $_SESSION['nom'] = $ligne2->nom;
                         header('Location: ../membre/membre.php');
                         exit();
                     } else { // Dans ce cas c'est un admin
                         $_SESSION['role'] = 'A';
-                        $_SESSION['prenom'] = $ligne->prenom;
-                        $_SESSION['nom'] = $ligne->nom;
                         header('Location: ../admin/admin.php');
                         exit();
                     }
                 } else {// Membre inactif
-                    $msg = "<b>SVP contactez l'administrateur !!!</b>";
+                    $msg = "SVP contactez l'administrateur";
                 } 
             } else {
-            $msg = "<br><b style='color:red'>Mot de passe ou nom d'utilisateur incorrect</b></br>";
+            $msg = "Mot de passe ou nom d'utilisateur incorrect";
             }
         } catch(Exception $e) {
-            $msg = "<br><b style='color:red'>Mot de passe ou nom d'utilisateur incorrect</b></br>";
+            $msg = 'Erreur : ' . $e->getMessage();
             //$msg = 'Erreur : '.$e->getMessage().'<br>';
         }finally{
+            header("Location: ../../index.php?msg=$msg");
             return $msg;
         }
     }

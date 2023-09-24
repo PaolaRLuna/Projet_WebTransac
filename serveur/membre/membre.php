@@ -28,7 +28,7 @@
 <body>
     <h1>Page membre</h1>
     <?php
-        require_once('serveur/includes/headerMembre.php');
+        require_once('serveur/includes/header.php');
     ?>
 
         <!-- Fin barre navigation -->
