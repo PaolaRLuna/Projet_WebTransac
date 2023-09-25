@@ -51,11 +51,11 @@ const modalEnregMembres = () => {
                         </div>
                         <div class="col-md-12">
                             <label for="password" class="form-label">Mot de passe :</label>
-                            <input type="password" class="form-control is-valid" id="password" name="password" minlength="8" maxlength="10" required pattern="^[A-Za-z0-9_\$#\-]{6,10}$" >
+                            <input type="password" class="form-control is-valid" id="password" name="password" minlength="8" maxlength="10" required pattern="^[A-Za-z0-9_\$#\-]{8,10}$" >
                         </div>
                         <div class="col-md-12">
                             <label for="cpassword" class="form-label">Confirmation mot de passe :</label>
-                            <input type="password" class="form-control is-valid" id="cpassword" name="cpassword" required pattern="^[A-Za-z0-9_\$#\-]{6,10}$">
+                            <input type="password" class="form-control is-valid" id="cpassword" name="cpassword" required pattern="^[A-Za-z0-9_\$#\-]{8,10}$">
                         </div>
                         <div class="col-md-12">
                             <label for="photo" class="form-label">Photo</label>
@@ -120,12 +120,17 @@ const montrerFormConnexion = () => {
       modalConnexion.show(); 
 }
 
-//Afficher message dans le modal
+//Afficher message dans Toast
 
-const montrerMessage = (idElem, msg) => {
-    document.getElementById(idElem).innerHTML = msg;
-    setInterval(() => {
-        document.getElementById(idElem).innerHTML = "";
-    }, 4000);
+let montrerToast = (msg) =>{
+	if(msg.length > 0){
+		let textToast = document.getElementById("textToast");
+		var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+		var toastList = toastElList.map(function (toastEl) {
+			return new bootstrap.Toast(toastEl)
+		})
+		textToast.innerHTML = msg;
+		toastList[0].show();
+	}
 }
 
