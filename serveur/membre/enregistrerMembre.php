@@ -10,11 +10,9 @@
         $daten=$_POST['daten'];
         
         $membre = new Membre(0,$nom,$prenom,$courriel,$sexe,$daten," ");
-        $msg = Mdl_Ajouter($membre,$_POST['password']);
-        return $msg;
+        Mdl_Ajouter($membre,$_POST['password']);
+        
     }
-    $msg = Ctr_Ajouter();
-    echo $msg;
+    Ctr_Ajouter();
+    
 ?>
-<br/>
-<a href="../../index.php">Retour à la page d'accueil</a>

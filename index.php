@@ -127,7 +127,9 @@
     <?php
         require_once('serveur/includes/footer.php');
     ?>
-
+    <?php
+        require_once('serveur/includes/toast.php');
+    ?>
     <div id="idForms" class="container">
 
 </body>
