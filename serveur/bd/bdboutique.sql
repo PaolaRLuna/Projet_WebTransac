@@ -53,23 +53,23 @@ INSERT INTO `connexion` (`idm`, `courriel`, `mot de passe`, `rôle`, `statut`) V
 
 CREATE TABLE `membres` (
   `idm` int(11) NOT NULL,
-  `nom` varchar(20) NOT NULL,
-  `prénom` varchar(20) NOT NULL,
-  `courriel` varchar(40) NOT NULL,
-  `sexe` varchar(20) NOT NULL,
-  `date de naissance` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  `nom` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `prénom` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `courriel` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `sexe` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `date de naissance` date NOT NULL,
+  `photo` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `membres`
 --
 
-INSERT INTO `membres` (`idm`, `nom`, `prénom`, `courriel`, `sexe`, `date de naissance`) VALUES
-(1, 'Reyes', 'Paola', 'e2296787@cmaisonneuve.qc.ca', 'F', '1987-11-02'),
-(2, 'Guerram', 'Houssam', 'e2296702@cmaisonneuve.qc.ca', 'M', '1984-12-14'),
-(3, 'Bertrand', 'Cassandre', 'e2296507@cmaisonneuve.qc.ca', 'F', '1991-01-15'),
-(4, 'Massina', 'Adam', 'e2296777@cmaisonneuve.qc.ca', 'M', '1993-09-01');
-
+INSERT INTO `membres` (`idm`, `nom`, `prénom`, `courriel`, `sexe`, `date de naissance`, `photo`) VALUES
+(1, 'Reyes', 'Paola', 'e2296787@cmaisonneuve.qc.ca', 'F', '1987-11-02', ''),
+(2, 'Guerram', 'Houssam', 'e2296702@cmaisonneuve.qc.ca', 'M', '1984-12-14', ''),
+(3, 'Bertrand', 'Cassandre', 'e2296507@cmaisonneuve.qc.ca', 'F', '1991-01-15', ''),
+(4, 'Massina', 'Adam', 'e2296777@cmaisonneuve.qc.ca', 'M', '1993-09-01', '');
 -- --------------------------------------------------------
 
 --
