@@ -85,31 +85,44 @@ const montrerFormEnregMembre = () => {
 const modalConnexionUtilisateurs = () => {
     return `
     <!-- Modal connexion membre ou admin -->
-    <div class="modal fade" id="modalConnexion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
+
+    <div class="modal fade" id="modalConnexion" tabindex="-1" aria-labelledby="ModalConnexionLabel" aria-hidden="true">
+        <div class="modal-dialog modal-login">
+            <div class="modal-content modal-content-connexion">
                 <div class="modal-header">
-                    <h2 class="modal-title fs-5" id="ModalConnexionLabel">Connexion</h2>
+                    <h5 class="modal-title" id="ModalConnexionLabel">Connexion</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body modal-body-bg">
-                    <!-- Formulaire connexion -->
-                    <form class="row g-3" id="formConnexion" action="serveur/connexion/controleurConnexion.php" method="POST">
-                            <div class="col-md-6">
-                                <label for="courriel" class="form-label">Courriel :</label>
-                                <input type="email" class="form-control" id="courrielco" name="courrielco" value="" required>
+                <div class="modal-body modal-body-connexion">
+                    <p class="logo-connexion">Pâte-à-Pouf</p>
+                    <form class="" id="formConnexion" action="serveur/connexion/controleurConnexion.php" method="POST">
+                        <div class="container-3 container">
+                            <img src="client/images/general/logo.png" loading="lazy" alt="pate" class="image-modal">
+                        </div>
+                        <div class="form-group">
+                            <label for="courriel" class="form-label">Courriel</label>
+                            <input type="email" class="form-control" id="courrielco" name="courrielco" value="" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="clearfix">
+                            <label for="pass" class="form-label">Mot Passe</label>
+                            <a href="#" class="float-right text-muted"><small>Oublié ?</small></a>
                             </div>
-                            <div class="col-md-6">
-                                <label for="pass" class="form-label">Mot Passe :</label>
-                                <input type="password" class="form-control" pattern="[A-Za-z0-9_\$#\-]{6,10}$" id="passwordco" name="passwordco" required>
-                            </div>
-                            <input type="hidden" name="action" value="connexion">
-                            <div class="col-12">
-                                <button class="btn btn-primary" type="submit">Connexion</button>
-                                <span id="msge"></span>
-                            </div>
-                        </form>
-                    <!-- Fin du formulaire connexion membre ou admin -->
+                            
+                            <input type="password" class="form-control" pattern="[A-Za-z0-9_\$#\-]{8,10}$" id="passwordco" name="passwordco" required="required">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-between">
+                <label class="form-check-label"><input type="checkbox"> Remember me</label>
+                <input type="hidden" name="action" value="connexion">
+                        <div class="">
+                            <button class="btn btn-primary" type="submit">Connexion</button>
+                        </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin du formulaire connexion membre ou admin -->
     `
 }
 
