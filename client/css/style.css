@@ -472,18 +472,6 @@ body {
       background-color: white !important;
       display: block !important;
   }
-
-  .posToast {
-      position: absolute;
-      top: 20%;
-      left: 40%;
-  }
-  
-  #textToast {
-      background-color: rgb(62, 62, 122);
-      color: white;
-      font-size: 18px;
-  }
   
 
   /*--------------------------------------------------------------
@@ -645,4 +633,18 @@ body {
     background-color: #eff3e7 !important;
   }
 
- 
+   /*--------------------------------------------------------------
+  # Toast
+  --------------------------------------------------------------*/
+  
+  .posToast {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+}
+
+#textToast {
+    background-color: rgb(62, 62, 122);
+    color: white;
+    font-size: 18px;
+}
