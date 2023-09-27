@@ -40,6 +40,8 @@
         </div>
     </section>
 
+    <div id="idForms" class="container"></div>
+    
     <main id="main">
         <section class="about">
             <div class="container">
@@ -85,36 +87,7 @@
 
                         <div class="cards_produits">
                             <?php
-                                $produits = glob('client/images/produits/*.jpg');
-                               
-                                foreach ($produits as $produit) {
-                                    $chemin = 'client/images/produits/';
-                                    $src = $chemin.basename($produit);
-                                    echo '<div class="card" style="width: 18rem;">
-                                        <a href="#"><img src='.$src.' class="card-img-top"></a>
-                                        
-                                        <div class="card-body">
-                                            <a href="#"><h5 class="card-title">Gnocchi di patate duri frais</h5></a>
-                                            <p class="card-text"><b>Ingrédients :</b> Farine enrichie, fécule de pomme de terre, pommes de terre, sel.</p>
-                                        </div>
-                            
-                                        <ul class="list-group list-group-flush">
-                                            <li class="list-group-item">5.25$ / (500g)</li>
-                                        </ul>
-                                        <nav class = "qte">
-                                            <ul class="pagination">
-                                                <li class="page-item"><a class="page-link moins">-</a></li>
-                                                <li class="page-item"><a contenteditable="true" class="page-link">1</a></li>
-                                                <li class="page-item"><a class="page-link plus">+</a></li>
-                                            </ul>
-                                        </nav>
-                            
-                                        <div class="card-body">
-                                            <a href="#" class="card-link">Ajouter au panier</a>
-                                            <p class="card-fav"><img class="etat-like" src="client/images/general/notlike.png" alt="ajouter aux favoris"></p>
-                                        </div>
-                                        </div>';
-                                }
+                                require_once('serveur/produit/affichageProduits.php');
                             ?>
                         </div>
                     </div>
@@ -130,7 +103,6 @@
     <?php
         require_once('serveur/includes/toast.php');
     ?>
-    <div id="idForms" class="container">
 
 </body>
 </html>
