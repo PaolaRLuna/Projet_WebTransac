@@ -468,10 +468,23 @@ body {
       margin-left: auto;
     }
 
-    .modal-body-connexion{
+  .modal-body-connexion{
       background-color: white !important;
       display: block !important;
-    }
+  }
+
+  .posToast {
+      position: absolute;
+      top: 20%;
+      left: 40%;
+  }
+  
+  #textToast {
+      background-color: rgb(62, 62, 122);
+      color: white;
+      font-size: 18px;
+  }
+  
 
   /*--------------------------------------------------------------
   # Footer

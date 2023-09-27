@@ -89,13 +89,14 @@ const modalConnexionUtilisateurs = () => {
     <div class="modal fade" id="modalConnexion" tabindex="-1" aria-labelledby="ModalConnexionLabel" aria-hidden="true">
         <div class="modal-dialog modal-login">
             <div class="modal-content modal-content-connexion">
+            <form class="" id="formConnexion" action="serveur/connexion/controleurConnexion.php" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ModalConnexionLabel">Connexion</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body modal-body-connexion">
                     <p class="logo-connexion">Pâte-à-Pouf</p>
-                    <form class="" id="formConnexion" action="serveur/connexion/controleurConnexion.php" method="POST">
+                    
                         <div class="container-3 container">
                             <img src="client/images/general/logo.png" loading="lazy" alt="pate" class="image-modal">
                         </div>
@@ -111,14 +112,16 @@ const modalConnexionUtilisateurs = () => {
                             
                             <input type="password" class="form-control" pattern="[A-Za-z0-9_\$#\-]{8,10}$" id="passwordco" name="passwordco" required="required">
                         </div>
-                    </form>
+                    
                 </div>
                 <div class="modal-footer justify-content-between">
                 <label class="form-check-label"><input type="checkbox"> Remember me</label>
-                <input type="hidden" name="action" value="connexion">
                         <div class="">
+                        <input type="hidden" name="action" value="connexion">
                             <button class="btn btn-primary" type="submit">Connexion</button>
                         </div>
+                </div>
+                </form>
             </div>
         </div>
     </div>
