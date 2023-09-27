@@ -40,6 +40,8 @@
         </div>
     </section>
 
+    <div id="idForms" class="container"></div>
+    
     <main id="main">
         <section class="about">
             <div class="container">
@@ -101,7 +103,6 @@
     <?php
         require_once('serveur/includes/toast.php');
     ?>
-    <div id="idForms" class="container">
 
 </body>
 </html>
