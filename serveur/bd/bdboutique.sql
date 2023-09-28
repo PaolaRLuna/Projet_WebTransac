@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2023 at 09:52 PM
+-- Generation Time: Sep 28, 2023 at 10:05 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,7 +44,8 @@ INSERT INTO `connexion` (`idm`, `courriel`, `mdp`, `role`, `statut`) VALUES
 (2, 'e2296702@cmaisonneuve.qc.ca', '45678901', 'M', 'A'),
 (3, 'e2296507@cmaisonneuve.qc.ca', '78901234', 'E', 'A'),
 (4, 'e2296777@cmaisonneuve.qc.ca', '32109876', 'M', 'I'),
-(7, 'admin@pate-a-pouf.com', 'admin', 'A', 'A');
+(7, 'admin@pate-a-pouf.com', 'admin', 'A', 'A'),
+(8, 'cabert@gmail.com', '23456789', 'M', 'A');
 
 -- --------------------------------------------------------
 
@@ -71,7 +72,8 @@ INSERT INTO `membres` (`idm`, `nom`, `prenom`, `courriel`, `sexe`, `datenaissanc
 (2, 'Guerram', 'Houssam', 'e2296702@cmaisonneuve.qc.ca', 'M', '1984-12-14', 'avatar-membre-m.png'),
 (3, 'Bertrand', 'Cassandre', 'e2296507@cmaisonneuve.qc.ca', 'F', '1991-01-15', 'avatar-membre-f.png'),
 (4, 'Massina', 'Adam', 'e2296777@cmaisonneuve.qc.ca', 'M', '1993-09-01', 'avatar-membre-m.png'),
-(7, 'Cashoupao', 'Berguelun', 'admin@pate-a-pouf.com', 'F', '2023-09-28', 'avatar_membre.png');
+(7, 'Cashoupao', 'Berguelun', 'admin@pate-a-pouf.com', 'F', '2023-09-28', 'avatar_membre.png'),
+(8, 'Bertrand', 'Cassandre', 'cabert@gmail.com', 'F', '2023-09-29', 'avatar_membre.png');
 
 -- --------------------------------------------------------
 
@@ -138,7 +140,7 @@ ALTER TABLE `produits`
 -- AUTO_INCREMENT for table `membres`
 --
 ALTER TABLE `membres`
-  MODIFY `idm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `produits`
