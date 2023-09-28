@@ -313,18 +313,14 @@ body {
 
   .card-body{
     margin-top: -2px;
-    height: 150px;
+    height: 55px;
     white-space: normal;
   }
 
   .card {
     margin-right: 20px;
     display: inline-block;
-<<<<<<< Updated upstream
-    height: 415px;
-=======
     height: 370px;
->>>>>>> Stashed changes
   }
   
   .card a img {
@@ -344,7 +340,7 @@ body {
 
     white-space:nowrap; 
     overflow-x:scroll;
-    overflow-y: scroll; /*hidden pour enlever*/
+    overflow-y: hidden;
   }
 
   *::-webkit-scrollbar {
@@ -479,10 +475,11 @@ body {
       margin-left: auto;
     }
 
-    .modal-body-connexion{
+  .modal-body-connexion{
       background-color: white !important;
       display: block !important;
-    }
+  }
+  
 
   /*--------------------------------------------------------------
   # Footer
@@ -643,4 +640,18 @@ body {
     background-color: #eff3e7 !important;
   }
 
- 
+   /*--------------------------------------------------------------
+  # Toast
+  --------------------------------------------------------------*/
+  
+  .posToast {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+}
+
+#textToast {
+    background-color: rgb(62, 62, 122);
+    color: white;
+    font-size: 18px;
+}

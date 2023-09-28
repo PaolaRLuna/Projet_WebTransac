@@ -4,9 +4,9 @@
     }
     session_start();
     $msg="";
-    if(isset($_GET['msg'])){
+        if(isset($_GET['msg'])){
         $msg = $_GET['msg'];
-    }
+        }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -40,6 +40,8 @@
         </div>
     </section>
 
+    <div id="idForms" class="container"></div>
+    
     <main id="main">
         <section class="about">
             <div class="container">
@@ -98,10 +100,13 @@
     <?php
         require_once('serveur/includes/footer.php');
     ?>
+
     <?php
         require_once('serveur/includes/toast.php');
+        if(isset($_GET['msg'])){
+        echo '<script> montrerToast("'.$msg.'");</script>';
+        }
     ?>
-    <div id="idForms" class="container">
 
 </body>
 </html>
