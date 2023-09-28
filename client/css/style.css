@@ -313,7 +313,7 @@ body {
 
   .card-body{
     margin-top: -2px;
-    height: 130px;
+    height: 150px;
     white-space: normal;
   }
 
@@ -333,7 +333,7 @@ body {
 
     white-space:nowrap; 
     overflow-x:scroll;
-    overflow-y: hidden;
+    overflow-y: scroll; /*hidden pour enlever*/
   }
 
   *::-webkit-scrollbar {
