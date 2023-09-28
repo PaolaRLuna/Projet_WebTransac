@@ -1,19 +1,68 @@
 <?php
-    require_once('../bd/connexion.inc.php');
-    global $connexion;
-    // $produits = glob('client/images/produits/*.jpg');
-              
+    declare (strict_types=1);
+    // require_once(__DIR__."/../ressources/bd/Connexion.php");
+    require_once('serveur/bd/connexion.inc.php');
+    require_once("Produit.php");
+
+    //$reponse=array();
+    //$connexion = Connexion::getConnexion();
+    // global $connexion;
+    $requette="SELECT * FROM produits";
+
     try{
-        $requete = "SELECT * FROM produits";
-        $stmt = $connexion->prepare($requete);
-        $stmt->execute();
-        $reponse =  $stmt->get_result();
-    }catch(Exception $e) {
+        $bdd = new PDO('mysql:host=localhost;dbname=bdboutique', 'root', '');
+        //$stmt = $connexion->prepare($requette);
+        $reponse = $bdd->query($requette);
+        // $reponse['OK'] = true;
+        // $reponse['msg'] = "";
+        // $reponse['listeProduits'] = array();
+        //$reponse =  $stmt->get_result();
+        //echo json_encode($reponse);
+        while($ligne = $reponse->fetch()){
+            listerProduits($ligne);
+            //echo $ligne['nom']."\n";
+            //$reponse['listeProduits'][] = $ligne;
+        }
+    }catch (Exception $e){ 
+        // $reponse['OK'] = false;
+        // $reponse['msg'] = "Problème pour obtenir les données des films";
+    }finally {
+      //unset($connexion);
+      //echo json_encode($reponse);
     }
 
-    // foreach ($produits as $produit) {
-    while($ligne=$reponse->fetch(PDO::FETCH_OBJ)){
-        echo '<p>'.$ligne->nom.'</p>'
+	function listerProduits($produit){
+        $card = '
+        <div class="card" style="width: 18rem;">
+            <a href="#"><img src="client/images/produits/cheddar.jpg" class="card-img-top"></a>
+            
+            <div class="card-body">
+                <a href="#"><h5 class="card-title">'.$produit['nom'].'</h5></a>
+                <p class="card-text"><b>Ingrédients :</b>'.$produit['ingredients'].'</p>
+            </div>
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">'.$produit['prix'].'$ / ('.$produit['quantite'].'g)</li>
+            </ul>
+            <nav class = "qte">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link moins">-</a></li>
+                    <li class="page-item"><a contenteditable="true" class="page-link">1</a></li>
+                    <li class="page-item"><a class="page-link plus">+</a></li>
+                </ul>
+            </nav>
+
+            <div class="card-body">
+                <a href="#" class="card-link">Ajouter au panier</a>
+                <p class="card-fav"><img class="etat-like" src="client/images/general/notlike.png" alt="ajouter aux favoris"></p>
+            </div>
+        </div>';
+
+        echo $card;
     }
-    
+
+    //fonction pour image
+    //fonction pour nomenclature des prix
 ?>
+
+
