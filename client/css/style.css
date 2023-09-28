@@ -320,14 +320,25 @@ body {
   .card {
     margin-right: 20px;
     display: inline-block;
+<<<<<<< Updated upstream
     height: 415px;
+=======
+    height: 370px;
+>>>>>>> Stashed changes
   }
   
+  .card a img {
+    height : 170px;
+    object-fit: cover;
+    border: solid;
+    color:#99999981;
+  }
+
   .cards_produits {
     margin-top:20px;
     margin-right: 125px;
     margin-bottom: 50px;
-    height: 450px;
+    height: 415px;
     display: block;
     width: 90%;
 
