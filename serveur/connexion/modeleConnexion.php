@@ -6,7 +6,7 @@
         $msg = "";
         try{
             // Tester si le courriel existe déjà
-            $requete = "SELECT * FROM connexion WHERE courriel=? AND pass=?";
+            $requete = "SELECT * FROM connexion WHERE courriel=? AND mdp=?";
 
             $stmt = $connexion->prepare($requete);
             $stmt->bind_param("ss", $courriel,$mdp);

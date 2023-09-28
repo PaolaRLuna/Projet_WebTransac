@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2023 at 04:49 PM
+-- Generation Time: Sep 28, 2023 at 09:52 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -30,8 +30,8 @@ SET time_zone = "+00:00";
 CREATE TABLE `connexion` (
   `idm` int(11) NOT NULL,
   `courriel` varchar(40) NOT NULL,
-  `mot de passe` varchar(20) NOT NULL,
-  `rôle` varchar(20) NOT NULL,
+  `mdp` varchar(20) DEFAULT NULL,
+  `role` varchar(1) DEFAULT NULL,
   `statut` varchar(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -39,11 +39,12 @@ CREATE TABLE `connexion` (
 -- Dumping data for table `connexion`
 --
 
-INSERT INTO `connexion` (`idm`, `courriel`, `mot de passe`, `rôle`, `statut`) VALUES
-(1, 'e2296787@cmaisonneuve.qc.ca', '123', 'A', 'A'),
-(2, 'e2296702@cmaisonneuve.qc.ca', '456', 'M', 'A'),
-(3, 'e2296507@cmaisonneuve.qc.ca', '789', 'E', 'A'),
-(4, 'e2296777@cmaisonneuve.qc.ca', '321', 'M', 'I');
+INSERT INTO `connexion` (`idm`, `courriel`, `mdp`, `role`, `statut`) VALUES
+(1, 'e2296787@cmaisonneuve.qc.ca', '12345678', 'M', 'A'),
+(2, 'e2296702@cmaisonneuve.qc.ca', '45678901', 'M', 'A'),
+(3, 'e2296507@cmaisonneuve.qc.ca', '78901234', 'E', 'A'),
+(4, 'e2296777@cmaisonneuve.qc.ca', '32109876', 'M', 'I'),
+(7, 'admin@pate-a-pouf.com', 'admin', 'A', 'A');
 
 -- --------------------------------------------------------
 
@@ -54,10 +55,10 @@ INSERT INTO `connexion` (`idm`, `courriel`, `mot de passe`, `rôle`, `statut`) V
 CREATE TABLE `membres` (
   `idm` int(11) NOT NULL,
   `nom` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `prénom` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `prenom` varchar(20) NOT NULL,
   `courriel` varchar(40) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `sexe` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `date de naissance` date NOT NULL,
+  `datenaissance` date NOT NULL,
   `photo` varchar(256) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -65,11 +66,12 @@ CREATE TABLE `membres` (
 -- Dumping data for table `membres`
 --
 
-INSERT INTO `membres` (`idm`, `nom`, `prénom`, `courriel`, `sexe`, `date de naissance`, `photo`) VALUES
+INSERT INTO `membres` (`idm`, `nom`, `prenom`, `courriel`, `sexe`, `datenaissance`, `photo`) VALUES
 (1, 'Reyes', 'Paola', 'e2296787@cmaisonneuve.qc.ca', 'F', '1987-11-02', 'avatar-membre-f.png'),
 (2, 'Guerram', 'Houssam', 'e2296702@cmaisonneuve.qc.ca', 'M', '1984-12-14', 'avatar-membre-m.png'),
 (3, 'Bertrand', 'Cassandre', 'e2296507@cmaisonneuve.qc.ca', 'F', '1991-01-15', 'avatar-membre-f.png'),
-(4, 'Massina', 'Adam', 'e2296777@cmaisonneuve.qc.ca', 'M', '1993-09-01', 'avatar-membre-m.png');
+(4, 'Massina', 'Adam', 'e2296777@cmaisonneuve.qc.ca', 'M', '1993-09-01', 'avatar-membre-m.png'),
+(7, 'Cashoupao', 'Berguelun', 'admin@pate-a-pouf.com', 'F', '2023-09-28', 'avatar_membre.png');
 
 -- --------------------------------------------------------
 
@@ -103,7 +105,8 @@ INSERT INTO `produits` (`IdP`, `nom`, `categorie`, `ingredients`, `prix`, `quant
 (9, 'Cheddar doux', 'fromage', 'Lait pasteurisé, concentré protéique de lait, crème, sel, chlorure de calcium, culture bactérienne, enzyme microbienne. M.G. : 31 %. Humidité : 39 %.', 10.75, 400, 'cheddar.jpg'),
 (10, 'Lasagne italienne (pour 2)', 'prêt-à-manger', 'Boeuf et porc haché, saucisses italiennes (porc, chapelure de blé, sel, épices, substances laitières, sucre, acide ascorbique, ail), pâtes alimentaires (semoule de blé, oeufs entiers, eau), tomates, poivrons, oignons, céleri, huile végétale,  mozzarella (lait partiellement écrémé, culture bactérienne, enzymes microbiennes, chlorure de calcium, cellulose), ail, champignons, jalapenos, épices.', 15, 900, 'lasagne_pam.jpg'),
 (11, 'Linguine sauce tomate et basilic', 'prêt-à-manger', 'Linguine (semoule de blé dur, niacine, sulfate ferreux, acide folique), sauce tomate (tomates biologiques, eau, sucre, amidon de maïs modifié, ail déshydraté, acide citrique), basilic frais haché, huile d\'olive, sel, poivre.', 7.75, 250, 'linguine_pam.jpg'),
-(12, 'Macaroni au fromage', 'prêt-à-manger', 'Pâtes alimentaires (semoule de blé dur, eau), parmesan (lait pasteurisé, crème, sel, enzyme microbienne, culture bactérienne), fromage Fontina (lait pasteurisé, sel, culture bactérienne, enzyme microbienne, chlorure de calcium), cheddar (chlorure de calcium, rocou (colorant)), tomates, oignons, huile d\'olive, ail.', 7.25, 365, 'macaroni_pam.jpg');
+(12, 'Macaroni au fromage', 'prêt-à-manger', 'Pâtes alimentaires (semoule de blé dur, eau), parmesan (lait pasteurisé, crème, sel, enzyme microbienne, culture bactérienne), fromage Fontina (lait pasteurisé, sel, culture bactérienne, enzyme microbienne, chlorure de calcium), cheddar (chlorure de calcium, rocou (colorant)), tomates, oignons, huile d\'olive, ail.', 7.25, 365, 'macaroni_pam.jpg'),
+(13, 'test', 'test', NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -135,13 +138,13 @@ ALTER TABLE `produits`
 -- AUTO_INCREMENT for table `membres`
 --
 ALTER TABLE `membres`
-  MODIFY `idm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `produits`
 --
 ALTER TABLE `produits`
-  MODIFY `IdP` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `IdP` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -151,7 +154,7 @@ ALTER TABLE `produits`
 -- Constraints for table `connexion`
 --
 ALTER TABLE `connexion`
-  ADD CONSTRAINT `connexion_idm_FK` FOREIGN KEY (`idm`) REFERENCES `membres` (`idm`);
+  ADD CONSTRAINT `connexion_idm_FK` FOREIGN KEY (`idm`) REFERENCES `membres` (`idm`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
