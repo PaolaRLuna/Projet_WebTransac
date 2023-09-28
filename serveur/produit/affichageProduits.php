@@ -38,7 +38,9 @@
             
             <div class="card-body">
                 <a href="#"><h5 class="card-title">'.$produit['nom'].'</h5></a>
-                <p class="card-text"><b>Ingrédients :</b>'.$produit['ingredients'].'</p>
+            </div>
+            <div class="card-body">
+                <p><b>Catégorie: </b>'.$produit['categorie'].'</p>
             </div>
 
             <ul class="list-group list-group-flush">

@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1
--- Généré le : mar. 26 sep. 2023 à 19:42
--- Version du serveur : 10.4.28-MariaDB
--- Version de PHP : 8.2.4
+-- Host: 127.0.0.1
+-- Generation Time: Sep 28, 2023 at 04:49 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `bdboutique`
+-- Database: `bdboutique`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `connexion`
+-- Table structure for table `connexion`
 --
 
 CREATE TABLE `connexion` (
@@ -36,7 +36,7 @@ CREATE TABLE `connexion` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Déchargement des données de la table `connexion`
+-- Dumping data for table `connexion`
 --
 
 INSERT INTO `connexion` (`idm`, `courriel`, `mot de passe`, `rôle`, `statut`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `connexion` (`idm`, `courriel`, `mot de passe`, `rôle`, `statut`) V
 -- --------------------------------------------------------
 
 --
--- Structure de la table `membres`
+-- Table structure for table `membres`
 --
 
 CREATE TABLE `membres` (
@@ -62,7 +62,7 @@ CREATE TABLE `membres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `membres`
+-- Dumping data for table `membres`
 --
 
 INSERT INTO `membres` (`idm`, `nom`, `prénom`, `courriel`, `sexe`, `date de naissance`, `photo`) VALUES
@@ -70,10 +70,11 @@ INSERT INTO `membres` (`idm`, `nom`, `prénom`, `courriel`, `sexe`, `date de nai
 (2, 'Guerram', 'Houssam', 'e2296702@cmaisonneuve.qc.ca', 'M', '1984-12-14', 'avatar-membre-m.png'),
 (3, 'Bertrand', 'Cassandre', 'e2296507@cmaisonneuve.qc.ca', 'F', '1991-01-15', 'avatar-membre-f.png'),
 (4, 'Massina', 'Adam', 'e2296777@cmaisonneuve.qc.ca', 'M', '1993-09-01', 'avatar-membre-m.png');
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `produits`
+-- Table structure for table `produits`
 --
 
 CREATE TABLE `produits` (
@@ -87,67 +88,67 @@ CREATE TABLE `produits` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Déchargement des données de la table `produits`
+-- Dumping data for table `produits`
 --
 
 INSERT INTO `produits` (`IdP`, `nom`, `categorie`, `ingredients`, `prix`, `quantite`, `photo`) VALUES
-(1, 'Tagliatelles fraîches aux épinards', 'pate', 'Semoule de blé dur non-blanchie, semoule durum, épinards frais, oeufs frais.', 4.5, 350, 'tagliatelle.jpg'),
-(2, 'Gnocchi di patate duri frais', 'pate', 'Farine enrichie, fécule de pomme de terre, pommes de terre, sel.', 5.25, 500, 'gnocchi.jpg'),
-(3, 'Feuilles de lasagne fraîches (12)', 'pate', 'Semoule de blé dur non blanchie, oeufs.', 4.75, 360, 'lasagne.jpg'),
+(1, 'Tagliatelles fraîches aux épinards', 'pâtes alimentaires', 'Semoule de blé dur non-blanchie, semoule durum, épinards frais, oeufs frais.', 4.5, 350, 'tagliatelle.jpg'),
+(2, 'Gnocchi di patate duri frais', 'pâtes alimentaires', 'Farine enrichie, fécule de pomme de terre, pommes de terre, sel.', 5.25, 500, 'gnocchi.jpg'),
+(3, 'Feuilles de lasagne fraîches (12)', 'pâtes alimentaires', 'Semoule de blé dur non blanchie, oeufs.', 4.75, 360, 'lasagne.jpg'),
 (4, 'Pesto génois', 'sauce', 'Huile d\'olive extra vierge pressée à froid, huile de tournesol, basilic, jus de citron, fromage parmesan (lait), persil frais, ail frais, noix de Grenoble, sel de mer, noix de pin, poivre noir. ', 8, 180, 'pesto.jpg'),
 (5, 'Sauce rosée', 'sauce', 'Tomates en conserve (tomates cueillies à la main à maturité, sel, acide citrique de source naturelle), crème, oignons, parmesan, ail, huile de canola, beurre, fines herbes, fécule de maïs, sel, poivre.', 5.25, 400, 'rose.jpg'),
 (6, 'Sauce tomate à l\'ail et au basilic', 'sauce', 'Tomates en conserve (tomates cueillies à la main à maturité, sel, acide citrique de source naturelle), oignons, ail, huile de canola, fines herbes, sel, poivre.', 5.5, 400, 'tomate.jpg'),
 (7, 'Parmesan', 'fromage', 'Lait pasteurisé, crème, protéines de lait concentré, sel, culture bactérienne, chlorure de calcium, lipase, enzyme microbienne. M.G. : 28 %. Humidité : 32 %.', 7, 200, 'parmesan.jpg'),
 (8, 'Fromage de chèvre à tartiner', 'fromage', 'Lait de chèvre, culture bactérienne, sel, présure, ciboulette.', 7.25, 175, 'chevre.jpg'),
 (9, 'Cheddar doux', 'fromage', 'Lait pasteurisé, concentré protéique de lait, crème, sel, chlorure de calcium, culture bactérienne, enzyme microbienne. M.G. : 31 %. Humidité : 39 %.', 10.75, 400, 'cheddar.jpg'),
-(10, 'Lasagne italienne (pour 2)', 'pret-a-manger', 'Boeuf et porc haché, saucisses italiennes (porc, chapelure de blé, sel, épices, substances laitières, sucre, acide ascorbique, ail), pâtes alimentaires (semoule de blé, oeufs entiers, eau), tomates, poivrons, oignons, céleri, huile végétale,  mozzarella (lait partiellement écrémé, culture bactérienne, enzymes microbiennes, chlorure de calcium, cellulose), ail, champignons, jalapenos, épices.', 15, 900, 'lasagne_pam.jpg'),
-(11, 'Linguine sauce tomate et basilic', 'pret-a-manger', 'Linguine (semoule de blé dur, niacine, sulfate ferreux, acide folique), sauce tomate (tomates biologiques, eau, sucre, amidon de maïs modifié, ail déshydraté, acide citrique), basilic frais haché, huile d\'olive, sel, poivre.', 7.75, 250, 'linguine_pam.jpg'),
-(12, 'Macaroni au fromage', 'pret-a-manger', 'Pâtes alimentaires (semoule de blé dur, eau), parmesan (lait pasteurisé, crème, sel, enzyme microbienne, culture bactérienne), fromage Fontina (lait pasteurisé, sel, culture bactérienne, enzyme microbienne, chlorure de calcium), cheddar (chlorure de calcium, rocou (colorant)), tomates, oignons, huile d\'olive, ail.', 7.25, 365, 'macaroni_pam.jpg');
+(10, 'Lasagne italienne (pour 2)', 'prêt-à-manger', 'Boeuf et porc haché, saucisses italiennes (porc, chapelure de blé, sel, épices, substances laitières, sucre, acide ascorbique, ail), pâtes alimentaires (semoule de blé, oeufs entiers, eau), tomates, poivrons, oignons, céleri, huile végétale,  mozzarella (lait partiellement écrémé, culture bactérienne, enzymes microbiennes, chlorure de calcium, cellulose), ail, champignons, jalapenos, épices.', 15, 900, 'lasagne_pam.jpg'),
+(11, 'Linguine sauce tomate et basilic', 'prêt-à-manger', 'Linguine (semoule de blé dur, niacine, sulfate ferreux, acide folique), sauce tomate (tomates biologiques, eau, sucre, amidon de maïs modifié, ail déshydraté, acide citrique), basilic frais haché, huile d\'olive, sel, poivre.', 7.75, 250, 'linguine_pam.jpg'),
+(12, 'Macaroni au fromage', 'prêt-à-manger', 'Pâtes alimentaires (semoule de blé dur, eau), parmesan (lait pasteurisé, crème, sel, enzyme microbienne, culture bactérienne), fromage Fontina (lait pasteurisé, sel, culture bactérienne, enzyme microbienne, chlorure de calcium), cheddar (chlorure de calcium, rocou (colorant)), tomates, oignons, huile d\'olive, ail.', 7.25, 365, 'macaroni_pam.jpg');
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `connexion`
+-- Indexes for table `connexion`
 --
 ALTER TABLE `connexion`
   ADD KEY `connexion_idm_FK` (`idm`);
 
 --
--- Index pour la table `membres`
+-- Indexes for table `membres`
 --
 ALTER TABLE `membres`
   ADD PRIMARY KEY (`idm`);
 
 --
--- Index pour la table `produits`
+-- Indexes for table `produits`
 --
 ALTER TABLE `produits`
   ADD PRIMARY KEY (`IdP`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `membres`
+-- AUTO_INCREMENT for table `membres`
 --
 ALTER TABLE `membres`
   MODIFY `idm` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT pour la table `produits`
+-- AUTO_INCREMENT for table `produits`
 --
 ALTER TABLE `produits`
   MODIFY `IdP` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `connexion`
+-- Constraints for table `connexion`
 --
 ALTER TABLE `connexion`
   ADD CONSTRAINT `connexion_idm_FK` FOREIGN KEY (`idm`) REFERENCES `membres` (`idm`);
