@@ -89,12 +89,17 @@ const switchHeader= (role) => {
     if (role === "M") {
         let switch1 = document.getElementById('optionHeader1'); 
         let switch2 = document.getElementById('optionHeader2'); 
-        switch1.setAttribute("href","javascript:;");
+        switch1.setAttribute("href","#");
         switch1.innerHTML = "Profil";
         switch2.setAttribute("href","javascript:document.getElementById('formDec').submit();");
         switch2.innerHTML = "Déconnexion";
-    } else{
-        //code à venir
+    } else if (role === "A") {
+        let switch1 = document.getElementById('optionHeader1'); 
+        let switch2 = document.getElementById('optionHeader2'); 
+        switch1.setAttribute("href","#");
+        switch1.innerHTML = "Gérer";
+        switch2.setAttribute("href","javascript:document.getElementById('formDec').submit();");
+        switch2.innerHTML = "Déconnexion";
     }
 
 }

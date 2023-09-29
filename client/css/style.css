@@ -27,7 +27,16 @@ body {
     position: relative;
     margin-bottom: 70px;
   }
+
+  #pageAdmin, #pageMembre {
+    margin-top: 270px;
+    z-index: 3;
+    position: relative;
+    margin-bottom: 70px;
+  }
   
+
+
   /*--------------------------------------------------------------
   # Header
   --------------------------------------------------------------*/
@@ -655,3 +664,20 @@ body {
     color: white;
     font-size: 18px;
 }
+
+.toast-header {
+  display: flex;
+  justify-content: space-around;
+  align-items:self-end;
+}
+
+.mr-auto{
+  color: red;
+  padding-top: 30px;
+  font-size: larger;
+}
+
+#fermerToast {
+  margin-bottom: 15px;
+}
+
