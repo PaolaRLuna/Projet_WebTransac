@@ -9,9 +9,9 @@
             $requete = "SELECT * FROM connexion WHERE courriel=? AND pass=?";
 
             $stmt = $connexion->prepare($requete);
-            $stmt->bind_param("ss", $courriel,$mdp);
+            $stmt->bind_param("ss", $courriel, $mdp);
             $stmt->execute();
-            $reponse =   $stmt->get_result();
+            $reponse = $stmt->get_result();
 
             if ($reponse->num_rows > 0) { // OK, courriel et mot de passe existent
                 $ligne = $reponse->fetch_object();
@@ -39,7 +39,7 @@
                     $msg = "SVP contactez l'administrateur";
                 } 
             } else {
-            $msg = "Mot de passe ou nom d'utilisateur incorrect";
+                $msg = "Mot de passe ou nom d'utilisateur incorrect";
             }
         } catch(Exception $e) {
             $msg = 'Erreur : ' . $e->getMessage();
