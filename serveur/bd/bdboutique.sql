@@ -20,7 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Database: `bdboutique`
 --
-
+--
+CREATE DATABASE IF NOT EXISTS `bdboutique` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `e23mabdfilms`;
 -- --------------------------------------------------------
 
 --
