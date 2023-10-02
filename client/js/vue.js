@@ -10,7 +10,7 @@ const modalEnregMembres = () => {
                 </div>
                 <div class="modal-body modal-body-bg">
                     <!-- Formulaire enregistrer Membre -->
-                    <form id="formEnregMembre" action="serveur/membre/enregistrerMembre.php" method="POST" enctype="multipart/form-data" class="row g-3" onsubmit="return validerFormEnreg();">
+                    <form id="formEnregMembre" action="serveur/membre/enregistrerMembre.php" method="POST" enctype="multipart/form-data" class="row g-3" onsubmit="return validerFormEnreg()">
                         <div class="col-md-6">
                             <label for="nom" class="form-label">Nom :</label>
                             <input type="text" class="form-control is-valid" id="nom" name="nom" required>
@@ -51,12 +51,14 @@ const modalEnregMembres = () => {
                         </div>
                         <div class="col-md-12">
                             <label for="password" class="form-label">Mot de passe :</label>
-                            <input type="password" class="form-control is-valid" id="password" name="password" minlength="8" maxlength="10" required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$" >
+                            <font size="2pt"><i><p>(8 à 10 caractères: au moins 1 majuscule, 1 minuscule, 1 chiffre et 1 symbole)</p></i></font>
+                            <input type="password" class="form-control is-valid" id="password" name="password" minlength="8" maxlength="10" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\\.\\*\\-\\#\\?\\!@\\$%\\^&_]).{8,10}" required>
                         </div>
                         <div class="col-md-12">
                             <label for="cpassword" class="form-label">Confirmation mot de passe :</label>
-                            <input type="password" class="form-control is-valid" id="cpassword" name="cpassword" required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$">
+                            <input type="password" class="form-control is-valid" id="cpassword" name="cpassword" pattern="(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\\.\\*\\-\\#\\?\\!@\\$%\\^&_]).{8,10}" required>
                         </div>
+                        <span style="color:red" id="msge"></span>
                         <div class="col-md-12">
                             <label for="photo" class="form-label">Photo</label>
                             <input type="file" class="form-control is-valid" id="photo" name="photo[]">
@@ -65,7 +67,6 @@ const modalEnregMembres = () => {
                         <br>
                             <button class="btn btn-primary" type="submit">S'enregistrer</button>
                             <button class="btn btn-danger" type="reset">Vider</button>
-                            <span id="msge"></span>
                         </div>
                     </form>
                     <!-- Fin du formulaire enregistrer Membre -->
