@@ -10,7 +10,7 @@ const modalEnregMembres = () => {
                 </div>
                 <div class="modal-body modal-body-bg">
                     <!-- Formulaire enregistrer Membre -->
-                    <form id="formEnregMembre" action="serveur/membre/enregistrerMembre.php" method="POST" enctype="multipart/form-data" class="row g-3" onSubmit="return validerFormEnreg();">
+                    <form id="formEnregMembre" action="serveur/membre/enregistrerMembre.php" method="POST" enctype="multipart/form-data" class="row g-3" onsubmit="return validerFormEnreg();">
                         <div class="col-md-6">
                             <label for="nom" class="form-label">Nom :</label>
                             <input type="text" class="form-control is-valid" id="nom" name="nom" required>
@@ -51,11 +51,11 @@ const modalEnregMembres = () => {
                         </div>
                         <div class="col-md-12">
                             <label for="password" class="form-label">Mot de passe :</label>
-                            <input type="password" class="form-control is-valid" id="password" name="password" minlength="8" maxlength="10" required pattern="^[A-Za-z0-9_\$#\-]{8,10}$" >
+                            <input type="password" class="form-control is-valid" id="password" name="password" minlength="8" maxlength="10" required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$" >
                         </div>
                         <div class="col-md-12">
                             <label for="cpassword" class="form-label">Confirmation mot de passe :</label>
-                            <input type="password" class="form-control is-valid" id="cpassword" name="cpassword" required pattern="^[A-Za-z0-9_\$#\-]{8,10}$">
+                            <input type="password" class="form-control is-valid" id="cpassword" name="cpassword" required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$">
                         </div>
                         <div class="col-md-12">
                             <label for="photo" class="form-label">Photo</label>
