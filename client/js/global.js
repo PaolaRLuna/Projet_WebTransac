@@ -105,31 +105,26 @@ const switchHeader= (role) => {
 }
 
 // Validation mot de passe pendant l'enregistrement
-let validerFormEnreg = () => {
+function validerFormEnreg() {
     let etat = true;
     let msg ="";
-    const regExpPass = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,10}$");
+    const regExpPass = new RegExp("(?=.*[A-Z])(?=.*?[a-z])(?=.*[0-9])(?=.*[\\#\\?\\!@\\$%\\^&\\*\\-_]).{8,10}");
     const mdp = document.getElementById('password').value;
     const mdpc = document.getElementById('cpassword').value;
     if(mdp !== mdpc){
         etat = false;
-        msg = "Mots de passe ne sont pas égaux !";
-        // montrerMessage('msge', msg);
+        msg = "Mot de passe ne sont pas égaux !";
+        document.getElementById('msge').innerHTML = msg;
         return etat;
     } else {//OK, égaux
         if(!regExpPass.test(mdp)){
             etat = false;
             msg = "Mot de passe non conforme";
-            // montrerMessage('msge', msg);
+            document.getElementById('msge').innerHTML = msg;
             return etat;
         } 
     }
     return etat;
 }
 
-// const montrerMessage = (idElem, msg) => {
-//     document.getElementById(idElem).innerHTML = msg;
-//     setInterval(() => {
-//         document.getElementById(idElem).innerHTML = "";
-//     }, 4000);
-// }
+

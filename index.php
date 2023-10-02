@@ -100,7 +100,7 @@
     <?php
         require_once('serveur/includes/toast.php');
         
-        if($_GET['msg']!==""){
+        if(isset($_GET['msg'])){
             $msg = $_GET['msg'];
             echo '<script> montrerToast("'.$msg.'");</script>';
             $msg = "" ;
