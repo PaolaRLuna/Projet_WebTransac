@@ -6,5 +6,5 @@
         echo "Problème de connexion au serveur de bd";
         exit();
     }
-    // Avec le API PDO
+    
 ?>
