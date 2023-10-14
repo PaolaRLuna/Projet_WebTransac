@@ -1,27 +1,20 @@
 <?php
-    require_once(__DIR__.'/../bd/connexion.inc.php');
+    require_once(__DIR__.'/../ressources/bd/connexion.inc.php');
+    require_once(__DIR__.'/../ressources/bd/modele.inc.php');
 
     function Mdl_Connexion($courriel, $mdp){
-        global $connexion;
         $msg = "";
         try{
             // Tester si le courriel existe déjà
+            $instanceModele= modeleDonnees::getInstanceModele();
             $requete = "SELECT * FROM connexion WHERE courriel=? AND mdp=?";
+            $stmt = $instanceModele->executer($requete,[$courriel, $mdp]);
 
-            $stmt = $connexion->prepare($requete);
-            $stmt->bind_param("ss", $courriel, $mdp);
-            $stmt->execute();
-            $reponse = $stmt->get_result();
-
-            if ($reponse->num_rows > 0) { // OK, courriel et mot de passe existent
-                $ligne = $reponse->fetch_object();
+            if ($ligne=$stmt->fetch(PDO::FETCH_OBJ)) { // OK, courriel et mot de passe existent
                 if($ligne->statut == 'A'){ 
                     $requete = "SELECT * FROM membres WHERE courriel=?";
-                    $stmt = $connexion->prepare($requete);
-                    $stmt->bind_param("s", $courriel);
-                    $stmt->execute();
-                    $reponse =   $stmt->get_result();
-                    $ligne2 = $reponse->fetch_object();
+                    $stmt=$instanceModele->executer($requete,[$courriel]);
+                    $ligne2 = $stmt->fetch(PDO::FETCH_OBJ);
                     $_SESSION['prenom'] = $ligne2->prenom;
                     $_SESSION['nom'] = $ligne2->nom;
                     $_SESSION['photo'] = "../membre/photos/".$ligne2->photo;
