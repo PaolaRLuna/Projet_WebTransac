@@ -1,5 +1,6 @@
 <?php
- 	require_once("connexion.inc.php");
+require_once("connexion.inc.php");
+
 class modeleDonnees{
 private static $instance=null;
 	
@@ -21,6 +22,17 @@ function executer($requete=null,$params=null){
 		Connexion::getInstanceConnexion()->deconnexion();
 		return $stmt;		//get result pour retourner le resultat
 	}
+
+	
+	function lastId($requete=null,$params=null){
+		$connexion = Connexion::getInstanceConnexion()->getConnexion();
+		$stmt = $connexion->prepare($requete);
+		$stmt->execute($params);
+		$idm = $connexion -> lastInsertId();
+		Connexion::getInstanceConnexion()->deconnexion();
+		return $idm;		//get result pour retourner le resultat
+	}
+	
 	
 
 function enleverFichier($dossier,$pochette){
@@ -41,7 +53,7 @@ function enleverFichier($dossier,$pochette){
 	
 function verserFichier($dossier, $inputNom, $fichierDefaut, $chaine){//inputNom - nom du champs input, chaine qui va me permettre de concatener avec sha1
 	$cheminDossier="../$dossier/";
-	$pochette=$fichierDefaut;//fichier par defaut je le mets dans pochette 
+	$pochette=$fichierDefaut;//fichier par defaut je le mets dans pochette
 	if($_FILES[$inputNom]['tmp_name']!==""){ //php mette le fichier dans le dossier tmp
 		$nomPochette=sha1($chaine.time());//former une clée unique qui va devenir le nom de ma pochette, il mets pas d'extension
 		if($pochette !== IMG_DEFAUT){
