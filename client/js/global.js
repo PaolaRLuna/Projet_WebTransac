@@ -89,34 +89,42 @@ const switchHeader= (role) => {
     if (role === "M") {
         let switch1 = document.getElementById('optionHeader1'); 
         let switch2 = document.getElementById('optionHeader2'); 
-        switch1.setAttribute("href","javascript:;");
+        switch1.setAttribute("href","#");
         switch1.innerHTML = "Profil";
         switch2.setAttribute("href","javascript:document.getElementById('formDec').submit();");
         switch2.innerHTML = "Déconnexion";
-    } else{
-        //code à venir
+    } else if (role === "A") {
+        let switch1 = document.getElementById('optionHeader1'); 
+        let switch2 = document.getElementById('optionHeader2'); 
+        switch1.setAttribute("href","#");
+        switch1.innerHTML = "Gérer";
+        switch2.setAttribute("href","javascript:document.getElementById('formDec').submit();");
+        switch2.innerHTML = "Déconnexion";
     }
 
 }
 
 // Validation mot de passe pendant l'enregistrement
-let validerFormEnreg = () => {
+function validerFormEnreg() {
     let etat = true;
-    const regExpPass = new RegExp('^[A-Za-z0-9_\$#\-]{8,10}$');
+    let msg ="";
+    const regExpPass = new RegExp("(?=.*[A-Z])(?=.*?[a-z])(?=.*[0-9])(?=.*[\\#\\?\\!@\\$%\\^&\\*\\-_]).{8,10}");
     const mdp = document.getElementById('password').value;
     const mdpc = document.getElementById('cpassword').value;
     if(mdp !== mdpc){
         etat = false;
-        document.getElementById('msgPass').innerHTML = "Mots de passe ne sont pas égaux !";
-        setInterval(() => {
-            document.getElementById('msgPass').innerHTML = "";
-        },3000);
+        msg = "Mot de passe ne sont pas égaux !";
+        document.getElementById('msge').innerHTML = msg;
+        return etat;
     } else {//OK, égaux
         if(!regExpPass.test(mdp)){
-              etat = false;
-             document.getElementById('msgPass').innerHTML = "Mot de passe non conforme";
-        }
+            etat = false;
+            msg = "Mot de passe non conforme";
+            document.getElementById('msge').innerHTML = msg;
+            return etat;
+        } 
     }
     return etat;
 }
+
 

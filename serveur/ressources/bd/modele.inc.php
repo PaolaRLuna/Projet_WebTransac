@@ -1,5 +1,6 @@
 <?php
 require_once("connexion.inc.php");
+
 class modeleDonnees{
 private static $instance=null;
 	
@@ -41,11 +42,11 @@ function enleverFichier($dossier,$pochette){
 		//print_r($tabFichiers);
 		// parcourir les fichier
 		foreach($tabFichiers as $fichier){
-		if(is_file($fichier) && $fichier==trim($rmPoc)) {
+		  if(is_file($fichier) && $fichier==trim($rmPoc)) {
 			// enlever le fichier
 			unlink($fichier);//supprimer
 			break;
-		}
+		  }
 		}
 	}
 }
