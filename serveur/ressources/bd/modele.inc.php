@@ -1,5 +1,5 @@
 <?php
- 	require_once("connexion.inc.php");
+require_once("connexion.inc.php");
 class modeleDonnees{
 private static $instance=null;
 	
@@ -41,18 +41,18 @@ function enleverFichier($dossier,$pochette){
 		//print_r($tabFichiers);
 		// parcourir les fichier
 		foreach($tabFichiers as $fichier){
-		  if(is_file($fichier) && $fichier==trim($rmPoc)) {
+		if(is_file($fichier) && $fichier==trim($rmPoc)) {
 			// enlever le fichier
 			unlink($fichier);//supprimer
 			break;
-		  }
+		}
 		}
 	}
 }
 	
 function verserFichier($dossier, $inputNom, $fichierDefaut, $chaine){//inputNom - nom du champs input, chaine qui va me permettre de concatener avec sha1
 	$cheminDossier="../$dossier/";
-	$pochette=$fichierDefaut;//fichier par defaut je le mets dans pochette 
+	$pochette=$fichierDefaut;//fichier par defaut je le mets dans pochette
 	if($_FILES[$inputNom]['tmp_name']!==""){ //php mette le fichier dans le dossier tmp
 		$nomPochette=sha1($chaine.time());//former une clée unique qui va devenir le nom de ma pochette, il mets pas d'extension
 		if($pochette !== IMG_DEFAUT){
