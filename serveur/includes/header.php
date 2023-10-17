@@ -1,6 +1,22 @@
+<?php
+$path =basename(getcwd());
+$cheminlike = "";
+$cheminlogo = "";
+$cheminpanier = "";
+//echo '<script type="text/javascript">alert('.$path.');</script>';
+if($path == "admin"){
+    $cheminlogo = "../../client/images/general/logo.png";
+    $cheminpanier = "../../client/images/general/panier.png";
+    $cheminlike= "../../client/images/general/like.png";
+} else {
+    $cheminlogo = "client/images/general/logo.png";
+    $cheminpanier = "client/images/general/panier.png";
+    $cheminlike= "client/images/general/like.png";
+}
+?>
 <header id="header">
         <div class="logo">
-            <a href="index.php"><img src="client/images/general/logo.png" alt="Pâte-à-Pouf" id="logo"></a>
+            <a href="index.php"><img src="<?php echo $cheminlogo?>" alt="Pâte-à-Pouf" id="logo"></a>
             <h1 class="text-light"><a href="index.php">Pâte-à-Pouf</a></h1>
         </div>
 
@@ -33,9 +49,9 @@
         </nav>
         
         <div class="panier">
-            <a href="panier.php"><img src="client/images/general/panier.png" alt="voir le panier" id="panier"></a>
+            <a href="panier.php"><img src="<?php echo $cheminpanier ?>" alt="voir le panier" id="panier"></a>
         </div>
         <div class="favoris">
-            <a href="favoris.php"><img src="client/images/general/like.png" alt="voir les favoris" id="favoris"></a>
+            <a href="favoris.php"><img src="<?php echo $cheminlike ?>" alt="voir les favoris" id="favoris"></a>
         </div>
 </header>
