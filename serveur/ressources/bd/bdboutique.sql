@@ -70,10 +70,10 @@ CREATE TABLE `membres` (
 --
 
 INSERT INTO `membres` (`idm`, `nom`, `prenom`, `courriel`, `sexe`, `datenaissance`, `photo`) VALUES
-(1, 'Reyes', 'Paola', 'e2296787@cmaisonneuve.qc.ca', 'F', '1987-11-02', 'avatar-membre.png'),
-(2, 'Guerram', 'Houssam', 'e2296702@cmaisonneuve.qc.ca', 'M', '1984-12-14', 'avatar-membre.png'),
-(3, 'Bertrand', 'Cassandre', 'e2296507@cmaisonneuve.qc.ca', 'F', '1991-01-15', 'avatar-membre.png'),
-(4, 'Massina', 'Adam', 'e2296777@cmaisonneuve.qc.ca', 'M', '1993-09-01', 'avatar-membre.png'),
+(1, 'Reyes', 'Paola', 'e2296787@cmaisonneuve.qc.ca', 'F', '1987-11-02', 'avatar-membre-f.png'),
+(2, 'Guerram', 'Houssam', 'e2296702@cmaisonneuve.qc.ca', 'M', '1984-12-14', 'avatar-membre-m.png'),
+(3, 'Bertrand', 'Cassandre', 'e2296507@cmaisonneuve.qc.ca', 'F', '1991-01-15', 'avatar-membre-f.png'),
+(4, 'Massina', 'Adam', 'e2296777@cmaisonneuve.qc.ca', 'M', '1993-09-01', 'avatar-membre-m.png'),
 (5, 'Cashoupao', 'Berguelun', 'admin@pate-a-pouf.com', 'F', '2023-09-28', 'avatar_membre.png'),
 (6, 'Bertrand', 'Cassandre', 'cabert@gmail.com', 'F', '2023-09-29', 'avatar_membre.png');
 

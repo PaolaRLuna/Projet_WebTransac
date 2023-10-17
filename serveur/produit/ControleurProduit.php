@@ -25,11 +25,19 @@
          return DaoProduit::getDaoProduit()->MdlF_Enregistrer($produit); 
     }
 
-    function CtrF_getAll(){
-         return DaoProduit::getDaoProduit()->MdlF_getAll(); 
+    function CtrP_getAll(){
+         return DaoProduit::getDaoProduit()->MdlP_getAll(); 
     }
 
-    function CtrF_Actions(){
+    function CtrP_getCategories(){
+        return DaoProduit::getDaoProduit()->MdlP_getCategorie(); 
+    }
+
+    function CtrP_rechercher(){
+        //return DaoProduit::getDaoProduit()->MdlP_getCategorie(); 
+    }
+
+    function CtrP_Actions(){
         $action=$_POST['action'];
         switch($action){
             case "enregistrer" :
@@ -44,7 +52,13 @@
                 //enlever(); 
             break;
             case "lister" :
-                return $this->CtrF_getAll(); 
+                return $this->CtrP_getAll(); 
+            break;
+            case "rechercher" :
+                return $this->CtrP_rechercher(); 
+            break;
+            case "recupererCategories" :
+                return $this->CtrP_getCategories(); 
         }
         // Retour de la réponse au client
        
