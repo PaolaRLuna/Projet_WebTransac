@@ -2,14 +2,14 @@
 // Au début de PHP: Déclarer les types dans les paramétres des fonctions
 declare (strict_types=1);
 
-require_once(__DIR__."/../ressources/bd/Connexion.php");
+require_once(__DIR__."/../ressources/bd/modele.inc.php");
 require_once("Produit.php");
 
 class DaoProduit {
     static private $modelProduit = null;
     
     private $reponse=array();
-    private $connexion = null;
+    //private $connexion = null;
 	
     private function __construct(){
         
@@ -43,25 +43,42 @@ class DaoProduit {
         }
     }
 	
-    function MdlF_getAll():string {
-
-        $connexion = Connexion::getConnexion();
-        $requette="SELECT * FROM produits";
+    function MdlP_getAll():string {
+        $requete="SELECT * FROM produits";
+        
         try{
-            $stmt = $connexion->prepare($requette);
-            $stmt->execute();
+            $instanceModele= modeleDonnees::getInstanceModele();
+            $stmt = $instanceModele->executer($requete,[]);
             $this->reponse['OK'] = true;
-            $this->reponse['msg'] = "";
+            $this->reponse['msg'] = "Opération réussie";
             $this->reponse['listeProduits'] = array();
-            while($ligne = $stmt->fetch(PDO::FETCH_OBJ)){
+            while($ligne=$stmt->fetch(PDO::FETCH_OBJ)){
                 $this->reponse['listeProduits'][] = $ligne;
             }
         }catch (Exception $e){ 
             $this->reponse['OK'] = false;
             $this->reponse['msg'] = "Problème pour obtenir les données des produits";
-            //$reponse['msg'] = $e->getMessage();
         }finally {
-          unset($connexion);
+          return json_encode($this->reponse);
+        }
+    }
+
+    function MdlP_getCategorie():string {
+        $requete="SELECT DISTINCT categorie FROM produits";
+        
+        try{
+            $instanceModele= modeleDonnees::getInstanceModele();
+            $stmt = $instanceModele->executer($requete,[]);
+            $this->reponse['OK'] = true;
+            $this->reponse['msg'] = "Opération réussie";
+            $this->reponse['listeCategories'] = array();
+            while($ligne=$stmt->fetch(PDO::FETCH_OBJ)){
+                $this->reponse['listeCategories'][] = $ligne;
+            }
+        }catch (Exception $e){ 
+            $this->reponse['OK'] = false;
+            $this->reponse['msg'] = "Problème pour obtenir les données des produits";
+        }finally {
           return json_encode($this->reponse);
         }
     }

@@ -29,7 +29,7 @@ body {
   }
 
   #pageAdmin, #pageMembre {
-    margin-top: 270px;
+    margin-top: 150px;
     z-index: 3;
     position: relative;
     margin-bottom: 70px;
@@ -379,6 +379,87 @@ body {
 
   .modal-body-bg {
     background-color: white !important;
+  }
+
+  /*--------------------------------------------------------------
+  # Produits côté ADMIN
+  --------------------------------------------------------------*/
+  
+  .navbar-admin {
+    padding: 0;
+    margin-left: 20px;
+    margin-top: 5px;
+  }
+
+  #identifiantAdmin{
+    font-family: "Open Sans", sans-serif;
+    font-size: smaller;
+    margin-left: 30px;
+  }
+
+
+  .menu-admin{
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+  }
+
+  .options-admin{
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+    align-items:center;
+  }
+
+  .card-adminP {
+    display: flex;
+    flex-direction: row;
+    width: 93%;
+    margin-left:50px;
+    margin-bottom:5px;
+    justify-content: center;
+    height: fit-content;
+    padding: 20px;
+  }
+
+  .img-adminP{
+    width: fit-content;
+  }
+
+  .corps-adminP{
+    width: 80%;
+    padding:20px;
+  }
+
+  .boutons-adminP{
+    display:flex;
+    display: column;
+    justify-content: center;
+    padding:20px;
+  }
+
+  .form-floating, .recherche{
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  .img-fluid {
+    height: 160px;
+    width: auto;
+  }
+
+  .texteEnteteAdmin{
+    color:#444444;
+    margin-right: 10px;
+  }
+
+  #button-addon2{
+    background-color: #444444;
+    color:#fff;
   }
 
   /*--------------------------------------------------------------
