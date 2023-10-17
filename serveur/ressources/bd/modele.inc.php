@@ -21,6 +21,15 @@ function executer($requete=null,$params=null){
 		Connexion::getInstanceConnexion()->deconnexion();
 		return $stmt;		//get result pour retourner le resultat
 	}
+
+	function lastId($requete=null,$params=null){
+		$connexion = Connexion::getInstanceConnexion()->getConnexion();
+		$stmt = $connexion->prepare($requete);
+		$stmt->execute($params);
+		$idm = $connexion -> lastInsertId();
+		Connexion::getInstanceConnexion()->deconnexion();
+		return $idm;		//get result pour retourner le resultat
+	}
 	
 
 function enleverFichier($dossier,$pochette){
