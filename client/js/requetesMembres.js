@@ -48,22 +48,23 @@ let montrerVueMembre = (action, donnees) => {
 
 let remplirCardM = (unMembre)=> {
 	lienImage = chargerImageM(unMembre.photo,unMembre.sexe);
-    let status = assignStatus(unMembre.$statut);
+    let status = assignStatus(unMembre.statut);
 	let rep ='<div class="card card-adminP">';
 	rep +='<div class="img-adminP">';// class="col-md-4"
 	rep +='<img src="'+lienImage+'" class="img-fluid rounded-start" alt="...">';
 	rep +='</div>';
 
 	rep +='<div class="corps-adminP"><h5 class="card-title">'+unMembre.prenom+' '+unMembre.nom+'</h5>';
-	rep +='<p class="">'+unMembre.courriel+'</p></div>';
-    rep +='<p class="">'+unMembre.datenaissance+'</p></div>';
-	rep +='<p class="card-text"><small class="text-body-secondary"> Sexe: '+unMembre.sexe+'</small></p></div>';
+	rep +='<p class="">'+unMembre.courriel+'</p>';
+    rep +='<p class="">'+unMembre.datenaissance+'</p>';
+	rep +='<p class=""> Sexe: '+unMembre.sexe+'</p></div>';
+    rep +='<div class="form-btnactive-membre">';
     rep +='<div class="form-check form-switch">';
-    rep +='<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" '+status+'>';
-    rep+= '<label class="form-check-label" for="flexSwitchCheckDefault">Active</label>'
-	rep +='<div class="boutons-adminP"><a href="#" class="btn btn-primary">Modifier</a></div>';
+    rep +='<input class="form-check-input boutons-adminP" type="checkbox" role="switch" id="flexSwitchCheckDefault" '+status+'>';
+    rep+= '<label class="form-check-label" for="flexSwitchCheckDefault">Active</label></div>'
+	rep +='<div class=""><a href="#" class="btn btn-primary boutons-adminM btn-modifier-membre">Modifier</a>';
 	rep +='<a href="#" onClick="supprimerMembre(this,unMembre.idP);" class="btn btn-danger">Supprimer</a></div>';     
-	rep +='</div>';
+	rep +='</div></div>';
 	return rep;
 }
 
@@ -73,13 +74,14 @@ let listerMembres = (listeMembres) => {
             contenu+=remplirCardM(unMembre);
     } 
     contenu += `</div>`;
-    document.getElementById('contenuProduits').innerHTML = contenu;
+    document.getElementById('contenuMembres').innerHTML = contenu;
 }
 
 function chargerImageM(image,sexe){
-	lien = '../membre/photos/'+image;
-    lienF = '../membre/photos/avatar-membre-f.png';
-    lienM = '../membre/photos/avatar-membre-m.png';
+	lien ='../membre/photos/'+image;
+    lienF ='../membre/photos/avatar-membre-f.png';
+    lienM ='../membre/photos/avatar-membre-m.png';
+    //console.log(lien);
     if (image != ""){
         return lien;
     }else {

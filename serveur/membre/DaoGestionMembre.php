@@ -25,7 +25,7 @@ class DaoGestionMembre{
 	
     function MdlM_getAll() {
 
-        $requete="SELECT m.idm, m.nom, m.prenom, m.datenaissance, m.courriel, m.sexe, c.statut FROM membres m INNER JOIN connexion c ON m.idm = c.idm";
+        $requete="SELECT m.idm, m.nom, m.prenom, m.datenaissance, m.courriel, m.sexe, m.photo, c.statut FROM membres m INNER JOIN connexion c ON m.idm = c.idm";
         try{
             $instanceModele= modeleDonnees::getInstanceModele();
             $stmt = $instanceModele->executer($requete,[]);

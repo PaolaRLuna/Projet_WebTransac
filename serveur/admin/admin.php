@@ -41,8 +41,8 @@
     </header>
 
     <main id="pageAdmin">
-        <div class="menu-admin">
-            <h2 class="texteEnteteAdmin" id="affichercontenuProduits">Liste des produits</h2>
+        <div class="menu-admin" id="affichercontenuProduits">
+            <h2 class="texteEnteteAdmin">Liste des produits</h2>
             <div class="options-admin">
                 <a class="texteEnteteAdmin" href="#"><u>+ Ajouter un produit</u></a>
                 <div class="form-floating">
@@ -59,7 +59,7 @@
 
             
         </div>
-        <div class="menu-admin" id="affichercontenuMembre" style="display:none;">
+        <div class="menu-admin-membre" id="affichercontenuMembre" style="display:none;">
             <h2 class="texteEnteteAdmin" >Liste des Membres</h2>
                 <div class="recherche">
                     <div class="input-group mb-3">
@@ -71,6 +71,7 @@
         </div>
 
         <div id="contenuProduits"></div>
+        <div id="contenuMembres"></div>
     </main>
 
     

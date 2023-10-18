@@ -462,6 +462,37 @@ body {
     color:#fff;
   }
 
+  .form-btnactive-membre{
+    display:flex;
+    flex-direction: column !important;
+    justify-content: space-between;
+  }
+
+  .menu-admin-membre{
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+  }
+
+  .boutons-adminM{
+    display:flex;
+    flex-direction: column !important;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .btn-modifier-membre{
+    margin-bottom: 20px;
+  }
+
+  .form-switch{
+    display: flex;
+    flex-direction: column !important;
+  }
   /*--------------------------------------------------------------
   # Modal Connexion
   ----------------------------------------------------------------*/
