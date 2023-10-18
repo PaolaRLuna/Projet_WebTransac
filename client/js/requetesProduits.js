@@ -114,7 +114,6 @@ function chargerImage(image){
 	// }
 }
 
-
 // let requeteEnregistrer = () => {
 // 	let formFilm = new FormData(document.getElementById('formEnreg'));
 // 	formFilm.append('action','enregistrer');

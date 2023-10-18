@@ -33,7 +33,7 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="active" href="#">Gestion des produits</a></li>
+                <li><a class="active" href="javascript:relisterProduits();">Gestion des produits</a></li>
                 <li><a class="active" href="javascript:chargerMembres();">Gestion des membres</a></li>
                 <li><a class="getstarted" href="#">Déconnexion</a></li>
             </ul>
