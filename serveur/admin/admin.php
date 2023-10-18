@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../../client/css/style.css?v=<?php echo time(); ?>">
     <script src="../../client/js/global.js"></script>
     <script src="../../client/js/requetesProduits.js"></script>
+    <script src="../../client/js/requetesMembres.js"></script>
     <script src="../../client/js/vue.js"></script>
     <link href="https://fonts.cdnfonts.com/css/bradley-hand-2" rel="stylesheet">
 </head>
@@ -32,15 +33,15 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="active" href="#">Gestion des produits</a></li>
-                <li><a class="active" href="#">Gestion des membres</a></li>
+                <li><a class="active" href="javascript:relisterProduits();">Gestion des produits</a></li>
+                <li><a class="active" href="javascript:chargerMembres();">Gestion des membres</a></li>
                 <li><a class="getstarted" href="#">Déconnexion</a></li>
             </ul>
         </nav>
     </header>
 
     <main id="pageAdmin">
-        <div class="menu-admin">
+        <div class="menu-admin" id="affichercontenuProduits">
             <h2 class="texteEnteteAdmin">Liste des produits</h2>
             <div class="options-admin">
                 <a class="texteEnteteAdmin" href="#"><u>+ Ajouter un produit</u></a>
@@ -55,8 +56,22 @@
                     </div>
                 </div>
             </div>
+
+            
         </div>
+        <div class="menu-admin-membre" id="affichercontenuMembre" style="display:none;">
+            <h2 class="texteEnteteAdmin" >Liste des Membres</h2>
+                <div class="recherche">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" id="rechercheMotCleMembre">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick='rechercheMotCleMembre();'>Rechercher Membre</button>
+                    </div>
+                </div>
+                
+        </div>
+
         <div id="contenuProduits"></div>
+        <div id="contenuMembres"></div>
     </main>
 
     
