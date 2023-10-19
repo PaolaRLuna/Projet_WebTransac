@@ -37,10 +37,6 @@
     
     //Houssam****************************************************
 
-    // function CtrP_listerParCategorie() {
-    //     $params = ["motCle" => $_POST['motCle']];
-    //     return DaoProduit::getDaoProduit()->MdlP_getByCategory($params);
-    // }
 
     function CtrP_listerParCategorie() {
         $categorie = $_POST['categorie'];

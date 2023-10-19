@@ -50,12 +50,8 @@ function Mdl_Ajouter($membre, $mdp)
             // Insérer dans la table membres
             $requete = "INSERT INTO membres VALUES (0,?,?,?,?,?,?)";
             $idm = $instanceModele->lastId($requete, [$nom, $prenom, $courriel, $sexe, $daten, $photo]);
-            
-            //$msg = "ICI";
-            // Obtenir l'ID généré lors de l'insertion dans la table membres
-            //$idm = $instanceModele->lastId();
-            //$msg = "ICI".$idm;
-            // Insérer dans la table connexion
+    
+
             $requete = "INSERT INTO connexion VALUES (?,?,?,'M','A')";
             $stmt = $instanceModele->executer($requete, [$idm, $courriel, $mdp]);
             
