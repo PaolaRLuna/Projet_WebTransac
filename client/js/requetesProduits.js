@@ -29,6 +29,75 @@ let chargerCategories = () => {
     })
 }
 
+
+//Houssam****************************************************
+
+let chargerProduitsParCategorie = (categorie) => {
+    $.ajax({
+        type: "POST",
+        url: "routesProduits.php",
+        data: {"action": "rechercher", "categorie": categorie},
+        dataType: "json",
+        success: (reponse) => {
+            montrerVue("lister", reponse);
+        },
+        fail: (err) => {
+            console.log(err);
+        }
+    });
+}
+
+
+// Recherche par nom ou ingrédients
+let rechercheParMotCle = () => {
+    let motCle = $("#rechercheMotCle").val();
+    $.ajax({
+        type: "POST",
+        url: "routesProduits.php",
+        data: { "action": "rechercherParMotCle", "motCle": motCle },
+        dataType: "json",
+        success: (reponse) => {
+            montrerVue("lister", reponse);
+        },
+        fail: (err) => {
+            console.log(err);
+        }
+    });
+}
+
+
+let rechercheCategorie = () => {
+    let selectedCategorie = $("#floatingSelect").val();
+    $.ajax({
+        type: "POST",
+        url: "routesProduits.php",
+        data: {
+            "action": "rechercherParCategorie",
+            "categorie": selectedCategorie  // Nouvelle propriété pour la catégorie
+        },
+        dataType: "json",
+        success: (reponse) => {
+            montrerVue("lister", reponse);
+        },
+        fail: (err) => {
+            console.log(err);
+        }
+    });
+}
+
+// enlever categorie et focus mot cle
+
+let effectuerRecherche = () => {
+    let motCle = $("#rechercheMotCle").val();
+
+    if (motCle !== "") {
+        rechercheParMotCle();
+    }
+}
+
+
+//********************************************
+
 //implémenter la fonction affichermessage*****
 let montrerVue = (action, donnees) => {
 	msgErr = "Problème côté serveur. Essayez plus tard!";
