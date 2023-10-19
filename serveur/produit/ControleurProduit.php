@@ -1,5 +1,4 @@
 <?php
-       
     require_once("Produit.php");
     require_once("DaoProduit.php");
 
@@ -20,10 +19,10 @@
 		return self::$instanceCtr;
 	}
 
-	function CtrF_Enregistrer(){
-        // $produit = new Produit(0,$_POST['titre'], (int)$_POST['duree'], $_POST['res'],"Pochette");
-       //  return DaoProduit::getDaoProduit()->MdlF_Enregistrer($produit); 
-    }
+	// function CtrF_Enregistrer(){
+    //     $produit = $_POST['']
+    //     return DaoProduit::getDaoProduit()->Mdl_AjoutProduit($produit);
+    // }
 
     function CtrP_getAll(){
          return DaoProduit::getDaoProduit()->MdlP_getAll(); 
@@ -55,7 +54,7 @@
         $action=$_POST['action'];
         switch($action){
             case "enregistrer" :
-                return  $this->CtrF_Enregistrer();
+                // return  $this->CtrF_Enregistrer();
             case "fiche" :
                 //fiche(); 
             break;

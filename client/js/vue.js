@@ -74,11 +74,11 @@ const modalEnregMembres = () => {
 }
 
 const montrerFormEnregMembre = () => {
-    document.getElementById('idForms').innerHTML = modalEnregMembres(); 
+    document.getElementById('idForms').innerHTML = modalEnregMembres();
     const modalEnregMembre = new bootstrap.Modal('#modalEnregMembre', {
-    
-      })
-      modalEnregMembre.show(); 
+
+    })
+    modalEnregMembre.show();
 }
 
 //Modal Connexion 
@@ -131,23 +131,84 @@ const modalConnexionUtilisateurs = () => {
 }
 
 const montrerFormConnexion = () => {
-    document.getElementById('idForms').innerHTML = modalConnexionUtilisateurs(); 
-    const modalConnexion = new bootstrap.Modal('#modalConnexion', {    
-      })
-      modalConnexion.show(); 
+    document.getElementById('idForms').innerHTML = modalConnexionUtilisateurs();
+    const modalConnexion = new bootstrap.Modal('#modalConnexion', {
+    })
+    modalConnexion.show();
 }
 
 //Afficher message dans Toast
 
-let montrerToast = (msg) =>{
-	if(msg.length > 0){
-		let textToast = document.getElementById("textToast");
-		var toastElList = [].slice.call(document.querySelectorAll('.toast'))
-		var toastList = toastElList.map(function (toastEl) {
-			return new bootstrap.Toast(toastEl)
-		})
-		textToast.innerHTML = msg;
-		toastList[0].show();
-	}
+let montrerToast = (msg) => {
+    if (msg.length > 0) {
+        let textToast = document.getElementById("textToast");
+        var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+        var toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl)
+        })
+        textToast.innerHTML = msg;
+        toastList[0].show();
+    }
 }
 
+const creerModalAjoutProduit = () => {
+    return `
+    <div class="modal fade" id="modalAjoutProduit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Ajout d'un produit</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                </div>
+  
+                <div class="modal-body modal-body-bg">
+                    <form id="formAjoutProduit" action="/votre-action.php" method="POST" enctype="multipart/form-data" class="row g-3">
+                        <div class="col-md-6">
+                            <label for="nom" class="form-label">Nom :</label>
+                            <input type="text" class="form-control is-valid" id="nom" name="nom" required>
+                        </div>
+  
+                        <div class="col-md-6">
+                            <label for="categorie" class="form-label">Catégorie :</label>
+                            <input type="text" class="form-control is-valid" id="categorie" name="categorie" required>
+                        </div>
+  
+                        <div class="col-md-12">
+                            <label for="ingredients" class="form-label">Ingrédients :</label>
+                            <input type="text" class="form-control is-valid" id="ingredients" name="ingredients" required>
+                        </div>
+  
+                        <div class="col-md-6">
+                            <label for="prix" class="form-label">Prix en $ :</label>
+                            <input type="number" class="form-control is-valid" id="prix" name="prix" required>
+                        </div>
+  
+                        <div class="col-md-6">
+                            <label for="quantite" class="form-label">Quantité :</label>
+                            <input type="number" class="form-control is-valid" id="quantite" name="quantite" required>
+                        </div>
+  
+                        <div class="col-md-12">
+                            <label for="photo" class="form-label">Photo :</label>
+                            <input type="file" class="form-control is-valid" id="photo" name="photo">
+                        </div>
+  
+                        <div class="col-12 btn-ajouter-produit">
+                            <br>
+                            <button class="btn btn-primary" type="submit">Ajouter le produit</button>
+                            <button class="btn btn-danger" type="reset">Effacer</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    `
+}
+
+const montrerFormAjoutProduit = () =>{
+    document.getElementById('idFormProduit').innerHTML = creerModalAjoutProduit();
+    const modalAjout = new bootstrap.Modal('#modalAjoutProduit', {
+    })
+    modalAjout.show();
+}

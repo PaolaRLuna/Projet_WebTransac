@@ -103,6 +103,11 @@ let montrerVue = (action, donnees) => {
 	msgErr = "Problème côté serveur. Essayez plus tard!";
     switch(action){
         case "enregistrer"  :
+            if(donnees.OK){
+                modalAjoutProduit();
+            }else{
+                afficherMessage(msgErr);
+            }
         case "modifier"     :
         case "enlever"      :
             if(donnees.OK){

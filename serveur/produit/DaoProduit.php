@@ -86,44 +86,71 @@ class DaoProduit {
 //Houssam****************************************************
 
 
-function MdlP_getByCategory($categorie): string {
-    $requete = "SELECT * FROM produits WHERE categorie = ?";
-    
-    try {
-        $instanceModele = modeleDonnees::getInstanceModele();
-        $stmt = $instanceModele->executer($requete, [$categorie]);
-        $this->reponse['OK'] = true;
-        $this->reponse['msg'] = "Opération réussie";
-        $this->reponse['listeProduits'] = array();
-        while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $this->reponse['listeProduits'][] = $ligne;
+    function MdlP_getByCategory($categorie): string {
+        $requete = "SELECT * FROM produits WHERE categorie = ?";
+        
+        try {
+            $instanceModele = modeleDonnees::getInstanceModele();
+            $stmt = $instanceModele->executer($requete, [$categorie]);
+            $this->reponse['OK'] = true;
+            $this->reponse['msg'] = "Opération réussie";
+            $this->reponse['listeProduits'] = array();
+            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $this->reponse['listeProduits'][] = $ligne;
+            }
+        } catch (Exception $e) {
+            $this->reponse['OK'] = false;
+            $this->reponse['msg'] = "Problème pour obtenir les données des produits par catégorie";
+        } finally {
+            return json_encode($this->reponse);
         }
-    } catch (Exception $e) {
-        $this->reponse['OK'] = false;
-        $this->reponse['msg'] = "Problème pour obtenir les données des produits par catégorie";
-    } finally {
-        return json_encode($this->reponse);
     }
-}
 
 
-function rechercherParMotCle(array $params): string {
-    $instanceModele = modeleDonnees::getInstanceModele();
-    $motCle = $params['motCle'];
+    function rechercherParMotCle(array $params): string {
+        $instanceModele = modeleDonnees::getInstanceModele();
+        $motCle = $params['motCle'];
 
-    try {
-        $requete = "SELECT * FROM produits WHERE nom LIKE :motCle OR ingredients LIKE :motCle";
-        $stmt = $instanceModele->executer($requete, [':motCle' => '%' . $motCle . '%']);
-        $resultats = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        try {
+            $requete = "SELECT * FROM produits WHERE nom LIKE :motCle OR ingredients LIKE :motCle";
+            $stmt = $instanceModele->executer($requete, [':motCle' => '%' . $motCle . '%']);
+            $resultats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return json_encode(["OK" => true, "msg" => "Recherche réussie", "resultats" => $resultats]);
-    } catch (Exception $e) {
-        return json_encode(["OK" => false, "msg" => "Problème de recherche"]);
+            return json_encode(["OK" => true, "msg" => "Recherche réussie", "resultats" => $resultats]);
+        } catch (Exception $e) {
+            return json_encode(["OK" => false, "msg" => "Problème de recherche"]);
+        }
     }
-}
 
-
-
+    function Mdl_AjoutProduit($produit) {
+        $nom = $produit->getNom();
+        $categorie = $produit->getCateg();
+        $ingredient = $produit->getIngredients();
+        $prix = $produit->getPrix();
+        $quantite = $produit->getQte();
+        $photo = $produit->getPhoto();
+        $msg = "";
+    
+        try{
+            $requete = "SELECT * FROM produits WHERE nom=?";
+            $instanceModele = modeleDonnees::getInstanceModele();
+            $stmt = $instanceModele->executer($requete, [$nom]);
+    
+            if ($stmt->fetch(PDO::FETCH_OBJ)) {
+                $msg = "Ce produit est déjà utilisé !!!";
+            }else{
+                $requete = "INSERT INTO produits (nom, categorie, ingredients, prix, quantite, photo) VALUES (?,?,?,?,?,?)";
+                $instanceModele->executer($requete, [$nom, $categorie, $ingredient, $prix, $quantite, $photo]);
+    
+                $msg = "Produit " .$nom. " bien enregistré.";
+            }
+        } catch (Exception $e) {
+            $msg = 'Erreur: ' .$e->getMessage();
+        } finally {
+            header("Location: ../../index.php?msg=" . urlencode($msg));
+            exit;
+        }
+    }
 }
 
 

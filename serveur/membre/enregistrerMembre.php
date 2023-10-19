@@ -52,7 +52,6 @@
         
         $membre = new Membre(0,$nom,$prenom,$courriel,$sexe,$daten,"");
         Mdl_Ajouter($membre,$_POST['password']);
-        
     }
     
 ?>
