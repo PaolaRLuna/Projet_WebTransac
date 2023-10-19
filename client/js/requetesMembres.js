@@ -18,6 +18,32 @@ function chargerMembres() {
     })
 }
 
+$(document).on('change', '#flexSwitchCheckDefault', function (e) {
+    let idmembre=document.getElementById('idMembre').innerHTML;
+    let formMembre = new FormData();
+    formMembre.append('action', 'modifierstatut');
+    formMembre.append('idm', idmembre);
+    $.ajax({
+        type : "POST",
+        url  : "routesMembres.php",
+        data : formMembre,
+        dataType : "json", //text pour voir si bien formé même chose pour xml
+        async: true,
+        contentType : false, 
+		processData : false,
+        success : (reponse) => {//alert(JSON.stringify(listeFilms['listeFilms']));
+            //listeMembres = reponse;
+            console.log(reponse);
+        	//montrerVueMembre("listerMembres", listeMembres);
+        },
+        fail : (err) => {
+            //Décider du message
+        }
+    })
+});
+
+
+
 let relisterProduits =() => {
     document.getElementById('affichercontenuProduits').style.display = "block";
     document.getElementById('contenuProduits').style.display = "block";
@@ -64,7 +90,8 @@ let remplirCardM = (unMembre)=> {
 	rep +='<div class="corps-adminP"><h5 class="card-title">'+unMembre.prenom+' '+unMembre.nom+'</h5>';
 	rep +='<p class="">'+unMembre.courriel+'</p>';
     rep +='<p class="">'+unMembre.datenaissance+'</p>';
-	rep +='<p class=""> Sexe: '+unMembre.sexe+'</p></div>';
+	rep +='<p class=""> Sexe: '+unMembre.sexe+'</p>';
+    rep +='<p class="" id="idMembre" hidden>'+unMembre.idm+'</p></div>';
     rep +='<div class="form-btnactive-membre">';
     rep +='<div class="form-check form-switch">';
     rep +='<input class="form-check-input boutons-adminP" type="checkbox" role="switch" id="flexSwitchCheckDefault" '+status+'>';

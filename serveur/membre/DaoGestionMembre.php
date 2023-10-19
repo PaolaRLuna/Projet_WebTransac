@@ -22,6 +22,33 @@ class DaoGestionMembre{
 		}
 		return self::$modelMembre;
 	}
+
+    function MdlM_modifierStatut($idm){
+        $requete = "SELECT * FROM connexion WHERE idm=?"; 
+        try{
+            $instanceModele= modeleDonnees::getInstanceModele();
+            $stmt = $instanceModele->executer($requete,[$idm]);
+            if ($ligne=$stmt->fetch(PDO::FETCH_OBJ)){
+                if($ligne->statut == "A"){
+                    $statut = "I";
+                } else{ 
+                    $statut = "A";
+                }
+                $requete = "UPDATE connexion SET statut =? WHERE idm=?"; 
+                $stmt=$instanceModele->executer($requete,[$statut, $idm]);
+                $this->reponse['OK'] = true;
+                $this->reponse['msg'] = "Opération réussie";
+                
+            }
+        } catch (Exception $e){ 
+            $this->reponse['OK'] = false;
+            $this->reponse['msg'] = "Problème pour obtenir les données des membres";
+            //echo 'ERREUR: '.$e;
+        }finally {
+          //unset($connexion);
+          return json_encode($this->reponse);
+    } 
+    }
 	
     function MdlM_getAll() {
 
@@ -41,7 +68,7 @@ class DaoGestionMembre{
             }
         } catch (Exception $e){ 
             $this->reponse['OK'] = false;
-            $this->reponse['msg'] = "Problème pour obtenir les données des produits";
+            $this->reponse['msg'] = "Problème pour obtenir les données des membres";
             //echo 'ERREUR: '.$e;
         }finally {
           //unset($connexion);
