@@ -116,7 +116,7 @@ function rechercherParMotCle(array $params): string {
         $stmt = $instanceModele->executer($requete, [':motCle' => '%' . $motCle . '%']);
         $resultats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return json_encode(["OK" => true, "msg" => "Recherche réussie", "resultats" => $resultats]);
+        return json_encode(["OK" => true, "msg" => "Recherche réussie", "listeProduits" => $resultats]);
     } catch (Exception $e) {
         return json_encode(["OK" => false, "msg" => "Problème de recherche"]);
     }

@@ -52,7 +52,7 @@
                 <div class="recherche">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" id="rechercheMotCle">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick='rechercheMotCle();'>Rechercher</button>
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick='rechercheParMotCle();'>Rechercher</button>
                     </div>
                 </div>
             </div>
