@@ -25,7 +25,6 @@
 
     function CtrM_modifierStatut(){
         $idm=$_POST['idm'];
-        echo "console.log( 'Debug Objects: " . $idm . "' );";
         return DaoGestionMembre::getDaoMembre()->MdlM_modifierStatut($idm); 
    }
 
