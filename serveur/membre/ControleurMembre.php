@@ -23,14 +23,20 @@
          return DaoGestionMembre::getDaoMembre()->MdlM_getAll(); 
     }
 
+    function CtrM_modifierStatut(){
+        $idm=$_POST['idm'];
+        echo "console.log( 'Debug Objects: " . $idm . "' );";
+        return DaoGestionMembre::getDaoMembre()->MdlM_modifierStatut($idm); 
+   }
+
     function CtrM_Actions(){ // il est appelé a partir de routes.php
         $action=$_POST['action'];
         switch($action){
             case "fiche" :
                 //fiche(); 
             break;
-            case "modifier" :
-                //modifier(); 
+            case "modifierstatut" :
+                return $this->CtrM_modifierStatut(); 
             break;
             case "enlever" :
                 //enlever(); 
