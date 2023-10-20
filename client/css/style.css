@@ -415,6 +415,7 @@ body {
     align-items:center;
   }
 
+
   /* -----PRODUITS-------- */
 
   /*entete*/
@@ -519,6 +520,7 @@ body {
   }
 
   /* ------MEMBRES------ */
+
   .form-btnactive-membre{
     display:flex;
     flex-direction: column !important;

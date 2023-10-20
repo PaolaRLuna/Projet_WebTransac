@@ -57,10 +57,11 @@
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick='rechercheParMotCle();'>Rechercher</button>
                     </div>
                 </div>
-            </div>
-            
+            </div>         
         </div>
         <hr class="eHr">
+
+     
 
         <div class="menu-admin-membre" id="affichercontenuMembre" style="display:none;">
             <h2 class="texteEnteteAdmin" >Liste des Membres</h2>

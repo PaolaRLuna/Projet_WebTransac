@@ -8,7 +8,7 @@ require_once("Produit.php");
 class DaoProduit {
     static private $modelProduit = null;    
     private $reponse=array();
-	
+
     private function __construct(){
         
     }
@@ -77,7 +77,6 @@ class DaoProduit {
         }
     }
 
-
     function MdlP_getCategorie():string {
         $requete="SELECT DISTINCT categorie FROM produits";
         
@@ -136,7 +135,6 @@ function rechercherParMotCle(array $params): string {
         return json_encode(["OK" => false, "msg" => "Problème de recherche"]);
     }
 }
-
 
 
 }

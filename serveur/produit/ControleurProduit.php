@@ -33,20 +33,12 @@
         return DaoProduit::getDaoProduit()->MdlP_getCategorie(); 
     }
 
+
     function CtrP_supprimer(){
         $idP = $_POST['id'];
-        // $instanceDao = DaoProduit::getDaoProduit();
-        // $instanceDao->MdlP_supprimer($idP);
-        // return "masgOk"; 
-        // return $instanceDao->MdlP_getAll(); 
-        // if ($reussite['OK']) {
-        return DaoProduit::getDaoProduit()->MdlP_supprimer($idP);
-        // } else {
-        //     $reponse = json_encode($reussite);
-        //     return $reponse;
-        // }
-        
+        return DaoProduit::getDaoProduit()->MdlP_supprimer($idP);  
     }
+
 
     
     //Houssam****************************************************

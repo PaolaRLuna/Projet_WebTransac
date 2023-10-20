@@ -5,7 +5,7 @@
     session_start();
     $msg="";
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
