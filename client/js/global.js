@@ -1,8 +1,11 @@
-
 function initialisation() { // des fonctions propres au panier et aux favoris
     switchLike();
     qtePlus();
     qteMoins();
+}
+
+let deconnexionPageSpec = () => {
+    document.getElementById('deconnexionAdmin').submit();
 }
 
 // bouton pour ajouter/enlever aux favoris
@@ -84,7 +87,7 @@ const modalCarte = () => {
             </div>`;
 }
 
-// changer le header du site selon la connexion
+// changer le header du site selon la connexion - à garder pour partie 3:MEMBRE
 const switchHeader= (role) => {
     if (role === "M") {
         let switch1 = document.getElementById('optionHeader1'); 

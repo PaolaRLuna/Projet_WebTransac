@@ -9,7 +9,7 @@
         private $photo;
 
         public function __construct($idP, $nom, $categorie, $ingredients, $prix, $quantite, $photo){
-            $this->setIdP($idm);
+            $this->setIdP($idP);
             $this->setNom($nom);
             $this->setCateg($categorie);
             $this->setIngredients($ingredients);
@@ -26,7 +26,7 @@
         public function getQte()  {return $this->quantite;}
         public function getPhoto()  {return $this->photo;}
         // setters
-        public function setIdm($idP) {
+        public function setIdP($idP) {
             $this->idP = $idP;
         }
 

@@ -27,7 +27,7 @@
 <body onload="chargerProduits(); chargerCategories();">
     <header id="header">
         <div class="logo">
-            <a href="index.php"><img src="../../client/images/general/logo.png" alt="Pâte-à-Pouf" id="logo"></a>
+            <a href="../../index.php"><img src="../../client/images/general/logo.png" alt="Pâte-à-Pouf" id="logo"></a>
             <h1 class="text-light">Pâte-à-Pouf<span id="identifiantAdmin">/Page Administrateur</span></h1>
         </div>
 
@@ -35,16 +35,18 @@
             <ul>
                 <li><a class="active" href="javascript:relisterProduits();">Gestion des produits</a></li>
                 <li><a class="active" href="javascript:chargerMembres();">Gestion des membres</a></li>
-                <li><a class="getstarted" href="#">Déconnexion</a></li>
+                <li><a class="getstarted" href="javascript:deconnexionPageSpec();">Déconnexion</a></li>
             </ul>
         </nav>
     </header>
 
     <main id="pageAdmin">
         <div class="menu-admin" id="affichercontenuProduits">
-            <h2 class="texteEnteteAdmin">Liste des produits</h2>
             <div class="options-admin">
-                <a class="texteEnteteAdmin" href="#"><u>+ Ajouter un produit</u></a>
+                <h2 class="texteEnteteAdmin">Liste des produits</h2>
+                <button class="btn btn-success" onClick='ajouterProduit();'>+ Ajouter un produit</button>
+            </div>
+            <div class="options-admin">
                 <div class="form-floating">
                     <select class="form-select" id="floatingSelect" aria-label="Floating label select example" onchange='rechercheCategorie();'></select>
                     <label for="floatingSelect">Catégories</label>
@@ -55,10 +57,12 @@
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick='rechercheParMotCle();'>Rechercher</button>
                     </div>
                 </div>
-            </div>
-
-            
+            </div>         
         </div>
+        <hr class="eHr">
+
+     
+
         <div class="menu-admin-membre" id="affichercontenuMembre" style="display:none;">
             <h2 class="texteEnteteAdmin" >Liste des Membres</h2>
                 <div class="recherche">
@@ -73,7 +77,16 @@
         <div id="contenuProduits"></div>
         <div id="contenuMembres"></div>
     </main>
-
     
+    <form id="deconnexionAdmin" action="../connexion/deconnexion.php"></form>
+    <?php
+        require_once('../includes/toast.php');
+        
+        if(isset($_GET['msg'])){
+            $msg = $_GET['msg'];
+            echo '<script> montrerToast("'.$msg.'");</script>';
+            $msg = "" ;
+        } 
+    ?>
 </body>
 </html>

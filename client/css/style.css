@@ -415,52 +415,111 @@ body {
     align-items:center;
   }
 
-  .card-adminP {
-    display: flex;
-    flex-direction: row;
-    width: 93%;
-    margin-left:50px;
-    margin-bottom:5px;
-    justify-content: center;
-    height: fit-content;
-    padding: 20px;
-  }
 
-  .img-adminP{
-    width: fit-content;
-  }
+  /* -----PRODUITS-------- */
 
-  .corps-adminP{
-    width: 80%;
-    padding:20px;
-  }
-
-  .boutons-adminP{
-    display:flex;
-    display: column;
-    justify-content: center;
-    padding:20px;
-  }
-
-  .form-floating, .recherche{
-    margin-right: 20px;
-    margin-left: 20px;
-  }
-
-  .img-fluid {
-    height: 160px;
-    width: auto;
-  }
-
+  /*entete*/
   .texteEnteteAdmin{
     color:#444444;
-    margin-right: 10px;
+    margin-right: 30px;
   }
 
   #button-addon2{
     background-color: #444444;
     color:#fff;
   }
+
+  .form-floating, .recherche{
+    margin-left: 20px;
+  }
+
+  .cardEntete-adminP {
+    display: flex;
+    flex-direction: row;
+    width: 94%;
+    margin-left:50px;
+    margin-bottom: 12px;
+    justify-content:space-between;
+    align-items: center;
+    height: fit-content;
+    background-color: rgba(243, 116, 70, 0);
+    border: none;
+  }
+
+  .titre {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .eHr{
+    color: #141611;
+    width: 94%;
+    margin-left:50px;
+  }
+  
+  /*cards*/
+  .card-adminP {
+    display: flex;
+    flex-direction: row;
+    width: 94%;
+    margin-left:50px;
+    margin-bottom:3px;
+    justify-content:space-between;
+    align-items: center;
+    height: fit-content;
+    background-color: rgba(245, 245, 245, 0.863);
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  
+  .id-adminP {
+    width: 3%;
+    font-weight: bolder;
+    text-align: center;
+  }
+
+  .prix-adminP, .qte-adminP {
+    width: 7%;
+    text-align: center;
+  }
+
+  .ingredient-adminP{
+    width: 40%;
+  }
+
+  .nom-adminP, .categorie-adminP {
+    width: 10%;
+  }
+
+  .categorie-adminP {
+    text-align: center;
+  }
+
+  .id-adminP, .prix-adminP, .qte-adminP, .nom-adminP, .categorie-adminP, .ingredient-adminP {
+    padding-left: 10px;
+  }
+
+  .img-fluid, .img-adminP {
+    width: 120px;
+    height: auto;
+  }
+
+  .boutons-adminP{
+    width: 8%;
+    text-align: center;
+  }
+
+  .btn-success{
+    background-color: #9fc658;
+    border-color: #9fc658;
+  }
+
+  .btn-danger{
+    background-color: rgba(243, 116, 70, 0.774);
+    border-color: rgba(243, 116, 70, 0.774);
+  }
+
+  /* ------MEMBRES------ */
 
   .form-btnactive-membre{
     display:flex;

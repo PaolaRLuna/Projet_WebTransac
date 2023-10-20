@@ -44,14 +44,6 @@ $(document).on('change', '#flexSwitchCheckDefault', function (e) {
 });
 
 
-
-let relisterProduits =() => {
-    document.getElementById('affichercontenuProduits').style.display = "block";
-    document.getElementById('contenuProduits').style.display = "block";
-    document.getElementById('affichercontenuMembre').style.display = "none";
-    document.getElementById('contenuMembres').style.display = "none";
-}
-
 //afficher 
 let montrerVueMembre = (action, donnees) => {
 	msgErr = "Problème côté serveur. Essayez plus tard!";

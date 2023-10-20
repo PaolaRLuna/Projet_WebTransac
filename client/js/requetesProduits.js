@@ -13,6 +13,22 @@ let chargerProduits = () => {
     })
 }
 
+let supprimerProduit = (idP) => {
+    $.ajax({
+        type : "POST",
+        url  : "routesProduits.php",
+        data : {"action":"supprimer", "id": idP},
+        dataType : "json", 
+        success : (reponse) => {
+            console.log(reponse);
+        	montrerVue("lister", reponse);
+        },
+        fail : (err) => {
+            console.log(err);
+        }
+    })
+}
+
 let chargerCategories = () => {
     $.ajax({
         type : "POST",
@@ -143,30 +159,48 @@ const genererCategories = (liste) => {
 
  
 let remplirCard = (unProduit)=> {
-	lienImage = chargerImage(unProduit.photo);
+	let lienImage = chargerImage(unProduit.photo);
+  let prix = miseEnFormePrix(unProduit.prix);
+  let idP = unProduit.IdP;
 	let rep ='<div class="card card-adminP">';
-	rep +='<div class="img-adminP">';// class="col-md-4"
-	rep +='<img src="'+lienImage+'" class="img-fluid rounded-start" alt="...">';
+	rep +='<div class="id-adminP">'+idP+'</div>';
+	rep +='<div class="img-adminP"><img src="'+lienImage+'" class="img-fluid rounded-start"></div>';
+	rep +='<div class="nom-adminP"><b>'+unProduit.nom+'</b></div>';
+	rep +='<div class="ingredient-adminP">'+unProduit.ingredients+'</div>';
+	rep +='<div class="categorie-adminP">'+unProduit.categorie+'</div>';
+  rep +='<div class="prix-adminP">'+prix+'</div>';
+  rep +='<div class="qte-adminP">'+unProduit.quantite+'</div>';
+	rep +='<div class="boutons-adminP"><a href="#" class="btn btn-success">Modifier</a></div>';
+	rep +='<div class="boutons-adminP"><a href="#" onClick="supprimerProduit('+idP+');" class="btn btn-danger">Supprimer</a></div>';     
 	rep +='</div>';
+	return rep;
+}
 
-	rep +='<div class="corps-adminP"><h5 class="card-title">'+unProduit.IdP+' '+unProduit.nom+'</h5>';
-	rep +='<p class="">'+unProduit.ingredients+'</p></div>';
-	//rep +='<p class="card-text"><small class="text-body-secondary">'+unProduit.categorie+'</small></p></div>';
-	rep +='<div class="boutons-adminP"><a href="#" class="btn btn-primary">Modifier</a>';
-	rep +='<a href="#" onClick="supprimerProduit(this,unProduit.idP);" class="btn btn-danger">Supprimer</a></div>';     
-
+let enteteProduits = ()=> {
+	let rep ='<div class="card cardEntete-adminP">';
+	rep +='<div class="id-adminP titre">ID</div>';
+	rep +='<div class="img-adminP titre">Image</div>';
+	rep +='<div class="nom-adminP titre">Nom</div>';
+	rep +='<div class="ingredient-adminP titre">Ingrédients</div>';
+	rep +='<div class="categorie-adminP titre">Catégorie</div>';
+  rep +='<div class="prix-adminP titre">Prix</div>';
+  rep +='<div class="qte-adminP titre">Nb unités<br><i>(Inventaire)</i></div>';
+	rep +='<div class="boutons-adminP titre">Modifier</div>';
+	rep +='<div class="boutons-adminP titre">Supprimer</div>';     
 	rep +='</div>';
 	return rep;
 }
 
 let listerProduits = (listeProduits) => {
-    let contenu = `<div class="row row-cols-4">`;
+    let contenu = enteteProduits();
+    contenu += `<div class="row row-cols-4">`;
     for (let unProduit of listeProduits){
             contenu+=remplirCard(unProduit);
     } 
     contenu += `</div>`;
     document.getElementById('contenuProduits').innerHTML = contenu;
 }
+
 
 function chargerImage(image){
 	lien = '../../client/images/produits/'+image;
@@ -182,6 +216,38 @@ function chargerImage(image){
 	// 	return lienND;
 	// }
 }
+
+
+function miseEnFormePrix(prix){
+    prixStr = prix.toString();
+    if (prixStr.length != 0) {
+        if (prixStr.indexOf(".") != -1){
+            prixTab = prixStr.split(".");
+            prixEnt = prixTab[0];
+            decimal = prixTab[1];
+            if (decimal.length != 2) {
+                while (decimal.length != 2) {
+                    decimal += '0';
+                }
+            }
+        } else {
+            prixEnt =  prixStr;
+            decimal = '00';
+        }
+        return prixEnt+'.'+decimal+"$";
+    } else {
+        return 'Prix Non Disponible';
+    }
+}
+
+
+let relisterProduits =() => {
+    document.getElementById('affichercontenuProduits').style.display = "block";
+    document.getElementById('contenuProduits').style.display = "block";
+    document.getElementById('affichercontenuMembre').style.display = "none";
+    document.getElementById('contenuMembres').style.display = "none";
+}
+
 
 // let requeteEnregistrer = () => {
 // 	let formFilm = new FormData(document.getElementById('formEnreg'));

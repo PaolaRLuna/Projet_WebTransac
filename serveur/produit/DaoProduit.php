@@ -6,11 +6,9 @@ require_once(__DIR__."/../ressources/bd/modele.inc.php");
 require_once("Produit.php");
 
 class DaoProduit {
-    static private $modelProduit = null;
-    
+    static private $modelProduit = null;    
     private $reponse=array();
-    //private $connexion = null;
-	
+
     private function __construct(){
         
     }
@@ -60,6 +58,22 @@ class DaoProduit {
             $this->reponse['msg'] = "Problème pour obtenir les données des produits";
         }finally {
           return json_encode($this->reponse);
+        }
+    }
+
+    function MdlP_supprimer($idP):string {
+        $requete="DELETE FROM produits where idP=?";
+        $msg="";
+        try{
+            $instanceModele= modeleDonnees::getInstanceModele();
+            $stmt = $instanceModele->executer($requete,[$idP]);
+            $produitsAJ = self::$modelProduit->MdlP_getAll();
+            $this->reponse = json_decode($produitsAJ);
+        }catch (Exception $e){ 
+            $this->reponse['OK'] = false;
+            $this->reponse['msg'] = "Problème pour obtenir les données des produits";
+        }finally {
+            return json_encode($this->reponse);
         }
     }
 
@@ -116,12 +130,11 @@ function rechercherParMotCle(array $params): string {
         $stmt = $instanceModele->executer($requete, [':motCle' => '%' . $motCle . '%']);
         $resultats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        return json_encode(["OK" => true, "msg" => "Recherche réussie", "listeProduits" => $resultats]);
+        return json_encode(["OK" => true, "msg" => "Recherche réussie", "resultats" => $resultats]);
     } catch (Exception $e) {
         return json_encode(["OK" => false, "msg" => "Problème de recherche"]);
     }
 }
-
 
 
 }

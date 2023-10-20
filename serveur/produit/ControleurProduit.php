@@ -26,11 +26,17 @@
     }
 
     function CtrP_getAll(){
-         return DaoProduit::getDaoProduit()->MdlP_getAll(); 
+        return DaoProduit::getDaoProduit()->MdlP_getAll(); 
     }
 
     function CtrP_getCategories(){
         return DaoProduit::getDaoProduit()->MdlP_getCategorie(); 
+    }
+
+
+    function CtrP_supprimer(){
+        $idP = $_POST['id'];
+        return DaoProduit::getDaoProduit()->MdlP_supprimer($idP);  
     }
 
 
@@ -56,18 +62,16 @@
         switch($action){
             case "enregistrer" :
                 return  $this->CtrF_Enregistrer();
-            case "fiche" :
-                //fiche(); 
-            break;
+                break;
             case "modifier" :
                 //modifier(); 
-            break;
-            case "enlever" :
-                //enlever(); 
-            break;
+                break;
+            case "supprimer" :
+                return $this->CtrP_supprimer(); 
+                break;
             case "lister" :
                 return $this->CtrP_getAll(); 
-            break;
+                break;
             case "recupererCategories" :
                 return $this->CtrP_getCategories(); 
                 break;
