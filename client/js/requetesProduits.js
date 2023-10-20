@@ -36,7 +36,6 @@ let chargerCategories = () => {
         data : {"action":"recupererCategories"},
         dataType : "json", 
         success : (reponse) => {
-			console.log(reponse);
         	montrerVue("chargerCateg", reponse);
         },
         fail : (err) => {
@@ -119,6 +118,11 @@ let montrerVue = (action, donnees) => {
 	msgErr = "Problème côté serveur. Essayez plus tard!";
     switch(action){
         case "enregistrer"  :
+            if (donnees.OK) {
+                modalAjoutProduit();
+            } else {
+                //afficherMessage(msgErr);
+            }
         case "modifier"     :
         case "enlever"      :
             if(donnees.OK){
@@ -160,16 +164,16 @@ const genererCategories = (liste) => {
  
 let remplirCard = (unProduit)=> {
 	let lienImage = chargerImage(unProduit.photo);
-  let prix = miseEnFormePrix(unProduit.prix);
-  let idP = unProduit.IdP;
+    let prix = miseEnFormePrix(unProduit.prix);
+    let idP = unProduit.IdP;
 	let rep ='<div class="card card-adminP">';
 	rep +='<div class="id-adminP">'+idP+'</div>';
 	rep +='<div class="img-adminP"><img src="'+lienImage+'" class="img-fluid rounded-start"></div>';
 	rep +='<div class="nom-adminP"><b>'+unProduit.nom+'</b></div>';
 	rep +='<div class="ingredient-adminP">'+unProduit.ingredients+'</div>';
 	rep +='<div class="categorie-adminP">'+unProduit.categorie+'</div>';
-  rep +='<div class="prix-adminP">'+prix+'</div>';
-  rep +='<div class="qte-adminP">'+unProduit.quantite+'</div>';
+    rep +='<div class="prix-adminP">'+prix+'</div>';
+    rep +='<div class="qte-adminP">'+unProduit.quantite+'</div>';
 	rep +='<div class="boutons-adminP"><a href="#" class="btn btn-success">Modifier</a></div>';
 	rep +='<div class="boutons-adminP"><a href="#" onClick="supprimerProduit('+idP+');" class="btn btn-danger">Supprimer</a></div>';     
 	rep +='</div>';
@@ -183,8 +187,8 @@ let enteteProduits = ()=> {
 	rep +='<div class="nom-adminP titre">Nom</div>';
 	rep +='<div class="ingredient-adminP titre">Ingrédients</div>';
 	rep +='<div class="categorie-adminP titre">Catégorie</div>';
-  rep +='<div class="prix-adminP titre">Prix</div>';
-  rep +='<div class="qte-adminP titre">Nb unités<br><i>(Inventaire)</i></div>';
+    rep +='<div class="prix-adminP titre">Prix</div>';
+    rep +='<div class="qte-adminP titre">Nb unités<br><i>(Inventaire)</i></div>';
 	rep +='<div class="boutons-adminP titre">Modifier</div>';
 	rep +='<div class="boutons-adminP titre">Supprimer</div>';     
 	rep +='</div>';
@@ -249,24 +253,25 @@ let relisterProduits =() => {
 }
 
 
-// let requeteEnregistrer = () => {
-// 	let formFilm = new FormData(document.getElementById('formEnreg'));
-// 	formFilm.append('action','enregistrer');
-// 	$.ajax({
-// 		type : 'POST',
-// 		url : 'routes.php',
-// 		data : formFilm, //$('#formEnreg').serialize()
-// 		//async : false,
-// 		//cache : false,
-// 		contentType : false,
-// 		processData : false,
-//         dataType : 'xml', //text pour le voir en format de string
-// 		success : function (xmlMessage){//alert(reponse);
-// 					montrerVue("enregistrer", xmlMessage);
-// 		},
-// 		fail : function (err){
-		   
-// 		}
-// 	});
-// }
-
+const requeteEnregistrer = () => {
+    let formProduit = new FormData(document.getElementById('formAjoutProduit'));
+    let categorie = document.getElementById('categorie').options[document.getElementById('categorie').selectedIndex].value;
+    formProduit.append('categorie', categorie);
+    formProduit.append('action', 'enregistrer');
+    $.ajax({
+        type: 'POST',
+        url: 'routesProduits.php',
+        data: formProduit,
+        contentType: false,
+        processData: false,
+        dataType: 'text',
+        async: false,
+        success: function (reponse) {
+            console.log(reponse);
+            montrerVue("enregistrer", reponse);
+        },
+        fail: function (err) {
+            console.log(err);
+        }
+    });
+}
