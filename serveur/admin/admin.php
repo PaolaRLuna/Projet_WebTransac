@@ -44,7 +44,7 @@
         <div class="menu-admin" id="affichercontenuProduits">
             <div class="options-admin">
                 <h2 class="texteEnteteAdmin">Liste des produits</h2>
-                <button class="btn btn-success" onClick='ajouterProduit();'>+ Ajouter un produit</button>
+                <button class="btn btn-success" onClick='montrerFormAjoutProduit();'>+ Ajouter un produit</button>
             </div>
             <div class="options-admin">
                 <div class="form-floating">
@@ -77,6 +77,8 @@
         <div id="contenuProduits"></div>
         <div id="contenuMembres"></div>
     </main>
+
+    <div id="idFormProduit" class="container"></div>
     
     <form id="deconnexionAdmin" action="../connexion/deconnexion.php"></form>
     <?php

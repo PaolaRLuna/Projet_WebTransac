@@ -20,9 +20,20 @@
 		return self::$instanceCtr;
 	}
 
-	function CtrF_Enregistrer(){
-        // $produit = new Produit(0,$_POST['titre'], (int)$_POST['duree'], $_POST['res'],"Pochette");
-       //  return DaoProduit::getDaoProduit()->MdlF_Enregistrer($produit); 
+    function CtrP_AjouterProduit(){
+        $nom = $_POST['nom'];
+        $categorie= $_POST['categorie'] ;
+        $ingredient= $_POST['ingredients'];
+        $prix= $_POST['prix'];
+        $quantite= $_POST['quantite'];
+        $photo= DaoProduit::getDaoProduit()->uploadPhoto();
+
+        if ($photo === ""){
+            return "Erreur lors du téléchargement de la photo";
+        }
+
+        $produit = new Produit(0,$nom,$categorie,$ingredient,$prix,$quantite,$photo);
+        return DaoProduit::getDaoProduit()->Mdl_AjoutProduit($produit);
     }
 
     function CtrP_getAll(){
@@ -61,7 +72,7 @@
         $action=$_POST['action'];
         switch($action){
             case "enregistrer" :
-                return  $this->CtrF_Enregistrer();
+                return  $this->CtrP_AjouterProduit();
                 break;
             case "modifier" :
                 //modifier(); 

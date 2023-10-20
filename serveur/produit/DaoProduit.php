@@ -21,25 +21,54 @@ class DaoProduit {
 		return self::$modelProduit;
 	}
 	
-	// function MdlF_Enregistrer(Produit $produit):string {
-             
-    //     $connexion =  Connexion::getConnexion();
-        
-    //     $requette="INSERT INTO produits VALUES(0,?,?,?,?)";
-    //     try{
-    //         $donnees = [$produit->getTitre(),$produit->getDuree(),$produit->getRealisateur(),$produit->getPochette()];
-    //         $stmt = $connexion->prepare($requette);
-    //         $stmt->execute($donnees);
-    //         $this->reponse['OK'] = true;
-    //         $this->reponse['msg'] = "Produit bien enregistre";
-    //     }catch (Exception $e){
-    //         $this->reponse['OK'] = false;
-    //         $this->reponse['msg'] = "Probléme pour enregistrer le produit";
-    //     }finally {
-    //       unset($connexion);
-    //       return json_encode($this->reponse);
-    //     }
-    // }
+    function Mdl_AjoutProduit($produit) {
+        $nom = $produit->getNom();
+        $categorie = $produit->getCateg();
+        $ingredient = $produit->getIngredients();
+        $prix = $produit->getPrix();
+        $quantite = $produit->getQte();
+        $photo = $produit->getPhoto();
+        $msg = "";
+    
+        try{
+            $requete = "SELECT * FROM produits WHERE nom=?";
+            $instanceModele = modeleDonnees::getInstanceModele();
+            $stmt = $instanceModele->executer($requete, [$nom]);
+    
+            if ($stmt->fetch(PDO::FETCH_OBJ)) {
+                $msg = "Ce produit est déjà utilisé !!!";
+            }else{
+                $requete = "INSERT INTO produits VALUES (0,?,?,?,?,?,?)";
+                $instanceModele->executer($requete, [$nom, $categorie, $ingredient, $prix, $quantite, $photo]);
+    
+                $msg = "Produit " .$nom. " bien enregistré.";
+            }
+        } catch (Exception $e) {
+            $msg = 'Erreur: ' .$e->getMessage();
+        } finally {
+            return $msg;
+        }
+    }
+
+    function uploadPhoto() {
+        $targetRepertoire = "../../client/images/produits/";
+        $allowedTypes = array('jpg', 'jpeg', 'png', 'gif');
+    
+        $nomFichier = $_FILES['photo']['name'];
+        $fileType = strtolower(pathinfo($nomFichier, PATHINFO_EXTENSION));
+    
+        if (!in_array($fileType, $allowedTypes)) {
+            return "Erreur 1";
+        }
+    
+        $nomFichierUnique = uniqid() .'.'. $fileType;
+    
+        if (move_uploaded_file($_FILES['photo']['tmp_name'], $targetRepertoire . $nomFichierUnique)) {
+            return $nomFichierUnique;
+        } else {
+            return "Erreur 2";
+        }
+    }
 	
     function MdlP_getAll():string {
         $requete="SELECT * FROM produits";

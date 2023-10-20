@@ -151,3 +151,68 @@ let montrerToast = (msg) =>{
 	}
 }
 
+const modalAjoutProduit = () => {
+    return `
+            <div class="modal fade" id="modalAjoutProduit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Ajout d'un produit</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                        </div>
+        
+                        <div class="modal-body modal-body-bg">
+                            <form id="formAjoutProduit" method="POST" class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="nom" class="form-label">Nom :</label>
+                                    <input type="text" class="form-control is-valid" id="nom" name="nom" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="categorie" class="form-label">Catégorie :</label>
+                                    <select class="form-select" id="categorie" aria-label="Floating label select example">
+                                        <option value="pâtes alimentaires">pâtes alimentaires</option>
+                                        <option value="sauce">sauce</option>
+                                        <option value="fromage">fromage</option>
+                                        <option value="prêt-à-manger">prêt-à-manger</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="ingredients" class="form-label">Ingrédients :</label>
+                                    <input type="text" class="form-control is-valid" id="ingredients" name="ingredients" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label for="prix" class="form-label">Prix en $ :</label>
+                                    <input type="number" class="form-control is-valid" step="0.01" id="prix" name="prix" required>
+                                </div>
+        
+                                <div class="col-md-6">
+                                    <label for="quantite" class="form-label">Quantité :</label>
+                                    <input type="number" class="form-control is-valid" id="quantite" name="quantite" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <label for="photo" class="form-label">Photo :</label>
+                                    <input type="file" class="form-control is-valid" id="photo" name="photo">
+                                </div>
+
+                                <div class="col-12 btn-ajouter-produit">
+                                    <br>
+                                    <button class="btn btn-primary" onClick="requeteEnregistrer();">Ajouter le produit</button>
+                                    <button class="btn btn-danger" type="reset">Effacer</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    `;
+}
+
+const montrerFormAjoutProduit = () => {
+    document.getElementById('idFormProduit').innerHTML = modalAjoutProduit();
+    const modalAjout = new bootstrap.Modal('#modalAjoutProduit', {});
+    modalAjout.show();
+}
