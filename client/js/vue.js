@@ -102,16 +102,16 @@ const modalConnexionUtilisateurs = () => {
                             <img src="client/images/general/logo.png" loading="lazy" alt="pate" class="image-modal">
                         </div>
                         <div class="form-group">
-                            <label for="courriel" class="form-label">Courriel</label>
+                            <label for="courrielco" class="form-label">Courriel</label>
                             <input type="email" class="form-control" id="courrielco" name="courrielco" value="" required>
                         </div>
                         <div class="form-group">
                             <div class="clearfix">
-                            <label for="pass" class="form-label">Mot Passe</label>
+                            <label for="passwordco" class="form-label">Mot Passe</label>
                             <a href="#" class="float-right text-muted"><small>Oublié ?</small></a>
                             </div>
                             
-                            <input type="password" class="form-control" pattern="[A-Za-z0-9_\$#\-]{8,10}$" id="passwordco" name="passwordco" required="required">
+                            <input type="password" class="form-control" id="passwordco" name="passwordco" required="required">
                         </div>
                     
                 </div>

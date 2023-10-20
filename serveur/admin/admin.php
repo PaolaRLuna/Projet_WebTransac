@@ -19,18 +19,73 @@
     <script src="../../client/utilitaires/bootstrap-5.3.0-alpha1-dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="../../client/css/style.css?v=<?php echo time(); ?>">
     <script src="../../client/js/global.js"></script>
+    <script src="../../client/js/requetesProduits.js"></script>
+    <script src="../../client/js/requetesMembres.js"></script>
     <script src="../../client/js/vue.js"></script>
     <link href="https://fonts.cdnfonts.com/css/bradley-hand-2" rel="stylesheet">
 </head>
-<body>
-    <?php
-        require_once(__DIR__.'/../includes/header.php');
-    ?>
+<body onload="chargerProduits(); chargerCategories();">
+    <header id="header">
+        <div class="logo">
+            <a href="../../index.php"><img src="../../client/images/general/logo.png" alt="Pâte-à-Pouf" id="logo"></a>
+            <h1 class="text-light">Pâte-à-Pouf<span id="identifiantAdmin">/Page Administrateur</span></h1>
+        </div>
+
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="active" href="javascript:relisterProduits();">Gestion des produits</a></li>
+                <li><a class="active" href="javascript:chargerMembres();">Gestion des membres</a></li>
+                <li><a class="getstarted" href="javascript:deconnexionPageSpec();">Déconnexion</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <main id="pageAdmin">
-        <h1>Page admin</h1>
-    </main>
+        <div class="menu-admin" id="affichercontenuProduits">
+            <div class="options-admin">
+                <h2 class="texteEnteteAdmin">Liste des produits</h2>
+                <button class="btn btn-success" onClick='ajouterProduit();'>+ Ajouter un produit</button>
+            </div>
+            <div class="options-admin">
+                <div class="form-floating">
+                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example" onchange='rechercheCategorie();'></select>
+                    <label for="floatingSelect">Catégories</label>
+                </div>
+                <div class="recherche">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" id="rechercheMotCle">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick='rechercheParMotCle();'>Rechercher</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <hr class="eHr">
 
+        <div class="menu-admin-membre" id="affichercontenuMembre" style="display:none;">
+            <h2 class="texteEnteteAdmin" >Liste des Membres</h2>
+                <div class="recherche">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" id="rechercheMotCleMembre">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick='rechercheMotCleMembre();'>Rechercher Membre</button>
+                    </div>
+                </div>
+                
+        </div>
+
+        <div id="contenuProduits"></div>
+        <div id="contenuMembres"></div>
+    </main>
     
+    <form id="deconnexionAdmin" action="../connexion/deconnexion.php"></form>
+    <?php
+        require_once('../includes/toast.php');
+        
+        if(isset($_GET['msg'])){
+            $msg = $_GET['msg'];
+            echo '<script> montrerToast("'.$msg.'");</script>';
+            $msg = "" ;
+        } 
+    ?>
 </body>
 </html>

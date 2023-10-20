@@ -29,7 +29,7 @@ body {
   }
 
   #pageAdmin, #pageMembre {
-    margin-top: 270px;
+    margin-top: 150px;
     z-index: 3;
     position: relative;
     margin-bottom: 70px;
@@ -381,6 +381,175 @@ body {
     background-color: white !important;
   }
 
+  /*--------------------------------------------------------------
+  # Produits côté ADMIN
+  --------------------------------------------------------------*/
+  
+  .navbar-admin {
+    padding: 0;
+    margin-left: 20px;
+    margin-top: 5px;
+  }
+
+  #identifiantAdmin{
+    font-family: "Open Sans", sans-serif;
+    font-size: smaller;
+    margin-left: 30px;
+  }
+
+
+  .menu-admin{
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+  }
+
+  .options-admin{
+    display: flex;
+    flex-direction: row;
+    margin-right: 20px;
+    align-items:center;
+  }
+
+  /* -----PRODUITS-------- */
+
+  /*entete*/
+  .texteEnteteAdmin{
+    color:#444444;
+    margin-right: 30px;
+  }
+
+  #button-addon2{
+    background-color: #444444;
+    color:#fff;
+  }
+
+  .form-floating, .recherche{
+    margin-left: 20px;
+  }
+
+  .cardEntete-adminP {
+    display: flex;
+    flex-direction: row;
+    width: 94%;
+    margin-left:50px;
+    margin-bottom: 12px;
+    justify-content:space-between;
+    align-items: center;
+    height: fit-content;
+    background-color: rgba(243, 116, 70, 0);
+    border: none;
+  }
+
+  .titre {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .eHr{
+    color: #141611;
+    width: 94%;
+    margin-left:50px;
+  }
+  
+  /*cards*/
+  .card-adminP {
+    display: flex;
+    flex-direction: row;
+    width: 94%;
+    margin-left:50px;
+    margin-bottom:3px;
+    justify-content:space-between;
+    align-items: center;
+    height: fit-content;
+    background-color: rgba(245, 245, 245, 0.863);
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  
+  .id-adminP {
+    width: 3%;
+    font-weight: bolder;
+    text-align: center;
+  }
+
+  .prix-adminP, .qte-adminP {
+    width: 7%;
+    text-align: center;
+  }
+
+  .ingredient-adminP{
+    width: 40%;
+  }
+
+  .nom-adminP, .categorie-adminP {
+    width: 10%;
+  }
+
+  .categorie-adminP {
+    text-align: center;
+  }
+
+  .id-adminP, .prix-adminP, .qte-adminP, .nom-adminP, .categorie-adminP, .ingredient-adminP {
+    padding-left: 10px;
+  }
+
+  .img-fluid, .img-adminP {
+    width: 120px;
+    height: auto;
+  }
+
+  .boutons-adminP{
+    width: 8%;
+    text-align: center;
+  }
+
+  .btn-success{
+    background-color: #9fc658;
+    border-color: #9fc658;
+  }
+
+  .btn-danger{
+    background-color: rgba(243, 116, 70, 0.774);
+    border-color: rgba(243, 116, 70, 0.774);
+  }
+
+  /* ------MEMBRES------ */
+  .form-btnactive-membre{
+    display:flex;
+    flex-direction: column !important;
+    justify-content: space-between;
+  }
+
+  .menu-admin-membre{
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+  }
+
+  .boutons-adminM{
+    display:flex;
+    flex-direction: column !important;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  .btn-modifier-membre{
+    margin-bottom: 20px;
+  }
+
+  .form-switch{
+    display: flex;
+    flex-direction: column !important;
+  }
   /*--------------------------------------------------------------
   # Modal Connexion
   ----------------------------------------------------------------*/

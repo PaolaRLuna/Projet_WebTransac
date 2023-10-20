@@ -21,30 +21,74 @@
 	}
 
 	function CtrF_Enregistrer(){
-         $produit = new Produit(0,$_POST['titre'], (int)$_POST['duree'], $_POST['res'],"Pochette");
-         return DaoProduit::getDaoProduit()->MdlF_Enregistrer($produit); 
+        // $produit = new Produit(0,$_POST['titre'], (int)$_POST['duree'], $_POST['res'],"Pochette");
+       //  return DaoProduit::getDaoProduit()->MdlF_Enregistrer($produit); 
     }
 
-    function CtrF_getAll(){
-         return DaoProduit::getDaoProduit()->MdlF_getAll(); 
+    function CtrP_getAll(){
+        return DaoProduit::getDaoProduit()->MdlP_getAll(); 
     }
 
-    function CtrF_Actions(){
+    function CtrP_getCategories(){
+        return DaoProduit::getDaoProduit()->MdlP_getCategorie(); 
+    }
+
+    function CtrP_supprimer(){
+        $idP = $_POST['id'];
+        // $instanceDao = DaoProduit::getDaoProduit();
+        // $instanceDao->MdlP_supprimer($idP);
+        // return "masgOk"; 
+        // return $instanceDao->MdlP_getAll(); 
+        // if ($reussite['OK']) {
+        return DaoProduit::getDaoProduit()->MdlP_supprimer($idP);
+        // } else {
+        //     $reponse = json_encode($reussite);
+        //     return $reponse;
+        // }
+        
+    }
+
+    
+    //Houssam****************************************************
+
+
+    function CtrP_listerParCategorie() {
+        $categorie = $_POST['categorie'];
+        return DaoProduit::getDaoProduit()->MdlP_getByCategory($categorie);
+    }
+    
+
+    function CtrP_rechercherParMotCle(){
+        $params = ["motCle" => $_POST['motCle']];
+        return DaoProduit::getDaoProduit()-> rechercherParMotCle($params);
+    }
+
+    
+
+    function CtrP_Actions(){
         $action=$_POST['action'];
         switch($action){
             case "enregistrer" :
                 return  $this->CtrF_Enregistrer();
-            case "fiche" :
-                //fiche(); 
-            break;
+                break;
             case "modifier" :
                 //modifier(); 
-            break;
-            case "enlever" :
-                //enlever(); 
-            break;
+                break;
+            case "supprimer" :
+                return $this->CtrP_supprimer(); 
+                break;
             case "lister" :
-                return $this->CtrF_getAll(); 
+                return $this->CtrP_getAll(); 
+                break;
+            case "recupererCategories" :
+                return $this->CtrP_getCategories(); 
+                break;
+            case "rechercherParMotCle":
+                return $this->CtrP_rechercherParMotCle();
+                break;
+            case "rechercherParCategorie":
+                return $this->CtrP_listerParCategorie();
+                break;
         }
         // Retour de la réponse au client
        
