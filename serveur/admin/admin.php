@@ -74,9 +74,10 @@ if (!isset($_SESSION['role'])) {
 
         <div id="contenuProduits"></div>
         <div id="contenuMembres"></div>
-        <div id="idFormProduit" class="container"></div>
+        
     </main>
-
+    
+    <div id="idFormProduit" class="container"></div>
 
 </body>
 

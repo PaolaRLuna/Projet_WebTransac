@@ -139,7 +139,7 @@ class DaoProduit {
             if ($stmt->fetch(PDO::FETCH_OBJ)) {
                 $msg = "Ce produit est déjà utilisé !!!";
             }else{
-                $requete = "INSERT INTO produits (nom, categorie, ingredients, prix, quantite, photo) VALUES (?,?,?,?,?,?)";
+                $requete = "INSERT INTO produits VALUES (0,?,?,?,?,?,?)";
                 $instanceModele->executer($requete, [$nom, $categorie, $ingredient, $prix, $quantite, $photo]);
     
                 $msg = "Produit " .$nom. " bien enregistré.";
@@ -147,11 +147,29 @@ class DaoProduit {
         } catch (Exception $e) {
             $msg = 'Erreur: ' .$e->getMessage();
         } finally {
-            header("Location: ../../index.php?msg=" . urlencode($msg));
-            exit;
+            return $msg;
+        }
+    }
+
+    function uploadPhoto() {
+        $targetRepertoire = "../../client/images/produits/";
+        $allowedTypes = array('jpg', 'jpeg', 'png', 'gif');
+    
+        $nomFichier = $_FILES['photo']['name'];
+        $fileType = strtolower(pathinfo($nomFichier, PATHINFO_EXTENSION));
+    
+        if (!in_array($fileType, $allowedTypes)) {
+            return "Erreur 1";
+        }
+    
+        $nomFichierUnique = uniqid() .'.'. $fileType;
+    
+        if (move_uploaded_file($_FILES['photo']['tmp_name'], $targetRepertoire . $nomFichierUnique)) {
+            return $nomFichierUnique;
+        } else {
+            return "Erreur 2";
         }
     }
 }
 
 
-?>
