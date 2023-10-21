@@ -110,6 +110,63 @@ let effectuerRecherche = () => {
     }
 }
 
+// affichage du produit a modifier dans le formulaire
+
+let chargerInfosProduit = (idP) => {
+    $.ajax({
+        type: "POST",
+        url: "routesProduits.php",
+        data: {'action': "charger_produit", 'idProduit': idP},
+        dataType: "json",
+        success: function (reponse){
+            if (reponse.OK){
+                remplirFormulaireModification(reponse.produit);
+            } else {
+                console.log(reponse.msg);
+            }
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+
+// modification du produit afficher dans le formulaire
+
+let modifierProduit = () => {
+    let formProduit= new FormData(document.getElementById('formModif'));
+
+    formProduit.append('action', 'modifier_produit');
+    formProduit.append('idProduit', $("#idProduit").val());
+    formProduit.append('nom', $("#nom").val());
+    formProduit.append('categorie', $("#categorie").val());
+    formProduit.append('ingredients', $("#ingredients").val());
+    formProduit.append('prix', $("#prix").val());
+    formProduit.append('quantite', $("#quantite").val());
+
+    if ($("#photo")[0].files[0]){
+        formProduit.append('photo', $("#photo")[0].files[0]);
+    }
+    
+    $.ajax({
+        type: "POST",
+        url: "routesProduits.php",
+        data: formProduit,
+        dataType: "json",
+        contentType: false,
+        processData: false,
+        success: function (reponse){
+            if (reponse.OK) {
+                console.log("Produit modifier avec succès.");
+            } else {
+                console.error("Erreur lors de la modification:", reponse.msg);
+            }
+        },
+        error: function (err) {
+            console.error("Erreur AJAX:", err);
+        }
+    });
+}
 
 //********************************************
 
@@ -124,6 +181,17 @@ let montrerVue = (action, donnees) => {
                 //afficherMessage(msgErr);
             }
         case "modifier"     :
+            // if(donnees.OK){
+            //     // getUnProduit(donnees.produitAEditer);
+            // }else{
+            //     afficherMessage(msgErr); 
+            // }
+        // case "afficher_produit_a_modifier"     :
+        //     if(donnees.OK){
+        //         afficherFormulaireModification(donnees.produitAEditer);
+        //     }else{
+        //         afficherMessage(msgErr); 
+        //     }
         case "enlever"      :
             if(donnees.OK){
                 afficherMessage(donnees.msg);
@@ -142,7 +210,6 @@ let montrerVue = (action, donnees) => {
 		break;
 		case "chargerCateg" :
 			if(donnees.OK){
-				console.log(donnees.listeCategories);
 				genererCategories(donnees.listeCategories);
 			}else{
 				afficherMessage(msgErr); 
@@ -159,7 +226,7 @@ const genererCategories = (liste) => {
         resultat += '<option value="'+unGenre.categorie+'">'+unGenre.categorie+'</option>';
      }
      document.getElementById('floatingSelect').innerHTML += resultat;
- }
+}
 
  
 let remplirCard = (unProduit)=> {
@@ -174,8 +241,8 @@ let remplirCard = (unProduit)=> {
 	rep +='<div class="categorie-adminP">'+unProduit.categorie+'</div>';
     rep +='<div class="prix-adminP">'+prix+'</div>';
     rep +='<div class="qte-adminP">'+unProduit.quantite+'</div>';
-	rep +='<div class="boutons-adminP"><a href="#" class="btn btn-success">Modifier</a></div>';
-	rep +='<div class="boutons-adminP"><a href="#" onClick="supprimerProduit('+idP+');" class="btn btn-danger">Supprimer</a></div>';     
+	rep +='<div class="boutons-adminP"><a href="#" onClick="chargerInfosProduit('+idP+');" class="btn btn-success btn-modifier-produit">Modifier</a></div>';
+	rep +='<div class="boutons-adminP"><a href="#" onClick="supprimerProduit('+idP+');" class="btn btn-danger">Supprimer</a></div>';    
 	rep +='</div>';
 	return rep;
 }
@@ -204,7 +271,6 @@ let listerProduits = (listeProduits) => {
     contenu += `</div>`;
     document.getElementById('contenuProduits').innerHTML = contenu;
 }
-
 
 function chargerImage(image){
 	lien = '../../client/images/produits/'+image;
@@ -264,10 +330,9 @@ const requeteEnregistrer = () => {
         data: formProduit,
         contentType: false,
         processData: false,
-        dataType: 'text',
+        dataType: 'json',
         async: false,
         success: function (reponse) {
-            console.log(reponse);
             montrerVue("enregistrer", reponse);
         },
         fail: function (err) {
@@ -275,3 +340,4 @@ const requeteEnregistrer = () => {
         }
     });
 }
+

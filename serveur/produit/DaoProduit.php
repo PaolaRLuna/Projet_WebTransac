@@ -50,23 +50,76 @@ class DaoProduit {
         }
     }
 
+    function MdlP_ChargerProduit($idP): string {
+        $requete = "SELECT * FROM produits WHERE idP=?";
+        
+        try {
+            $instanceModele = modeleDonnees::getInstanceModele();
+            $stmt = $instanceModele->executer($requete, [$idP]);
+            
+            if ($stmt->rowCount() > 0) {
+                $produit = $stmt->fetch(PDO::FETCH_ASSOC);
+                $this->reponse['OK'] = true;
+                $this->reponse['msg'] = "Produit chargé avec succès";
+                $this->reponse['produit'] = $produit;
+            } else {
+                $this->reponse['OK'] = false;
+                $this->reponse['msg'] = "Le produit demandé n'existe pas.";
+            }
+        } catch (Exception $e) {
+            $this->reponse['OK'] = false;
+            $this->reponse['msg'] = "Erreur: " . $e->getMessage();
+        }
+        
+        return json_encode($this->reponse);
+    }
+
+    function Mdl_ModifierProduit($idProduit, $nom, $categorie, $ingredients, $prix, $quantite, $photo) {
+        $reponse = array();
+    
+        try {
+            $requete = "UPDATE produits SET nom=?, categorie=?, ingredients=?, prix=?, quantite=?, photo=? WHERE IdP=?";
+            $parametres = array($nom, $categorie, $ingredients, $prix, $quantite, $photo, $idProduit);
+            $instanceModele = modeleDonnees::getInstanceModele();
+            $stmt = $instanceModele->executer($requete, $parametres);
+    
+            if ($stmt->rowCount() > 0) {
+                $reponse['OK'] = true;
+                $reponse['msg'] = "Produit modifié avec succès";
+            } else {
+                $reponse['OK'] = false;
+                $reponse['msg'] = "Le produit à modifier n'existe pas.";
+            }
+        } catch (Exception $e) {
+            $reponse['OK'] = false;
+            $reponse['msg'] = "Erreur: " . $e->getMessage();
+        }
+    
+        return json_encode($reponse);
+    }
+
     function uploadPhoto() {
         $targetRepertoire = "../../client/images/produits/";
         $allowedTypes = array('jpg', 'jpeg', 'png', 'gif');
+        $defaultImage = "default.jpg";
+    
+        if(!isset($_FILES['photo']) || $_FILES['photo']['size'] == 0){
+            return $defaultImage;
+        }
     
         $nomFichier = $_FILES['photo']['name'];
         $fileType = strtolower(pathinfo($nomFichier, PATHINFO_EXTENSION));
     
-        if (!in_array($fileType, $allowedTypes)) {
-            return "Erreur 1";
+        if (!in_array($fileType, $allowedTypes)){
+            return $defaultImage;
         }
     
         $nomFichierUnique = uniqid() .'.'. $fileType;
     
-        if (move_uploaded_file($_FILES['photo']['tmp_name'], $targetRepertoire . $nomFichierUnique)) {
+        if (move_uploaded_file($_FILES['photo']['tmp_name'], $targetRepertoire . $nomFichierUnique)){
             return $nomFichierUnique;
-        } else {
-            return "Erreur 2";
+        }else{
+            return $defaultImage;
         }
     }
 	
@@ -126,47 +179,40 @@ class DaoProduit {
         }
     }
 
-//Houssam****************************************************
-
-
-function MdlP_getByCategory($categorie): string {
-    $requete = "SELECT * FROM produits WHERE categorie = ?";
-    
-    try {
-        $instanceModele = modeleDonnees::getInstanceModele();
-        $stmt = $instanceModele->executer($requete, [$categorie]);
-        $this->reponse['OK'] = true;
-        $this->reponse['msg'] = "Opération réussie";
-        $this->reponse['listeProduits'] = array();
-        while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
-            $this->reponse['listeProduits'][] = $ligne;
+    function MdlP_getByCategory($categorie): string {
+        $requete = "SELECT * FROM produits WHERE categorie = ?";
+        
+        try {
+            $instanceModele = modeleDonnees::getInstanceModele();
+            $stmt = $instanceModele->executer($requete, [$categorie]);
+            $this->reponse['OK'] = true;
+            $this->reponse['msg'] = "Opération réussie";
+            $this->reponse['listeProduits'] = array();
+            while ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                $this->reponse['listeProduits'][] = $ligne;
+            }
+        } catch (Exception $e) {
+            $this->reponse['OK'] = false;
+            $this->reponse['msg'] = "Problème pour obtenir les données des produits par catégorie";
+        } finally {
+            return json_encode($this->reponse);
         }
-    } catch (Exception $e) {
-        $this->reponse['OK'] = false;
-        $this->reponse['msg'] = "Problème pour obtenir les données des produits par catégorie";
-    } finally {
-        return json_encode($this->reponse);
+    }
+
+
+    function rechercherParMotCle(array $params): string {
+        $instanceModele = modeleDonnees::getInstanceModele();
+        $motCle = $params['motCle'];
+
+        try {
+            $requete = "SELECT * FROM produits WHERE nom LIKE :motCle OR ingredients LIKE :motCle";
+            $stmt = $instanceModele->executer($requete, [':motCle' => '%' . $motCle . '%']);
+            $resultats = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return json_encode(["OK" => true, "msg" => "Recherche réussie", "resultats" => $resultats]);
+        } catch (Exception $e) {
+            return json_encode(["OK" => false, "msg" => "Problème de recherche"]);
+        }
     }
 }
-
-
-function rechercherParMotCle(array $params): string {
-    $instanceModele = modeleDonnees::getInstanceModele();
-    $motCle = $params['motCle'];
-
-    try {
-        $requete = "SELECT * FROM produits WHERE nom LIKE :motCle OR ingredients LIKE :motCle";
-        $stmt = $instanceModele->executer($requete, [':motCle' => '%' . $motCle . '%']);
-        $resultats = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        return json_encode(["OK" => true, "msg" => "Recherche réussie", "resultats" => $resultats]);
-    } catch (Exception $e) {
-        return json_encode(["OK" => false, "msg" => "Problème de recherche"]);
-    }
-}
-
-
-}
-
-
 ?>
