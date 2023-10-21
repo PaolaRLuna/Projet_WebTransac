@@ -79,6 +79,7 @@
     </main>
 
     <div id="idFormProduit" class="container"></div>
+    <div id="idModificationProduit" class="container"></div>
     
     <form id="deconnexionAdmin" action="../connexion/deconnexion.php"></form>
     <?php
