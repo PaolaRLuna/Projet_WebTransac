@@ -101,7 +101,7 @@ class DaoProduit {
     function uploadPhoto() {
         $targetRepertoire = "../../client/images/produits/";
         $allowedTypes = array('jpg', 'jpeg', 'png', 'gif');
-        $defaultImage = "default.jpg";
+        $defaultImage = "visuel-non-disponible.jpg";
     
         if(!isset($_FILES['photo']) || $_FILES['photo']['size'] == 0){
             return $defaultImage;
