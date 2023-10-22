@@ -142,14 +142,15 @@ const montrerFormConnexion = () => {
 let montrerToast = (msg) =>{
 	if(msg.length > 0){
 		let textToast = document.getElementById("textToast");
-		var toastElList = [].slice.call(document.querySelectorAll('.toast'))
+		var toastElList = [].slice.call(document.querySelectorAll('.toast'));
 		var toastList = toastElList.map(function (toastEl) {
-			return new bootstrap.Toast(toastEl)
+			return new bootstrap.Toast(toastEl);
 		})
 		textToast.innerHTML = msg;
 		toastList[0].show();
 	}
 }
+
 
 const modalAjoutProduit = () => {
     return `

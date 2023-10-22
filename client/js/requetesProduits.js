@@ -170,7 +170,7 @@ let modifierProduit = () => {
 
 //********************************************
 
-//implémenter la fonction affichermessage*****
+
 let montrerVue = (action, donnees) => {
 	msgErr = "Problème côté serveur. Essayez plus tard!";
     switch(action){
@@ -228,11 +228,31 @@ const genererCategories = (liste) => {
      document.getElementById('floatingSelect').innerHTML += resultat;
 }
 
+let confirmationSuppression = () => {
+    let boutonSupp = document.getElementsByClassName("boutonSupp")[0];
+    let idP = boutonSupp.getAttribute('id');
+    supprimerProduit(idP);
+}
+
+
+let afficherMessage = (idP) => {
+    let msg = 'Êtes-vous sûrs de vouloir supprimer le produit id='+idP+'?';
+
+    let ajoutScript = document.createElement('script');
+    ajoutScript.type = 'text/javascript';
+    let code = 'montrerToast("'+msg+'");';
+    ajoutScript.appendChild(document.createTextNode(code));
+    document.body.appendChild(ajoutScript);
+
+    let boutonSupp = document.getElementsByClassName("boutonSupp")[0];
+    boutonSupp.setAttribute('id', idP);
+}
  
 let remplirCard = (unProduit)=> {
 	let lienImage = chargerImage(unProduit.photo);
     let prix = miseEnFormePrix(unProduit.prix);
     let idP = unProduit.IdP;
+
 	let rep ='<div class="card card-adminP">';
 	rep +='<div class="id-adminP">'+idP+'</div>';
 	rep +='<div class="img-adminP"><img src="'+lienImage+'" class="img-fluid rounded-start"></div>';
@@ -241,8 +261,13 @@ let remplirCard = (unProduit)=> {
 	rep +='<div class="categorie-adminP">'+unProduit.categorie+'</div>';
     rep +='<div class="prix-adminP">'+prix+'</div>';
     rep +='<div class="qte-adminP">'+unProduit.quantite+'</div>';
+<<<<<<< Updated upstream
 	rep +='<div class="boutons-adminP"><a href="#" onClick="chargerInfosProduit('+idP+');" class="btn btn-success btn-modifier-produit">Modifier</a></div>';
 	rep +='<div class="boutons-adminP"><a href="#" onClick="supprimerProduit('+idP+');" class="btn btn-danger">Supprimer</a></div>';    
+=======
+	rep +='<div class="boutons-adminP"><a href="#" class="btn btn-success">Modifier</a></div>';
+	rep +='<div class="boutons-adminP"><a href="#" onClick="afficherMessage('+idP+');" class="btn btn-danger">Supprimer</a></div>';     
+>>>>>>> Stashed changes
 	rep +='</div>';
 	return rep;
 }
