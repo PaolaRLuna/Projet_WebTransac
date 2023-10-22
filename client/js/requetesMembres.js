@@ -75,28 +75,37 @@ let montrerVueMembre = (action, donnees) => {
 let remplirCardM = (unMembre)=> {
 	lienImage = chargerImageM(unMembre.photo,unMembre.sexe);
     let status = assignStatus(unMembre.statut);
-	let rep ='<div class="card card-adminP">';
-	rep +='<div class="img-adminP">';// class="col-md-4"
-	rep +='<img src="'+lienImage+'" class="img-fluid rounded-start" alt="...">';
-	rep +='</div>';
-
-	rep +='<div class="corps-adminP"><h5 class="card-title">'+unMembre.prenom+' '+unMembre.nom+'</h5>';
-	rep +='<p class="">'+unMembre.courriel+'</p>';
-    rep +='<p class="">'+unMembre.datenaissance+'</p>';
-	rep +='<p class=""> Sexe: '+unMembre.sexe+'</p>';
-    rep +='<p class="" id="idMembre" hidden>'+unMembre.idm+'</p></div>';
-    rep +='<div class="form-btnactive-membre">';
+	let rep ='<div class="card card-adminM">';
+    rep +='<div class="id-adminM"><p class="" id="idMembre">'+unMembre.idm+'</p></div>';
+	rep +='<div class="img-adminP"><img src="'+lienImage+'" class="img-fluid rounded-start"></div>';
+	rep +='<div class="nom-adminM"><h5 class="card-title">'+unMembre.prenom+' '+unMembre.nom+'</h5></div>';
+	rep +='<div class="courriel-adminM">'+unMembre.courriel+'</div>';
+    rep +='<div class="daten-adminM">'+unMembre.datenaissance+'</div>';
+	rep +='<div class="sexe-adminM">'+unMembre.sexe+'</div>';
+    rep +='<div class="statut-adminM"><div class="form-btnactive-membre">';
     rep +='<div class="form-check form-switch">';
     rep +='<input class="form-check-input boutons-adminP" type="checkbox" role="switch" id="flexSwitchCheckDefault" '+status+'>';
-    rep+= '<label class="form-check-label" for="flexSwitchCheckDefault">Active</label></div>'
-	rep +='<div class=""><a href="#" class="btn btn-primary boutons-adminM btn-modifier-membre">Modifier</a>';
-	rep +='<a href="#" onClick="supprimerMembre(this,unMembre.idP);" class="btn btn-danger">Supprimer</a></div>';     
+    rep+= '</div><label class="form-check-label" for="flexSwitchCheckDefault">Active</label></div>'
 	rep +='</div></div>';
 	return rep;
 }
 
+let enteteMembres = ()=> {
+	let rep ='<div class="card cardEntete-adminM">';
+    rep +='<div class="id-adminM titre">ID</div>';
+	rep +='<div class="img-adminP titre">Photo</div>';
+	rep +='<div class="nom-adminM titre">Nom</div>';
+	rep +='<div class="courriel-adminM titre">Courriel</div>';
+	rep +='<div class="daten-adminM titre titreM">Date de naissance</div>';
+    rep +='<div class="sexe-adminM titre titreM">Sexe</div>';
+	rep +='<div class="boutons-adminP titre titreM">Statut</div>';
+	rep +='</div>';
+	return rep;
+}
+
 let listerMembres = (listeMembres) => {
-    let contenu = `<div class="row row-cols-4">`;
+    let contenu = enteteMembres();
+    contenu += `<div class="row row-cols-4 container-membres">`;
     for (let unMembre of listeMembres){
             contenu+=remplirCardM(unMembre);
     } 
