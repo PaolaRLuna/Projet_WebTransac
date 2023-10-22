@@ -529,7 +529,7 @@ body {
   .card-adminM{
     display: flex;
     flex-direction: row;
-    width: 80%;
+    width: 90%;
     margin-left:50px;
     margin-bottom:3px;
     justify-content:space-between;
@@ -543,7 +543,7 @@ body {
   .cardEntete-adminM {
     display: flex;
     flex-direction: row;
-    width: 80%;
+    width: 90%;
     margin-left:50px;
     margin-bottom: 12px;
     justify-content:space-between;
@@ -581,6 +581,7 @@ body {
     width: 3%;
     font-weight: bolder;
     text-align: center;
+    min-width: 70px;
   }
 
   .daten-adminM, .sexe-adminM {
@@ -599,7 +600,7 @@ body {
   }
 
   .nom-adminM{
-    width: 15%;
+    width: 20%;
   }
 
   .statut-adminM {
