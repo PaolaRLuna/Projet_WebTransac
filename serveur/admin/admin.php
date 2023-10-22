@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $msg="";
     if(!isset($_SESSION['role'])){
          header('Location: ../../index.php');
          exit();
@@ -79,13 +80,7 @@
     
     <form id="deconnexionAdmin" action="../connexion/deconnexion.php"></form>
     <?php
-        require_once('../includes/toast.php');
-        
-        if(isset($_GET['msg'])){
-            $msg = $_GET['msg'];
-            echo '<script> montrerToast("'.$msg.'");</script>';
-            $msg = "" ;
-        } 
+        require_once('../includes/toastOptions.php'); 
     ?>
 </body>
 </html>
