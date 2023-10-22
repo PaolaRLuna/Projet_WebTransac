@@ -521,6 +521,45 @@ body {
 
   /* ------MEMBRES------ */
 
+  .entetemembres{
+    margin-left: 50px;
+    margin-bottom: 30px;
+  }
+
+  .card-adminM{
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin-left:50px;
+    margin-bottom:3px;
+    justify-content:space-between;
+    align-items: center;
+    height: fit-content;
+    background-color: rgba(245, 245, 245, 0.863);
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+ 
+  .cardEntete-adminM {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    margin-left:50px;
+    margin-bottom: 12px;
+    justify-content:space-between;
+    align-items: center;
+    height: fit-content;
+    background-color: rgba(243, 116, 70, 0);
+    border: none;
+  }
+
+  .container-membres{
+    text-align: center;
+    vertical-align: middle;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   .form-btnactive-membre{
     display:flex;
     flex-direction: column !important;
@@ -535,6 +574,44 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items:center;
+  }
+
+  
+  .id-adminM {
+    width: 3%;
+    font-weight: bolder;
+    text-align: center;
+  }
+
+  .daten-adminM, .sexe-adminM {
+    width: 7%;
+    text-align: center;
+    min-width: 100px;
+  }
+
+  .courriel-adminM{
+    width: 30%;
+  }
+
+  .statut-adminM, .form-check-label {
+    width: 10%;
+    min-width: 100px;
+  }
+
+  .nom-adminM{
+    width: 15%;
+  }
+
+  .statut-adminM {
+    text-align: center;
+  }
+
+  .id-adminM{
+    padding-left: 20px;
+  }
+
+  .titreM, .titreM, .titreM{
+    padding-right: 20px !important;
   }
 
   .boutons-adminM{
@@ -552,6 +629,12 @@ body {
     display: flex;
     flex-direction: column !important;
   }
+
+  .chercher-membre{
+    width: 40%;
+    float: right;
+  }
+
   /*--------------------------------------------------------------
   # Modal Connexion
   ----------------------------------------------------------------*/

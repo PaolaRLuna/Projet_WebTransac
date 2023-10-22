@@ -64,18 +64,14 @@
      
 
         <div class="menu-admin-membre" id="affichercontenuMembre" style="display:none;">
-            <h2 class="texteEnteteAdmin" >Liste des Membres</h2>
-                <div class="recherche">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" id="rechercheMotCleMembre">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick='rechercheMotCleMembre();'>Rechercher Membre</button>
-                    </div>
-                </div>
-                
+            <h2 class="texteEnteteAdmin entetemembres" >Liste des Membres</h2>
+            <div class="container-membres">
+                <div id="contenuMembres"></div>
+            </div>   
         </div>
 
         <div id="contenuProduits"></div>
-        <div id="contenuMembres"></div>
+        
     </main>
 
     <div id="idFormProduit" class="container"></div>
