@@ -1,6 +1,7 @@
 function chargerMembres() {
     document.getElementById('affichercontenuProduits').style.display = "none";
     document.getElementById('contenuProduits').style.display = "none";
+    document.getElementsByClassName('eHr')[0].style.display = "none";
     document.getElementById('affichercontenuMembre').style.display = "block";
     document.getElementById('contenuMembres').style.display = "block";
     $.ajax({

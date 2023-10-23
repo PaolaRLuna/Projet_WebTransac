@@ -58,14 +58,19 @@
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick='rechercheParMotCle();'>Rechercher</button>
                     </div>
                 </div>
-            </div>         
+                <div>
+                    <button class="btn btn-outline-secondary reinitialiser" type="button" onClick='chargerProduits();'>Réinitialiser</button>
+                </div>
+            </div>       
         </div>
+        <div id="msgConfirmation"></div>
         <hr class="eHr">
 
      
 
         <div class="menu-admin-membre" id="affichercontenuMembre" style="display:none;">
             <h2 class="texteEnteteAdmin entetemembres" >Liste des Membres</h2>
+            <hr class="eHr">
             <div class="container-membres">
                 <div id="contenuMembres"></div>
             </div>   
@@ -80,6 +85,7 @@
     
     <form id="deconnexionAdmin" action="../connexion/deconnexion.php"></form>
     <?php
+        require_once('../includes/toast.php'); 
         require_once('../includes/toastOptions.php'); 
     ?>
 </body>

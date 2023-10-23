@@ -36,17 +36,19 @@ class DaoProduit {
             $stmt = $instanceModele->executer($requete, [$nom]);
     
             if ($stmt->fetch(PDO::FETCH_OBJ)) {
-                $msg = "Ce produit est déjà utilisé !!!";
+                $this->reponse['OK'] = false;
+                $this->reponse['msg'] = "Attention, un produit du même nom existe déjà. Choisir un autre nom ou modifier l'item.";
             }else{
                 $requete = "INSERT INTO produits VALUES (0,?,?,?,?,?,?)";
                 $instanceModele->executer($requete, [$nom, $categorie, $ingredient, $prix, $quantite, $photo]);
-    
-                $msg = "Produit " .$nom. " bien enregistré.";
+                $this->reponse['OK'] = true;
+                $this->reponse['msg'] = "Produit " .$nom. " bien enregistré.";
             }
         } catch (Exception $e) {
-            $msg = 'Erreur: ' .$e->getMessage();
+            $this->reponse['OK'] = false;
+            $this->reponse['msg'] = "Erreur: " . $e->getMessage();
         } finally {
-            return $msg;
+            return json_encode($this->reponse);
         }
     }
 
@@ -69,9 +71,9 @@ class DaoProduit {
         } catch (Exception $e) {
             $this->reponse['OK'] = false;
             $this->reponse['msg'] = "Erreur: " . $e->getMessage();
-        }
-        
-        return json_encode($this->reponse);
+        } finally {
+            return json_encode($this->reponse);
+        }        
     }
 
     function Mdl_ModifierProduit($idProduit, $nom, $categorie, $ingredients, $prix, $quantite, $photo) {
@@ -93,9 +95,10 @@ class DaoProduit {
         } catch (Exception $e) {
             $reponse['OK'] = false;
             $reponse['msg'] = "Erreur: " . $e->getMessage();
+        } finally {
+            return json_encode($reponse);
         }
-    
-        return json_encode($reponse);
+        
     }
 
     function uploadPhoto() {
@@ -205,13 +208,16 @@ class DaoProduit {
         $motCle = $params['motCle'];
 
         try {
-            $requete = "SELECT * FROM produits WHERE nom LIKE :motCle OR ingredients LIKE :motCle";
+            $requete = "SELECT * FROM produits WHERE nom LIKE :motCle OR ingredients LIKE :motCle OR categorie LIKE :motCle";
             $stmt = $instanceModele->executer($requete, [':motCle' => '%' . $motCle . '%']);
-            $resultats = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            return json_encode(["OK" => true, "msg" => "Recherche réussie", "resultats" => $resultats]);
+            $this->reponse['OK'] = true;
+            $this->reponse['msg'] = "Opération réussie";
+            $this->reponse['listeProduits'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
-            return json_encode(["OK" => false, "msg" => "Problème de recherche"]);
+            $this->reponse['OK'] = false;
+            $this->reponse['msg'] = "Problème pour obtenir les données des produits par catégorie";
+        } finally {
+            return json_encode($this->reponse);
         }
     }
 }

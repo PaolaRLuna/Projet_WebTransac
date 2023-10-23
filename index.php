@@ -102,7 +102,7 @@
         
         if(isset($_GET['msg'])){
             $msg = $_GET['msg'];
-            echo '<script> montrerToast("'.$msg.'");</script>';
+            echo '<script> montrerToast("'.$msg.'",1);</script>';
             $msg = "" ;
         } 
     ?>

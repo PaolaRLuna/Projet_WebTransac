@@ -59,12 +59,8 @@ class DaoGestionMembre{
             $this->reponse['OK'] = true;
             $this->reponse['msg'] = "Opération réussie";
             $this->reponse['listeMembres'] = array();
-            if ($ligne=$stmt->fetch(PDO::FETCH_OBJ)){
-                while($ligne=$stmt->fetch(PDO::FETCH_OBJ)){
-                    $this->reponse['listeMembres'][] = $ligne;
-                
-                //listerMembres($ligne);
-                }
+            while($ligne=$stmt->fetch(PDO::FETCH_OBJ)){
+                $this->reponse['listeMembres'][] = $ligne;
             }
         } catch (Exception $e){ 
             $this->reponse['OK'] = false;

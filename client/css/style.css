@@ -405,14 +405,13 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items:center;
+    align-items: center;
   }
 
   .options-admin{
     display: flex;
     flex-direction: row;
     margin-right: 20px;
-    align-items:center;
   }
 
 
@@ -424,12 +423,12 @@ body {
     margin-right: 30px;
   }
 
-  #button-addon2{
+  #button-addon2, .reinitialiser{
     background-color: #444444;
     color:#fff;
   }
 
-  .form-floating, .recherche{
+  .form-floating, .recherche, .reinitialiser{
     margin-left: 20px;
   }
 
@@ -912,27 +911,40 @@ body {
     position: absolute;
     top: 20%;
     left: 40%;
-}
+  }
 
-#textToast {
-    background-color: rgb(62, 62, 122);
-    color: white;
-    font-size: 18px;
-}
+  #textToast, #textToastOptions {
+      background-color: rgb(62, 62, 122);
+      color: white;
+      font-size: 18px;
+  }
 
-.toast-header {
-  display: flex;
-  justify-content: space-around;
-  align-items:self-end;
-}
+  .toast-header {
+    display: flex;
+    justify-content: space-around;
+    align-items:self-end;
+  }
 
-.mr-auto{
-  color: red;
-  padding-top: 30px;
-  font-size: larger;
-}
+  .mr-auto{
+    color: red;
+    padding-top: 30px;
+    font-size: larger;
+  }
 
-#fermerToast {
-  margin-bottom: 15px;
-}
+  #fermerToast1, #fermerToast2 {
+    margin-bottom: 15px;
+  }
 
+  .posToastCourant {
+    position:absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .centrerBoutons {
+    display: flex;
+    justify-content: space-around;
+    background-color: #fff;
+    padding: 10px;
+  }

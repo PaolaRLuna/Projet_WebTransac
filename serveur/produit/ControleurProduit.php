@@ -5,7 +5,6 @@
 
     class ControleurProduit { 
         static private $instanceCtr = null;
-        
         private $reponse;
 
         private function __construct(){
@@ -18,6 +17,7 @@
             }
             return self::$instanceCtr;
         }
+
 
         function CtrP_AjouterProduit(){
             $nom = $_POST['nom'];
@@ -35,9 +35,11 @@
             return DaoProduit::getDaoProduit()->Mdl_AjoutProduit($produit);
         }
 
+
         function CtrP_ChargerProduit($idProduit) {
             return DaoProduit::getDaoProduit()->MdlP_ChargerProduit($idProduit);
         }
+
 
         function CtrP_ModifierProduit() {
             $idProduit= $_POST['idProduit'];
@@ -50,12 +52,12 @@
 
             return DaoProduit::getDaoProduit()->Mdl_ModifierProduit($idProduit, $nom, $categorie, $ingredients, $prix, $quantite, $photo);
         }
-
         
 
         function CtrP_getAll(){
             return DaoProduit::getDaoProduit()->MdlP_getAll(); 
         }
+
 
         function CtrP_getCategories(){
             return DaoProduit::getDaoProduit()->MdlP_getCategorie(); 
@@ -70,7 +72,12 @@
 
         function CtrP_listerParCategorie() {
             $categorie = $_POST['categorie'];
-            return DaoProduit::getDaoProduit()->MdlP_getByCategory($categorie);
+            if ($categorie === "All") {
+                return DaoProduit::getDaoProduit()->MdlP_getAll(); 
+            } else {
+                return DaoProduit::getDaoProduit()->MdlP_getByCategory($categorie);
+            }
+            
         }
         
 
@@ -80,7 +87,7 @@
         }
 
         
-
+        //controleur actions sur produits
         function CtrP_Actions(){
             $action=$_POST['action'];
             switch($action){

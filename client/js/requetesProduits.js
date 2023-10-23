@@ -1,4 +1,9 @@
-let chargerProduits = () => {
+//********************************************
+//Actions et requetes sur les produits 
+
+let chargerProduits = () => {floatingSelect
+    document.getElementById('rechercheMotCle').value="";
+    document.getElementById('floatingSelect').selectedIndex=0;
     $.ajax({
         type : "POST",
         url  : "routesProduits.php",
@@ -45,25 +50,30 @@ let chargerCategories = () => {
 }
 
 
-//Houssam****************************************************
-
-let chargerProduitsParCategorie = (categorie) => {
+const requeteEnregistrer = () => {
+    let formProduit = new FormData(document.getElementById('formAjoutProduit'));
+    let categorie = document.getElementById('categorie').options[document.getElementById('categorie').selectedIndex].value;
+    formProduit.append('categorie', categorie);
+    formProduit.append('action', 'enregistrer');
     $.ajax({
-        type: "POST",
-        url: "routesProduits.php",
-        data: {"action": "rechercher", "categorie": categorie},
-        dataType: "json",
-        success: (reponse) => {
-            montrerVue("lister", reponse);
+        type: 'POST',
+        url: 'routesProduits.php',
+        data: formProduit,
+        contentType: false,
+        processData: false,
+        dataType: 'json',
+        async: false,
+        success: function (reponse) {
+            montrerVue("enregistrer", reponse);
         },
-        fail: (err) => {
+        fail: function (err) {
             console.log(err);
         }
     });
 }
 
 
-// Recherche par nom ou ingrédients
+// Recherche par nom, ingrédients ou catégorie
 let rechercheParMotCle = () => {
     let motCle = $("#rechercheMotCle").val();
     $.ajax({
@@ -72,6 +82,7 @@ let rechercheParMotCle = () => {
         data: { "action": "rechercherParMotCle", "motCle": motCle },
         dataType: "json",
         success: (reponse) => {
+            console.log(reponse);
             montrerVue("lister", reponse);
         },
         fail: (err) => {
@@ -80,7 +91,7 @@ let rechercheParMotCle = () => {
     });
 }
 
-
+//lister par catégorie
 let rechercheCategorie = () => {
     let selectedCategorie = $("#floatingSelect").val();
     $.ajax({
@@ -100,18 +111,9 @@ let rechercheCategorie = () => {
     });
 }
 
-// enlever categorie et focus mot cle
 
-let effectuerRecherche = () => {
-    let motCle = $("#rechercheMotCle").val();
-
-    if (motCle !== "") {
-        rechercheParMotCle();
-    }
-}
 
 // affichage du produit a modifier dans le formulaire
-
 let chargerInfosProduit = (idP) => {
     $.ajax({
         type: "POST",
@@ -132,7 +134,6 @@ let chargerInfosProduit = (idP) => {
 }
 
 // modification du produit afficher dans le formulaire
-
 let modifierProduit = () => {
     let formProduit= new FormData(document.getElementById('formModif'));
 
@@ -145,6 +146,9 @@ let modifierProduit = () => {
     formProduit.append('quantite', $("#quantite").val());
 
     if ($("#photo")[0].files[0]){
+        formProduit.append('photo', $("#photo")[0].files[0]);
+    } else {
+
         formProduit.append('photo', $("#photo")[0].files[0]);
     }
     
@@ -168,55 +172,6 @@ let modifierProduit = () => {
     });
 }
 
-//********************************************
-
-
-let montrerVue = (action, donnees) => {
-	msgErr = "Problème côté serveur. Essayez plus tard!";
-    switch(action){
-        case "enregistrer"  :
-            if (donnees.OK) {
-                modalAjoutProduit();
-            } else {
-                //afficherMessage(msgErr);
-            }
-        case "modifier"     :
-            // if(donnees.OK){
-            //     // getUnProduit(donnees.produitAEditer);
-            // }else{
-            //     afficherMessage(msgErr); 
-            // }
-        // case "afficher_produit_a_modifier"     :
-        //     if(donnees.OK){
-        //         afficherFormulaireModification(donnees.produitAEditer);
-        //     }else{
-        //         afficherMessage(msgErr); 
-        //     }
-        case "enlever"      :
-            if(donnees.OK){
-                afficherMessage(donnees.msg);
-            }else{
-                console.log(donnees.OK);
-                console.log(donnees.msg);
-                afficherMessage(msgErr); 
-            }
-        break;
-        case "lister"       :
-            if(donnees.OK){
-                listerProduits(donnees.listeProduits);
-            }else{
-                afficherMessage(msgErr); 
-            }
-		break;
-		case "chargerCateg" :
-			if(donnees.OK){
-				genererCategories(donnees.listeCategories);
-			}else{
-				afficherMessage(msgErr); 
-			}
-    }
-}
-
 const genererCategories = (liste) => {
     document.getElementById('floatingSelect').innerHTML = "";
     let resultat = ""
@@ -228,25 +183,47 @@ const genererCategories = (liste) => {
      document.getElementById('floatingSelect').innerHTML += resultat;
 }
 
-let confirmationSuppression = () => {
-    let boutonSupp = document.getElementsByClassName("boutonSupp")[0];
-    let idP = boutonSupp.getAttribute('id');
-    supprimerProduit(idP);
+
+
+//********************************************
+//Controleur de sortie des requetes
+
+let montrerVue = (action, donnees) => {
+	msgErr = "Problème côté serveur. Essayez plus tard!";
+    switch(action){
+        case "modifier"     :
+        case "enregistrer"  :
+            if (donnees.OK) {
+                afficherMessageConfirmation(donnees.msg);
+            } else {
+                afficherMessageConfirmation(donnees.msg);
+            }
+            break;
+        case "enlever"      :
+            if(donnees.OK){
+                afficherMessage(donnees.msg);
+            }else{
+                afficherMessageConfirmation(donnees.msg); 
+            }
+            break;
+        case "lister"       :
+            if(donnees.OK){
+                listerProduits(donnees.listeProduits);
+            }else{
+                afficherMessageConfirmation(donnees.msg); 
+            }
+		    break;
+		case "chargerCateg" :
+			if(donnees.OK){
+				genererCategories(donnees.listeCategories);
+			}else{
+				afficherMessageConfirmation(donnees.msg); 
+			}
+    }
 }
 
-
-let afficherMessage = (idP) => {
-    let msg = 'Êtes-vous sûrs de vouloir supprimer le produit id='+idP+'?';
-
-    let ajoutScript = document.createElement('script');
-    ajoutScript.type = 'text/javascript';
-    let code = 'montrerToast("'+msg+'");';
-    ajoutScript.appendChild(document.createTextNode(code));
-    document.body.appendChild(ajoutScript);
-
-    let boutonSupp = document.getElementsByClassName("boutonSupp")[0];
-    boutonSupp.setAttribute('id', idP);
-}
+//********************************************
+//Affichage et mise en forme des cards
  
 let remplirCard = (unProduit)=> {
 	let lienImage = chargerImage(unProduit.photo);
@@ -261,13 +238,8 @@ let remplirCard = (unProduit)=> {
 	rep +='<div class="categorie-adminP">'+unProduit.categorie+'</div>';
     rep +='<div class="prix-adminP">'+prix+'</div>';
     rep +='<div class="qte-adminP">'+unProduit.quantite+'</div>';
-<<<<<<< Updated upstream
 	rep +='<div class="boutons-adminP"><a href="#" onClick="chargerInfosProduit('+idP+');" class="btn btn-success btn-modifier-produit">Modifier</a></div>';
-	rep +='<div class="boutons-adminP"><a href="#" onClick="supprimerProduit('+idP+');" class="btn btn-danger">Supprimer</a></div>';    
-=======
-	rep +='<div class="boutons-adminP"><a href="#" class="btn btn-success">Modifier</a></div>';
 	rep +='<div class="boutons-adminP"><a href="#" onClick="afficherMessage('+idP+');" class="btn btn-danger">Supprimer</a></div>';     
->>>>>>> Stashed changes
 	rep +='</div>';
 	return rep;
 }
@@ -288,28 +260,26 @@ let enteteProduits = ()=> {
 }
 
 let listerProduits = (listeProduits) => {
-    let contenu = enteteProduits();
-    contenu += `<div class="row row-cols-4">`;
-    for (let unProduit of listeProduits){
-            contenu+=remplirCard(unProduit);
-    } 
-    contenu += `</div>`;
+    let contenu = "";
+    
+    if (listeProduits.length == 0){
+        contenu += `<div class="menu-admin">`;
+        contenu += `Aucun élément ne correspond à la recherche.`
+        contenu += `</div>`;
+    } else {
+        contenu += enteteProduits();
+        contenu += `<div class="row row-cols-4">`;
+        for (let unProduit of listeProduits){
+                contenu+=remplirCard(unProduit);
+        } 
+        contenu += `</div>`;
+    }    
     document.getElementById('contenuProduits').innerHTML = contenu;
 }
 
 function chargerImage(image){
 	lien = '../../client/images/produits/'+image;
-	lienND = 'client/images/produits/visuel-non-disponible.jpg';
 	return lien;
-	// if (image != ""){
-	// 	if (lien.exists()){
-	// 		return lien;
-	// 	}else {
-	// 		return lienND;
-	// 	}
-	// } else {
-	// 	return lienND;
-	// }
 }
 
 
@@ -335,34 +305,42 @@ function miseEnFormePrix(prix){
     }
 }
 
-
+//lorsque retour vers la page produits
 let relisterProduits =() => {
     document.getElementById('affichercontenuProduits').style.display = "block";
+    document.getElementById('affichercontenuProduits').style.display = "flex";
     document.getElementById('contenuProduits').style.display = "block";
     document.getElementById('affichercontenuMembre').style.display = "none";
     document.getElementById('contenuMembres').style.display = "none";
+    document.getElementsByClassName('eHr')[0].style.display = "block";
 }
 
 
-const requeteEnregistrer = () => {
-    let formProduit = new FormData(document.getElementById('formAjoutProduit'));
-    let categorie = document.getElementById('categorie').options[document.getElementById('categorie').selectedIndex].value;
-    formProduit.append('categorie', categorie);
-    formProduit.append('action', 'enregistrer');
-    $.ajax({
-        type: 'POST',
-        url: 'routesProduits.php',
-        data: formProduit,
-        contentType: false,
-        processData: false,
-        dataType: 'json',
-        async: false,
-        success: function (reponse) {
-            montrerVue("enregistrer", reponse);
-        },
-        fail: function (err) {
-            console.log(err);
-        }
-    });
+
+//********************************************
+//Affichage message par rapport aux produits
+
+let afficherMessageConfirmation = (msg) => {
+    alert(msg);
 }
 
+
+let afficherMessage = (idP) => {
+    let msg = 'Êtes-vous sûrs de vouloir supprimer le produit id='+idP+'?';
+
+    let ajoutScript = document.createElement('script');
+    ajoutScript.type = 'text/javascript';
+    let code = 'montrerToast("'+msg+'",2);';
+    ajoutScript.appendChild(document.createTextNode(code));
+    document.body.appendChild(ajoutScript);
+
+    let boutonSupp = document.getElementsByClassName("boutonSupp")[0];
+    boutonSupp.setAttribute('id', idP);
+}
+
+
+let confirmationSuppression = () => {
+    let boutonSupp = document.getElementsByClassName("boutonSupp")[0];
+    let idP = boutonSupp.getAttribute('id');
+    supprimerProduit(idP);
+}

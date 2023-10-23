@@ -40,7 +40,7 @@ function Mdl_Ajouter($membre, $mdp)
         $stmt = $instanceModele->executer($requete,[$courriel]);
 
         if ($stmt->fetch(PDO::FETCH_OBJ)) {
-            $msg = "Attention, ce courriel est déjà utilisé!";
+            $msg = "Attention, ce courriel est déjà utilisé! Inscription non complétée.";
         } else {
             
             // Le courriel n'existe pas

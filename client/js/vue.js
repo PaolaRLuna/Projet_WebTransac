@@ -1,3 +1,4 @@
+//modal Enregistrer un membre
 const modalEnregMembres = () => {
     return `
     <!-- Modal enregistrer Membre -->
@@ -73,6 +74,7 @@ const modalEnregMembres = () => {
     `
 }
 
+//afficher modal Enregistrer un membre
 const montrerFormEnregMembre = () => {
     document.getElementById('idForms').innerHTML = modalEnregMembres(); 
     const modalEnregMembre = new bootstrap.Modal('#modalEnregMembre', {
@@ -81,8 +83,7 @@ const montrerFormEnregMembre = () => {
       modalEnregMembre.show(); 
 }
 
-//Modal Connexion 
-
+//modal Connexion 
 const modalConnexionUtilisateurs = () => {
     return `
     <!-- Modal connexion membre ou admin -->
@@ -130,6 +131,7 @@ const modalConnexionUtilisateurs = () => {
     `
 }
 
+//afficher modal Connexion
 const montrerFormConnexion = () => {
     document.getElementById('idForms').innerHTML = modalConnexionUtilisateurs(); 
     const modalConnexion = new bootstrap.Modal('#modalConnexion', {    
@@ -137,21 +139,9 @@ const montrerFormConnexion = () => {
       modalConnexion.show(); 
 }
 
-//Afficher message dans Toast
-
-let montrerToast = (msg) =>{
-	if(msg.length > 0){
-		let textToast = document.getElementById("textToast");
-		var toastElList = [].slice.call(document.querySelectorAll('.toast'));
-		var toastList = toastElList.map(function (toastEl) {
-			return new bootstrap.Toast(toastEl);
-		})
-		textToast.innerHTML = msg;
-		toastList[0].show();
-	}
-}
 
 
+//modal Ajout
 const modalAjoutProduit = () => {
     return `
             <div class="modal fade" id="modalAjoutProduit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -212,12 +202,14 @@ const modalAjoutProduit = () => {
     `;
 }
 
+//afficher modal Ajout
 const montrerFormAjoutProduit = () => {
     document.getElementById('idFormProduit').innerHTML = modalAjoutProduit();
     const modalAjout = new bootstrap.Modal('#modalAjoutProduit', {});
     modalAjout.show();
 }
 
+//modal Modif
 const montrerFormModification = () => {
     return `
         <div class="modal fade" id="modalModificationProduit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -264,7 +256,7 @@ const montrerFormModification = () => {
 
                             <div class="col-md-12">
                                 <label for="photo" class="form-label">Photo :</label>
-                                <input type="file" class="form-control is-valid" id="photo" name="photo">
+                                <input type="file/text" class="form-control is-valid" id="photo" name="photo">
                             </div>
 
                             <div class="col-12 btn-modifier-produit">
@@ -280,7 +272,7 @@ const montrerFormModification = () => {
     `;
 }
 
-
+//afficher modal Modif
 const remplirFormulaireModification = (ProduitAEditer) => {
     document.getElementById('idModificationProduit').innerHTML= montrerFormModification();
     
@@ -290,7 +282,7 @@ const remplirFormulaireModification = (ProduitAEditer) => {
     document.getElementById('ingredients').value= ProduitAEditer.ingredients;
     document.getElementById('prix').value= ProduitAEditer.prix;
     document.getElementById('quantite').value= ProduitAEditer.quantite;
-    
+
     let categorieSelect = document.getElementById('categorie');
     for (let option of categorieSelect.options){
         if (option.value == ProduitAEditer.categorie){
@@ -301,4 +293,25 @@ const remplirFormulaireModification = (ProduitAEditer) => {
 
     const modalModification = new bootstrap.Modal(document.getElementById('modalModificationProduit'), {});
     modalModification.show();
+}
+
+//afficher Toast
+let montrerToast = (msg, type) =>{
+	if(msg.length > 0){
+        let textToast;
+        if (type == 1){
+            textToast = document.getElementById("textToast");
+            var toastElList = [].slice.call(document.querySelectorAll('.toast.posToast'));
+        } else {
+            textToast = document.getElementById("textToastOptions");
+            var toastElList = [].slice.call(document.querySelectorAll('.toast.posToastCourant'));
+        }
+		
+		var toastList = toastElList.map(function (toastEl) {
+			return new bootstrap.Toast(toastEl);
+		})
+		textToast.innerHTML = msg;
+
+		toastList[0].show();
+	}
 }
