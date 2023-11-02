@@ -96,8 +96,16 @@ body {
   */
   .navbar {
     padding: 0;
-    margin-left: 320px;
+    margin-left: 220px;
     margin-top: 5px;
+  }
+
+  .navbarMembre {
+    margin-left: 120px;
+  }
+
+  .navbarAdmin {
+    margin-left: 380px;
   }
   
   .navbar ul {
@@ -316,8 +324,14 @@ body {
   }
 
   .card-fav {
+    float: left;
+    margin-left: 15px;
+  }
+
+  #add_to_cart {
     float: right;
-    margin-right: 15px;
+    margin-right: 25px;
+    margin-top: -8px;
   }
 
   .card-body{
@@ -397,6 +411,17 @@ body {
     margin-left: 30px;
   }
 
+  #identifiantMembre{
+    display: flex;
+    margin-left: 375px;
+    margin-top: -55px;
+  }
+
+  #salutation {
+    margin-left: 10px;
+    font-family: "Open Sans", sans-serif;  
+    line-height: 1.12em;
+  }
 
   .menu-admin{
     margin-left: 50px;

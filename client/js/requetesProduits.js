@@ -26,7 +26,7 @@ let supprimerProduit = (idP) => {
         dataType : "json", 
         success : (reponse) => {
             console.log(reponse);
-        	montrerVue("lister", reponse);
+            window.open("admin.php");
         },
         fail : (err) => {
             console.log(err);
@@ -194,7 +194,7 @@ let montrerVue = (action, donnees) => {
         case "modifier"     :
         case "enregistrer"  :
             if (donnees.OK) {
-                afficherMessageConfirmation(donnees.msg);
+                //afficherMessageConfirmation(donnees.msg);
             } else {
                 afficherMessageConfirmation(donnees.msg);
             }
