@@ -153,7 +153,7 @@ const modalAjoutProduit = () => {
                         </div>
         
                         <div class="modal-body modal-body-bg">
-                            <form id="formAjoutProduit" method="POST" class="row g-3">
+                            <form id="formAjoutProduit" class="row g-3">
                                 <div class="col-md-6">
                                     <label for="nom" class="form-label">Nom :</label>
                                     <input type="text" class="form-control is-valid" id="nom" name="nom" required>

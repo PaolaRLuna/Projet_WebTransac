@@ -1,23 +1,31 @@
-function initialisation() { // des fonctions propres au panier et aux favoris
-    switchLike();
+function initialisation(role = null) { // des fonctions propres au panier et aux favoris
+    switchLike(role);
     qtePlus();
     qteMoins();
 }
 
 let deconnexionPageSpec = () => {
-    document.getElementById('deconnexionAdmin').submit();
+    document.getElementById('deconnexion').submit();
 }
 
 // bouton pour ajouter/enlever aux favoris
-function switchLike() {
+function switchLike(role) {
+    let srcLike;
+    let srcNotLike;
+    if (role === "M") {
+        srcLike = '../../client/images/general/like.png';
+        srcNotLike = '../../client/images/general/notlike.png';
+    }else {
+        srcLike = 'client/images/general/like.png';
+        srcNotLike = 'client/images/general/notlike.png';
+    }
     let listeFavoris = document.getElementsByClassName("etat-like");
     for (let i=0; i<listeFavoris.length; i++) {
         listeFavoris[i].addEventListener("click", () => {
             if (listeFavoris[i].src.match(/^.*notlike.png$/)) {
-                listeFavoris[i].setAttribute("src", 'client/images/general/like.png');
-                // éventuellement lier au membre
+                listeFavoris[i].setAttribute("src", srcLike);
             } else {
-                listeFavoris[i].setAttribute("src", 'client/images/general/notlike.png');
+                listeFavoris[i].setAttribute("src", srcNotLike);
             }
         })
     }
@@ -88,22 +96,31 @@ const modalCarte = () => {
 }
 
 // changer le header du site selon la connexion - à garder pour partie 3:MEMBRE
-const switchHeader= (role) => {
+const switchHeader= (role, prenom, nom, photo) => {
     if (role === "M") {
         let switch1 = document.getElementById('optionHeader1'); 
         let switch2 = document.getElementById('optionHeader2'); 
         switch1.setAttribute("href","#");
         switch1.innerHTML = "Profil";
-        switch2.setAttribute("href","javascript:document.getElementById('formDec').submit();");
+        switch2.setAttribute("href","javascript:deconnexionPageSpec();");
         switch2.innerHTML = "Déconnexion";
-    } else if (role === "A") {
-        let switch1 = document.getElementById('optionHeader1'); 
-        let switch2 = document.getElementById('optionHeader2'); 
-        switch1.setAttribute("href","#");
-        switch1.innerHTML = "Gérer";
-        switch2.setAttribute("href","javascript:document.getElementById('formDec').submit();");
-        switch2.innerHTML = "Déconnexion";
-    }
+
+        let addIndentifiant= document.getElementById('identifiantMembre'); 
+        let nomCie = document.getElementsByClassName("text-light")[0];
+        nomCie.innerHTML += "  /";
+        let nomMembre = document.createElement("p");
+        nomMembre.setAttribute("id","salutation");
+        nomMembre.innerHTML = "  Bonjour "+ prenom + " " + nom + "!";
+        let photoMembre = document.createElement("img");
+        photoMembre.src = photo;
+        photoMembre.style.height = '50px';
+        addIndentifiant.prepend(nomMembre);
+        addIndentifiant.prepend(photoMembre);
+
+        let navbar= document.getElementById('navbar'); 
+        navbar.classList.add("navbarMembre");
+
+    } 
 
 }
 

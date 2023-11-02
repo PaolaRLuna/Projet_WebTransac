@@ -152,8 +152,10 @@ class DaoProduit {
         try{
             $instanceModele= modeleDonnees::getInstanceModele();
             $stmt = $instanceModele->executer($requete,[$idP]);
-            $produitsAJ = self::$modelProduit->MdlP_getAll();
-            $this->reponse = json_decode($produitsAJ);
+            //$produitsAJ = self::$modelProduit->MdlP_getAll();
+            //$this->reponse = json_decode($produitsAJ);
+            $this->reponse['OK'] = true;
+            $this->reponse['msg'] = "Produit bien supprimé";
         }catch (Exception $e){ 
             $this->reponse['OK'] = false;
             $this->reponse['msg'] = "Problème pour obtenir les données des produits";

@@ -1,7 +1,22 @@
+<?php
+    $pos = strpos($_SERVER['PHP_SELF'], "index.php");
+    if ($pos === false){
+        $index="../../index.php";
+        $logo="../../client/images/general/logo.png";
+        $panier="../../client/images/general/panier.png";
+        $favoris="../../client/images/general/like.png";
+    }else{
+        $index="index.php";
+        $logo="client/images/general/logo.png";
+        $panier="client/images/general/panier.png";
+        $favoris="client/images/general/like.png";
+    }
+?>
 <header id="header">
         <div class="logo">
-            <a href="index.php"><img src="client/images/general/logo.png" alt="Pâte-à-Pouf" id="logo"></a>
-            <h1 class="text-light"><a href="index.php">Pâte-à-Pouf</a></h1>
+            <a href="<?php echo $index ?>"><img src="<?php echo $logo ?>" alt="Pâte-à-Pouf" id="logo"></a>
+            <h1 class="text-light">Pâte-à-Pouf</h1>
+            <div id="identifiantMembre"></div>
         </div>
 
         <nav id="navbar" class="navbar">
@@ -33,9 +48,9 @@
         </nav>
         
         <div class="panier">
-            <a href="panier.php"><img src="client/images/general/panier.png" alt="voir le panier" id="panier"></a>
+            <a href="panier.php"><img src="<?php echo $panier ?>" alt="voir le panier" id="panier"></a>
         </div>
         <div class="favoris">
-            <a href="favoris.php"><img src="client/images/general/like.png" alt="voir les favoris" id="favoris"></a>
+            <a href="favoris.php"><img src="<?php echo $favoris ?>" alt="voir les favoris" id="favoris"></a>
         </div>
 </header>

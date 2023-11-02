@@ -22,7 +22,17 @@
 
 	function listerProduits($produit){
         $lienImage = chargerImage($produit->photo);
-        $prix = miseEnFormePrix($produit->prix, $produit->quantite);
+        $prix = miseEnFormePrix($produit->prix);
+        
+        $pos = strpos($_SERVER['PHP_SELF'], "index.php");
+        if ($pos === false){
+            $like = '../../client/images/general/notlike.png';
+            $ajoutPanier = '../../client/images/general/ajout-panier.png';
+        }else{
+            $like = 'client/images/general/notlike.png';
+            $ajoutPanier = 'client/images/general/ajout-panier.png';
+        }
+
         $card = '
         <div class="card" style="width: 18rem;">
             <a href="#"><img src="'.$lienImage.'" class="card-img-top"></a>
@@ -46,17 +56,24 @@
             </nav>
 
             <div class="card-body">
-                <a href="#" class="card-link">Ajouter au panier</a>
-                <p class="card-fav"><img class="etat-like" src="client/images/general/notlike.png" alt="ajouter aux favoris"></p>
+                <p class="card-fav"><img class="etat-like" src="'.$like.'" alt="ajouter aux favoris"></p>
+                <p id="add_to_cart"><img src="'.$ajoutPanier.'"></p>
             </div>
         </div>';
 
         echo $card;
     }
-    
+
     function chargerImage($image){
-        $lien = 'client/images/produits/'.$image;
-        $lienND = 'client/images/produits/visuel-non-disponible.jpg';
+        $pos = strpos($_SERVER['PHP_SELF'], "index.php");
+        if ($pos === false){
+            $lien = '../../client/images/produits/'.$image;
+            $lienND = '../../client/images/produits/visuel-non-disponible.jpg';
+        }else{
+            $lien = 'client/images/produits/'.$image;
+            $lienND = 'client/images/produits/visuel-non-disponible.jpg';
+        }
+
         if ($image != ""){
             if (file_exists($lien)){
                 return $lien;
@@ -68,10 +85,9 @@
         }
     }
 
-    function miseEnFormePrix($prix, $qte){
+    function miseEnFormePrix($prix){
         $prixStr = strval($prix);
-        $qteStr = strval($qte);
-        if (strlen($prixStr) != 0 && strlen($qteStr) != 0) {
+        if (strlen($prixStr) != 0) {
             if (strpos($prixStr, '.')){
                 $prixTab = explode(".", $prixStr);
                 $prixEnt = $prixTab[0];
@@ -85,7 +101,7 @@
                 $prixEnt =  $prixStr;
                 $decimal = '00';
             }
-            return $prixEnt.'.'.$decimal."$ / (".$qteStr."g)";
+            return $prixEnt.'.'.$decimal."$";
         } else {
             return 'Prix Non Disponible';
         }

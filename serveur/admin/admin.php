@@ -32,7 +32,7 @@
             <h1 class="text-light">Pâte-à-Pouf<span id="identifiantAdmin">/Page Administrateur</span></h1>
         </div>
 
-        <nav id="navbar" class="navbar">
+        <nav id="navbar" class="navbar navbarAdmin">
             <ul>
                 <li><a class="active" href="javascript:relisterProduits();">Gestion des produits</a></li>
                 <li><a class="active" href="javascript:chargerMembres();">Gestion des membres</a></li>
@@ -83,7 +83,7 @@
     <div id="idFormProduit" class="container"></div>
     <div id="idModificationProduit" class="container"></div>
     
-    <form id="deconnexionAdmin" action="../connexion/deconnexion.php"></form>
+    <form id="deconnexion" action="../connexion/deconnexion.php"></form>
     <?php
         require_once('../includes/toast.php'); 
         require_once('../includes/toastOptions.php'); 

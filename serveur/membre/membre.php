@@ -22,23 +22,25 @@
     <script src="../../client/js/vue.js"></script>
     <link href="https://fonts.cdnfonts.com/css/bradley-hand-2" rel="stylesheet">
 
-<body onload="switchHeader('<?php echo($_SESSION['role']) ?>');">
+<body onload="initialisation('<?php echo($_SESSION['role']) ?>'); switchHeader('<?php echo($_SESSION['role']) ?>', '<?php echo ($_SESSION['prenom'])  ?>', '<?php echo ($_SESSION['nom'])  ?>', '<?php echo ($_SESSION['photo'])  ?>');">
     <?php
         require_once(__DIR__.'/../includes/header.php');
     ?>
 
     <main id="pageMembre">
-        <h1>Page membre</h1>
+        <h1>Page membre en construction</h1>
     
 
         <!-- Fin barre navigation -->
-        <div class="container">
+        <div class="container_produits">
+            <?php
+                require_once('../produit/affichageProduits.php');
+            ?>
         </div>
-        <form id="formDec" action="../connexion/controleurConnexion.php" method="POST">
-            <!-- Bloc de formulaire pour déconnecter l'utilisateur-->
-            <!-- Formulaire avec les champs suivants : -->
-            <input type="hidden" name="action" value="deconnexion">
-        </form> 
+
+
     </main>
+    <form id="deconnexion" action="../connexion/deconnexion.php"></form>
+
 </body>
 </html>
