@@ -148,7 +148,6 @@ let modifierProduit = () => {
     if ($("#photo")[0].files[0]){
         formProduit.append('photo', $("#photo")[0].files[0]);
     } else {
-
         formProduit.append('photo', $("#photo")[0].files[0]);
     }
     
