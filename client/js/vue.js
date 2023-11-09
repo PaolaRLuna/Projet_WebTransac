@@ -256,7 +256,7 @@ const montrerFormModification = () => {
 
                             <div class="col-md-12">
                                 <label for="photo" class="form-label">Photo :</label>
-                                <input type="file/text" class="form-control is-valid" id="photo" name="photo">
+                                <input type="file" class="form-control is-valid" id="photo" name="photo">
                             </div>
 
                             <div class="col-12 btn-modifier-produit">
