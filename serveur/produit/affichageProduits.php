@@ -48,10 +48,10 @@
                 <li class="list-group-item">'.$prix.'</li>
             </ul>
             <nav class = "qte">
-                <ul class="pagination">
-                    <li class="page-item"><a class="page-link moins">-</a></li>
-                    <li class="page-item"><a contenteditable="true" class="page-link">1</a></li>
-                    <li class="page-item"><a class="page-link plus">+</a></li>
+                <ul class="pagination" id="prod'.$produit->IdP.'">
+                    <li class="page-item"><a class="page-link moins" onClick="enleverduPanier('.$produit->IdP.');">-</a></li>
+                    <li class="page-item"><a contenteditable="true" id="quantiteProduit" class="page-link">0</a></li>
+                    <li class="page-item"><a class="page-link plus" onClick="ajouterauPanier('.$produit->IdP.');">+</a></li>
                 </ul>
             </nav>
 

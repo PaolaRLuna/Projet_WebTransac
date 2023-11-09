@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../../client/css/style.css?v=<?php echo time(); ?>">
     <script src="../../client/js/global.js"></script>
     <script src="../../client/js/vue.js"></script>
+    <script src="../../client/js/panier.js"></script>
     <link href="https://fonts.cdnfonts.com/css/bradley-hand-2" rel="stylesheet">
 
 <body onload="initialisation('<?php echo($_SESSION['role']) ?>'); switchHeader('<?php echo($_SESSION['role']) ?>', '<?php echo ($_SESSION['prenom'])  ?>', '<?php echo ($_SESSION['nom'])  ?>', '<?php echo ($_SESSION['photo'])  ?>');">
