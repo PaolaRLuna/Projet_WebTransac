@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="client/css/style.css?v=<?php echo time(); ?>">
     <script src="client/js/global.js"></script>
     <script src="client/js/vue.js"></script>
+    <script src="client/js/panier.js"></script>
     <link href="https://fonts.cdnfonts.com/css/bradley-hand-2" rel="stylesheet">
 </head>
 
