@@ -2,6 +2,9 @@ function initialisation(role = null) { // des fonctions propres au panier et aux
     switchLike(role);
     setLocalStorage();
     afficherqteProdPanier()
+    $( document ).ready(function() {
+        attribuerProduits();
+    });
 }
 
 let deconnexionPageSpec = () => {
