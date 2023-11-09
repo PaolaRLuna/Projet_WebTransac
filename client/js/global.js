@@ -1,7 +1,7 @@
 function initialisation(role = null) { // des fonctions propres au panier et aux favoris
     switchLike(role);
-    qtePlus();
-    qteMoins();
+    setLocalStorage();
+    afficherqteProdPanier()
 }
 
 let deconnexionPageSpec = () => {
@@ -31,35 +31,81 @@ function switchLike(role) {
     }
 }
 
-// quantité à ajouter au panie, bouton + ou - pour le nombre d'articles souhaités
-function qtePlus() {
-    let listePlus = document.getElementsByClassName("plus");
-    for (let i=0; i<listePlus.length; i++) {
-        listePlus[i].addEventListener("click", () => {
-            let parentNode = listePlus[i].parentNode;
-            let nodeQte = parentNode.previousElementSibling.firstChild;
-            let qte = parseInt(nodeQte.innerHTML);
-            let nouvQte = qte + 1;
-            nodeQte.setHTML(nouvQte);
-        })
+function setLocalStorage() {
+    //Local Storage
+    let panier = null;
+    if (localStorage.getItem("panier") == undefined) {
+        localStorage.setItem("panier", '[]'); //panier vide
     }
 }
+    
+function afficherqteProdPanier() {
+    let nbart = JSON.parse(localStorage.getItem("panier"));
+    let nbartlength = nbart.length;
 
-function qteMoins() {
-    let listeMoins = document.getElementsByClassName("moins");
-    for (let i=0; i<listeMoins.length; i++) {
-        listeMoins[i].addEventListener("click", () => {
-            let parentNode = listeMoins[i].parentNode;
-            let nodeQte = parentNode.nextElementSibling.firstChild;
-            let qte = parseInt(nodeQte.innerHTML);
-            let nouvQte = qte - 1;
-            if (nouvQte < 1) {
-                alert("Attention, la quantité doit être minimalement de 1 unité")
-            } else {
-                nodeQte.setHTML(nouvQte);
-            }
-        })
+    if (nbartlength != 0){
+        nbtotalart = nbart.reduce(function(_this, val) {
+            return _this + val.quantite
+        }, 0);
+    } else {
+        nbtotalart = 0;
     }
+
+    let afficherNbart = "(" + nbtotalart + ")";
+    $('#nbart').html(afficherNbart);
+}
+    
+    
+// quantité à ajouter au panie, bouton + ou - pour le nombre d'articles souhaités
+let ajouterauPanier = (idArticle) => {
+    let elementprod = "prod"+idArticle;
+    let nodeQte = document.getElementById(elementprod);
+    let requirednode = nodeQte.getElementsByTagName('li')[1];
+    let anode = requirednode.getElementsByClassName("page-link")[0];
+    
+    let qte = parseInt(anode.innerHTML);
+    let nouvQte = qte + 1;
+    anode.textContent = nouvQte;
+
+    //ajuster quantité
+    let nouvarticle = {
+        id:idArticle,
+        quantite: nouvQte,
+    };
+
+    //ajuster localStorage
+    let panier = [];
+    panier = JSON.parse(localStorage.getItem("panier"));
+    let item = panier.find(el=> el.id == idArticle);
+    
+    if(item == undefined){
+        panier.push(nouvarticle);
+    }else {
+        item.quantite ++;
+    }
+    localStorage.setItem("panier", JSON.stringify(panier));
+    afficherqteProdPanier()
+}
+    
+    
+let enleverduPanier = (idArticle) => {
+    //ajuster quantité
+    let elementprod = "prod"+idArticle;
+    let nodeQte = document.getElementById(elementprod);
+    let requirednode = nodeQte.getElementsByTagName('li')[1];
+    let anode = requirednode.getElementsByClassName("page-link")[0];
+    let qte = parseInt(anode.innerHTML);
+    let nouvQte = qte - 1;
+    anode.textContent = nouvQte;
+
+    //ajuster localStorage
+    let panier = [];
+    panier = JSON.parse(localStorage.getItem("panier"));
+    let item = panier.find(el=> el.id == idArticle);
+    item.quantite >= 1 ? item.quantite -- : item.quantite = 0;
+    
+    localStorage.setItem("panier", JSON.stringify(panier));
+    afficherqteProdPanier()
 }
 
 // afficher carte de localisation

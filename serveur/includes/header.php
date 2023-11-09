@@ -50,6 +50,9 @@
         <div class="panier">
             <a href="panier.php"><img src="<?php echo $panier ?>" alt="voir le panier" id="panier"></a>
         </div>
+        <div class="qteproduits">
+            <span id="nbart">(0)</span>
+        </div>
         <div class="favoris">
             <a href="favoris.php"><img src="<?php echo $favoris ?>" alt="voir les favoris" id="favoris"></a>
         </div>
