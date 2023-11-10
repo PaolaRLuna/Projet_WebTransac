@@ -51,7 +51,7 @@ let chargerCategories = () => {
         data : {"action":"recupererCategories"},
         dataType : "json", 
         success : (reponse) => {
-        	montrerVue("chargerCateg", reponse);
+            montrerVue("chargerCateg", reponse);
         },
         fail : (err) => {
             console.log(err);
@@ -121,10 +121,13 @@ let rechercheCategorie = () => {
     });
 }
 
+
 //lister par catégorie MEMBRE
+let selectedCategorie;//fonctionne pas*********************************************
 let rechercheCategorieMembre = () => {
-    let selectedCategorie = $("#floatingSelect").val();
+    selectedCategorie = $("#floatingSelect").val();
     window.location = 'membre.php?categorie='+selectedCategorie;
+
 }
 
 
@@ -188,16 +191,15 @@ let modifierProduit = () => {
 }
 
 const genererCategories = (liste) => {
-    // document.getElementById('floatingSelect').innerHTML = "";
-    if (document.getElementById('floatingSelect').value == "") { //verifier si ok cote admin aussi
-        let resultat = ""
-        resultat += `<option value="All">Toutes</option>`;
-        for (let  i =0; i < liste.length; i++) {
-            let unGenre = liste[i];
-            resultat += '<option value="'+unGenre.categorie+'">'+unGenre.categorie+'</option>';
-        }
-        document.getElementById('floatingSelect').innerHTML += resultat;
+    let resultat = ""
+    resultat += `<option value="All">Toutes</option>`;
+    for (let  i =0; i < liste.length; i++) {
+        let unGenre = liste[i];
+        resultat += '<option value="'+unGenre.categorie+'">'+unGenre.categorie+'</option>';
     }
+    document.getElementById('floatingSelect').innerHTML += resultat;
+        
+    document.getElementById('floatingSelect').select.value = selectedCategorie;
 }
 
 

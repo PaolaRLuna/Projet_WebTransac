@@ -1,4 +1,18 @@
-  <footer id="footer">
+<?php
+    $pos = strpos($_SERVER['PHP_SELF'], "index.php");
+    if ($pos === false){
+        $map="../../client/images/general/localisation.png";
+        $facebook="../../client/images/general/facebook.png";
+        $insta="../../client/images/general/instagram.png";
+        $gmail="../../client/images/general/gmail.png";
+    }else{
+        $map="client/images/general/localisation.png";
+        $facebook="client/images/general/facebook.png";
+        $insta="client/images/general/instagram.png";
+        $gmail="client/images/general/gmail.png";
+    }
+?>
+<footer id="footer">
     <div class="footer-top">
       <div class="container">
         <div class="row">
@@ -23,15 +37,15 @@
             <p>
               555 5e avenue <br>
               Montréal, Québec<br>
-              Canada <a id="carte" onClick='montrerCarte();'><img src="client/images/general/localisation.png"></a><br><br>
+              Canada <a id="carte" onClick='montrerCarte();'><img src='<?php echo $map ?>'></a><br><br>
               <strong>Téléphone:</strong><a id="telp"> +1 514 555 5555</a><br>
               <strong>Courriel:</strong><a id="emailp" href="mailto:pate-a-pouf@info.com"> pate-a-pouf@info.com</a><br>
             </p>
 
             <div>
-              <a href="#"><img class="liens" src="client/images/general/facebook.png"></a>
-              <a href="#"><img class="liens" src="client/images/general/instagram.png"></a>
-              <a href="#"><img class="liens" src="client/images/general/gmail.png"></a>
+              <a href="#"><img class="liens" src='<?php echo $facebook ?>'></a>
+              <a href="#"><img class="liens" src='<?php echo $insta ?>'></a>
+              <a href="#"><img class="liens" src='<?php echo $gmail ?>'></a>
             </div>
 
           </div>

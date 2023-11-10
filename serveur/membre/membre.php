@@ -58,6 +58,8 @@
 
     </main>
     <form id="deconnexion" action="../connexion/deconnexion.php"></form>
-
+    <?php
+        require_once('../includes/footer.php');
+    ?>
 </body>
 </html>
