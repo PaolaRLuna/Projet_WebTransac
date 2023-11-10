@@ -1,40 +1,40 @@
 const TAXES = 0.1556;
 let panier = null;
 
-afficherqteProdPanier();
+// afficherqteProdPanier();
 
-let attribuerProduits = () =>{
-    //Chercher produits dans localStorage
-    let panier = [];
-    panier = JSON.parse(localStorage.getItem("panier"));
-    panier = panier.filter(item => item.quantite != 0);
-    localStorage.setItem("panier", JSON.stringify(panier));
-    let panierlen = panier.length;
-    if ( panierlen == 0){
-        localStorage.setItem("panier", '[]');
-    } else {
-        panier.forEach(element => {
-            let elementprod = "prod"+element.id;
-            let nodeQte = document.getElementById(elementprod);
-            let requirednode = nodeQte.getElementsByTagName('li')[1];
-            let anode = requirednode.getElementsByClassName("page-link")[0];
+// let attribuerProduits = () =>{
+//     //Chercher produits dans localStorage
+//     let panier = [];
+//     panier = JSON.parse(localStorage.getItem("panier"));
+//     panier = panier.filter(item => item.quantite != 0);
+//     localStorage.setItem("panier", JSON.stringify(panier));
+//     let panierlen = panier.length;
+//     if ( panierlen == 0){
+//         localStorage.setItem("panier", '[]');
+//     } else {
+//         panier.forEach(element => {
+//             let elementprod = "prod"+element.id;
+//             let nodeQte = document.getElementById(elementprod);
+//             let requirednode = nodeQte.getElementsByTagName('li')[1];
+//             let anode = requirednode.getElementsByClassName("page-link")[0];
             
-            let qte = parseInt(element.quantite);
-            let nouvQte = qte;
-            anode.textContent = nouvQte;
-        });
-    }
-}
+//             let qte = parseInt(element.quantite);
+//             let nouvQte = qte;
+//             anode.textContent = nouvQte;
+//         });
+//     }
+// }
 
 
-if (localStorage.getItem("panier") == undefined) {
-    localStorage.setItem("panier", '[]'); //panier vide
-} else {
-    $( document ).ready(function() {
-        attribuerProduits();
-    });
+// if (localStorage.getItem("panier") == undefined) {
+//     localStorage.setItem("panier", '[]'); //panier vide
+// } else {
+//     $( document ).ready(function() {
+//         attribuerProduits();
+//     });
     
-}
+// }
 
 
 let enleverArticle = (btnClose, idArticleEnlever) => {

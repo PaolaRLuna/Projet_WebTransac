@@ -21,19 +21,35 @@
     <script src="../../client/js/global.js"></script>
     <script src="../../client/js/vue.js"></script>
     <script src="../../client/js/panier.js"></script>
+    <script src="../../client/js/requetesProduits.js"></script>
+    <script src="../../client/js/requetesMembres.js"></script>
     <link href="https://fonts.cdnfonts.com/css/bradley-hand-2" rel="stylesheet">
 
-<body onload="initialisation('<?php echo($_SESSION['role']) ?>'); switchHeader('<?php echo($_SESSION['role']) ?>', '<?php echo ($_SESSION['prenom'])  ?>', '<?php echo ($_SESSION['nom'])  ?>', '<?php echo ($_SESSION['photo'])  ?>');">
+<body onload="initialisation('<?php echo($_SESSION['role']) ?>'); switchHeader('<?php echo($_SESSION['role']) ?>', '<?php echo ($_SESSION['prenom'])  ?>', '<?php echo ($_SESSION['nom'])  ?>', '<?php echo ($_SESSION['photo'])  ?>'); chargerCategories();">
     <?php
         require_once(__DIR__.'/../includes/header.php');
     ?>
 
     <main id="pageMembre">
-        <h1>Page membre en construction</h1>
+        <div id="entete-membre">
+            <h2>Découvrez nos délicieux produits!</h2>
+            <div class="options-membre">
+                <div class="form-floating">
+                    <select class="form-select liste-deroulante" id="floatingSelect" aria-label="Floating label select example" onchange='rechercheCategorieMembre();'></select>
+                    <label for="floatingSelect">Catégories</label>
+                </div>
+                <div class="recherche">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2" id="rechercheMotCle">
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2" onClick='rechercheParMotCle();'>Rechercher</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     
 
         <!-- Fin barre navigation -->
-        <div class="container_produits">
+        <div class="container_produits-membre">
             <?php
                 require_once('../produit/affichageProduits.php');
             ?>

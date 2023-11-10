@@ -3,20 +3,24 @@
     require_once(__DIR__.'/../ressources/bd/connexion.inc.php');
     require_once(__DIR__.'/../ressources/bd/modele.inc.php');
 
-    $requete="SELECT * FROM produits";
-
+    if(isset($_GET['categorie'])){
+        $categorie = $_GET['categorie'];
+        $requete="SELECT * FROM produits WHERE categorie='$categorie'";
+        $categorie = "" ;
+    
+    } else {
+        $requete="SELECT * FROM produits";
+    }
+    
     try{
         $instanceModele= modeleDonnees::getInstanceModele();
         $stmt = $instanceModele->executer($requete,[]);
-        if ($ligne=$stmt->fetch(PDO::FETCH_OBJ)){
-            while($ligne=$stmt->fetch(PDO::FETCH_OBJ)){
-                listerProduits($ligne);
-            }
+        while($ligne=$stmt->fetch(PDO::FETCH_OBJ)){
+            listerProduits($ligne);
         }
     }catch (Exception $e){ 
         echo 'ERREUR: '.$e;
     }finally {
-      //unset($connexion);
       //echo json_encode($reponse);
     }
 
@@ -49,15 +53,15 @@
             </ul>
             <nav class = "qte">
                 <ul class="pagination" id="prod'.$produit->IdP.'">
-                    <li class="page-item"><a class="page-link moins" onClick="enleverduPanier('.$produit->IdP.');">-</a></li>
+                    <li class="page-item"><a class="page-link moins">-</a></li>
                     <li class="page-item"><a contenteditable="true" id="quantiteProduit" class="page-link">0</a></li>
-                    <li class="page-item"><a class="page-link plus" onClick="ajouterauPanier('.$produit->IdP.');">+</a></li>
+                    <li class="page-item"><a class="page-link plus">+</a></li>
                 </ul>
             </nav>
 
             <div class="card-body">
                 <p class="card-fav"><img class="etat-like" src="'.$like.'" alt="ajouter aux favoris"></p>
-                <p id="add_to_cart"><img src="'.$ajoutPanier.'"></p>
+                <p id="add_to_cart"><img onClick="ajouterauPanier('.$produit->IdP.');" src="'.$ajoutPanier.'"></p>
             </div>
         </div>';
 

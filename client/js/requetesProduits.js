@@ -1,5 +1,15 @@
 //********************************************
 //Actions et requetes sur les produits 
+let pageEnCours = window.location.pathname;
+pageEnCours = pageEnCours.split("/");
+pageEnCours = pageEnCours[pageEnCours.length - 1];
+let srcUrl;
+if (pageEnCours == "membre.php") {
+    srcUrl =  "../admin/routesProduits.php";
+} else {
+    srcUrl =  "routesProduits.php";
+}
+
 
 let chargerProduits = () => {floatingSelect
     document.getElementById('rechercheMotCle').value="";
@@ -37,7 +47,7 @@ let supprimerProduit = (idP) => {
 let chargerCategories = () => {
     $.ajax({
         type : "POST",
-        url  : "routesProduits.php",
+        url  : srcUrl,
         data : {"action":"recupererCategories"},
         dataType : "json", 
         success : (reponse) => {
@@ -91,7 +101,7 @@ let rechercheParMotCle = () => {
     });
 }
 
-//lister par catégorie
+//lister par catégorie ADMIN
 let rechercheCategorie = () => {
     let selectedCategorie = $("#floatingSelect").val();
     $.ajax({
@@ -109,6 +119,12 @@ let rechercheCategorie = () => {
             console.log(err);
         }
     });
+}
+
+//lister par catégorie MEMBRE
+let rechercheCategorieMembre = () => {
+    let selectedCategorie = $("#floatingSelect").val();
+    window.location = 'membre.php?categorie='+selectedCategorie;
 }
 
 
@@ -172,14 +188,16 @@ let modifierProduit = () => {
 }
 
 const genererCategories = (liste) => {
-    document.getElementById('floatingSelect').innerHTML = "";
-    let resultat = ""
-    resultat += `<option value="All">Toutes</option>`;
-     for (let  i =0; i < liste.length; i++) {
-        let unGenre = liste[i];
-        resultat += '<option value="'+unGenre.categorie+'">'+unGenre.categorie+'</option>';
-     }
-     document.getElementById('floatingSelect').innerHTML += resultat;
+    // document.getElementById('floatingSelect').innerHTML = "";
+    if (document.getElementById('floatingSelect').value == "") { //verifier si ok cote admin aussi
+        let resultat = ""
+        resultat += `<option value="All">Toutes</option>`;
+        for (let  i =0; i < liste.length; i++) {
+            let unGenre = liste[i];
+            resultat += '<option value="'+unGenre.categorie+'">'+unGenre.categorie+'</option>';
+        }
+        document.getElementById('floatingSelect').innerHTML += resultat;
+    }
 }
 
 
