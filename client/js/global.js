@@ -1,10 +1,12 @@
 function initialisation(role = null) { // des fonctions propres au panier et aux favoris
     switchLike(role);
+    qtePlus();
+    qteMoins();
     setLocalStorage();
     afficherqteProdPanier()
-    $( document ).ready(function() {
-        attribuerProduits();
-    });
+    // $( document ).ready(function() {
+    //     attribuerProduits();
+    // });
 }
 
 let deconnexionPageSpec = () => {
@@ -34,9 +36,39 @@ function switchLike(role) {
     }
 }
 
+// quantité à ajouter au panie, bouton + ou - pour le nombre d'articles souhaités
+function qtePlus() {
+    let listePlus = document.getElementsByClassName("plus");
+    for (let i=0; i<listePlus.length; i++) {
+        listePlus[i].addEventListener("click", () => {
+            let parentNode = listePlus[i].parentNode;
+            let nodeQte = parentNode.previousElementSibling.firstChild;
+            let qte = parseInt(nodeQte.innerHTML);
+            let nouvQte = qte + 1;
+            nodeQte.innerHTML=nouvQte;
+        })
+    }
+}
+
+function qteMoins() {
+    let listeMoins = document.getElementsByClassName("moins");
+    for (let i=0; i<listeMoins.length; i++) {
+        listeMoins[i].addEventListener("click", () => {
+            let parentNode = listeMoins[i].parentNode;
+            let nodeQte = parentNode.nextElementSibling.firstChild;
+            let qte = parseInt(nodeQte.innerHTML);
+            let nouvQte = qte - 1;
+            if (nouvQte < 1) {
+                alert("Attention, la quantité doit être minimalement de 1 unité")
+            } else {
+                nodeQte.innerHTML=nouvQte;
+            }
+        })
+    }
+}
+
 function setLocalStorage() {
     //Local Storage
-    let panier = null;
     if (localStorage.getItem("panier") == undefined) {
         localStorage.setItem("panier", '[]'); //panier vide
     }
@@ -48,7 +80,7 @@ function afficherqteProdPanier() {
 
     if (nbartlength != 0){
         nbtotalart = nbart.reduce(function(_this, val) {
-            return _this + val.quantite
+        return _this + val.quantite
         }, 0);
     } else {
         nbtotalart = 0;
@@ -59,21 +91,19 @@ function afficherqteProdPanier() {
 }
     
     
-// quantité à ajouter au panie, bouton + ou - pour le nombre d'articles souhaités
+// quantité à ajouter au panier, bouton + ou - pour le nombre d'articles souhaités
 let ajouterauPanier = (idArticle) => {
     let elementprod = "prod"+idArticle;
     let nodeQte = document.getElementById(elementprod);
     let requirednode = nodeQte.getElementsByTagName('li')[1];
-    let anode = requirednode.getElementsByClassName("page-link")[0];
-    
-    let qte = parseInt(anode.innerHTML);
-    let nouvQte = qte + 1;
-    anode.textContent = nouvQte;
+    let requiredElement= requirednode.childNodes[0];
+    //récupérer quantité
+    let qte = parseInt(requiredElement.innerHTML);
 
-    //ajuster quantité
+    //ajuster objet articleId/quantité
     let nouvarticle = {
         id:idArticle,
-        quantite: nouvQte,
+        quantite: qte
     };
 
     //ajuster localStorage
@@ -84,32 +114,34 @@ let ajouterauPanier = (idArticle) => {
     if(item == undefined){
         panier.push(nouvarticle);
     }else {
-        item.quantite ++;
+        item.quantite=item.quantite+qte;
     }
     localStorage.setItem("panier", JSON.stringify(panier));
+    //remettre quantité à 0 dans le card
+    requiredElement.innerHTML = "0";
     afficherqteProdPanier()
 }
     
     
-let enleverduPanier = (idArticle) => {
-    //ajuster quantité
-    let elementprod = "prod"+idArticle;
-    let nodeQte = document.getElementById(elementprod);
-    let requirednode = nodeQte.getElementsByTagName('li')[1];
-    let anode = requirednode.getElementsByClassName("page-link")[0];
-    let qte = parseInt(anode.innerHTML);
-    let nouvQte = qte - 1;
-    anode.textContent = nouvQte;
+// let enleverduPanier = (idArticle) => {
+//     //ajuster quantité
+//     let elementprod = "prod"+idArticle;
+//     let nodeQte = document.getElementById(elementprod);
+//     let requirednode = nodeQte.getElementsByTagName('li')[1];
+//     let anode = requirednode.getElementsByClassName("page-link")[0];
+//     let qte = parseInt(anode.innerHTML);
+//     let nouvQte = qte - 1;
+//     anode.textContent = nouvQte;
 
-    //ajuster localStorage
-    let panier = [];
-    panier = JSON.parse(localStorage.getItem("panier"));
-    let item = panier.find(el=> el.id == idArticle);
-    item.quantite >= 1 ? item.quantite -- : item.quantite = 0;
+//     //ajuster localStorage
+//     let panier = [];
+//     panier = JSON.parse(localStorage.getItem("panier"));
+//     let item = panier.find(el=> el.id == idArticle);
+//     item.quantite >= 1 ? item.quantite -- : item.quantite = 0;
     
-    localStorage.setItem("panier", JSON.stringify(panier));
-    afficherqteProdPanier()
-}
+//     localStorage.setItem("panier", JSON.stringify(panier));
+//     afficherqteProdPanier()
+// }
 
 // afficher carte de localisation
 const montrerCarte= () => {

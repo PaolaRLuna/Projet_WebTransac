@@ -103,7 +103,7 @@ body {
   */
   .navbar {
     padding: 0;
-    margin-left: 220px;
+    margin-left: 190px;
     margin-top: 5px;
   }
 
@@ -398,14 +398,52 @@ body {
     font-size: 0.8em;
   }
 
+  .moins, .plus, #add_to_cart {
+    cursor: pointer;
+  }
+
   .modal-body-bg {
     background-color: white !important;
   }
 
   /*--------------------------------------------------------------
-  # Produits côté ADMIN
+  # PAGE MEMBRE
   --------------------------------------------------------------*/
+
+  #entete-membre{
+    display: flex;
+    flex-direction: row;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 50px;
+    justify-content: space-between;
+  }
   
+  .options-membre{
+    display: flex;
+    flex-direction: row;
+  }
+    
+  .container_produits-membre{
+    display: inline-flex;
+    justify-content: space-around;;
+    flex-wrap: wrap;
+    margin-left: 40px;
+    margin-right: 40px;
+    background-color: rgba(128, 128, 128, 0.295);
+    padding-top: 20px;
+    padding-left: 20px;
+  }
+  
+  .container_produits-membre .card{
+    margin-bottom: 20px;
+
+  }
+
+  /*--------------------------------------------------------------
+  # PAGE ADMIN
+  --------------------------------------------------------------*/
+  /*navbar Admin*/
   .navbar-admin {
     padding: 0;
     margin-left: 20px;
@@ -487,7 +525,7 @@ body {
     width: 94%;
     margin-left:50px;
   }
-  
+
   /*cards*/
   .card-adminP {
     display: flex;
