@@ -46,27 +46,14 @@ let enleverArticle = (btnClose, idArticleEnlever) => {
     articleEnleverVisuelPanier.parentNode.remove(articleEnleverVisuelPanier);
 
     //Mise à jour du localStorage
-    let panier = JSON.parse(localStorage.getItem("panier"));
+    let panier = [];
+    panier = JSON.parse(localStorage.getItem("panier"));
     let items = panier.filter(element => element.id == idArticleEnlever);
     localStorage.setItem("panier", JSON.stringify(items));
 
-
     //mise a jour qte arts
-
-    let nbart = JSON.parse(localStorage.getItem("panier"));
-    let nbartlength = nbart.length;
-
-    if (nbartlength != 0){
-        nbtotalart = nbart.reduce(function(_this, val) {
-            return _this + val.quantite
-        }, 0);
-    } else {
-        nbtotalart = 0;
-    }
-    afficherNbart = "(" + nbart + ")";
-    $('#nbart').html(afficherNbart);
+    afficherqteProdPanier();
     mettreAJourLaFacture(nouveauTotal);
-    
 }
 
 let mettreAJourLaFacture = (nouveauTotal) => {
@@ -101,7 +88,7 @@ let ajusterTotalAchat = (elemInput, prix, montantActuel) => {
     let item = panier.find(element=> element.id == numprod);
 
     if(item !== undefined){
-        item.quantite = qte;
+        item.quantite = Number(qte);
     }
 
     localStorage.setItem("panier", JSON.stringify(panier));

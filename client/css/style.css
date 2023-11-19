@@ -1061,3 +1061,7 @@ body {
   outline: solid #d0e7a2;
   background-color: white;
 }
+
+#qte{
+  width: 80px!important;
+}
