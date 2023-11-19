@@ -46,13 +46,18 @@ let enleverArticle = (btnClose, idArticleEnlever) => {
     articleEnleverVisuelPanier.parentNode.remove(articleEnleverVisuelPanier);
 
     //Mise à jour du localStorage
-    let panier = JSON.parse(localStorage.getItem("panier"));
+    let panier = [];
+    panier = JSON.parse(localStorage.getItem("panier"));
     let items = panier.filter(element => element.id == idArticleEnlever);
     localStorage.setItem("panier", JSON.stringify(items));
 
 
     //mise a jour qte arts
+    afficherqteProdPanier();
+    mettreAJourLaFacture(nouveauTotal);
+}
 
+function afficherqteProdPanier() {
     let nbart = JSON.parse(localStorage.getItem("panier"));
     let nbartlength = nbart.length;
 
@@ -63,10 +68,9 @@ let enleverArticle = (btnClose, idArticleEnlever) => {
     } else {
         nbtotalart = 0;
     }
-    afficherNbart = "(" + nbart + ")";
+
+    let afficherNbart = "(" + nbtotalart + ")";
     $('#nbart').html(afficherNbart);
-    mettreAJourLaFacture(nouveauTotal);
-    
 }
 
 let mettreAJourLaFacture = (nouveauTotal) => {
