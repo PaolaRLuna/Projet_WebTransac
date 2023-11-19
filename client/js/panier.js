@@ -96,7 +96,7 @@ let ajusterTotalAchat = (elemInput, prix, montantActuel) => {
 
 let payer = () => {
     document.getElementById("payer").innerHTML = "Merci pour votre paiement.";
-    localStorage.removeItem("panier");
+    localStorage.setItem("panier", '[]');
     let nbart = 0;
     afficherNbart = "(" + nbart + ")";
     $('#nbart').html(afficherNbart);
