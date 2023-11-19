@@ -8,12 +8,11 @@ function afficherformulaire() {
 
 
 
-function afficherEtModifierMembre(idMembre) {
-    // Assurez-vous que l'ID du membre est valide
-    if (!idMembre) {
-        console.error("ID du membre manquant");
-        return;
-    }
+function afficherEtModifierMembre() {
+    document.getElementById('pageMembre').style.display = "none";
+    document.getElementById('pageProfil').style.display = "block";
+
+    let idMembre = document.getElementById('idMembreCourant').innerHTML;
 
     // Requête AJAX pour récupérer les données du membre
     $.ajax({
@@ -33,6 +32,7 @@ function afficherEtModifierMembre(idMembre) {
             document.getElementById('nomMembre').textContent = dataMembre.donneesMembre.nom;
             document.getElementById('prenomMembre').textContent = dataMembre.donneesMembre.prenom;
             document.getElementById('sexeMembre').textContent = dataMembre.donneesMembre.sexe;
+            document.getElementById('courriel').textContent = dataMembre.donneesMembre.courriel;
             document.getElementById('datenaissanceMembre').textContent = dataMembre.donneesMembre.datenaissance;
 
             // Remplir le formulaire de modification
@@ -45,9 +45,9 @@ function afficherEtModifierMembre(idMembre) {
 
             // Gestion de la photo de profil
             if (dataMembre.donneesMembre.photo && dataMembre.donneesMembre.photo !== '') {
-                $('#photoMembre').attr('src', dataMembre.donneesMembre.photo);
+                $('#imageDuMembre').attr('src', 'photos/'+dataMembre.donneesMembre.photo);
             } else {
-                $('#photoMembre').hide(); // ou définissez une image par défaut
+                $('#imageDuMembre').hide(); // ou définissez une image par défaut
             }
         },
         fail: (err) => {

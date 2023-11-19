@@ -198,8 +198,6 @@ const genererCategories = (liste) => {
         resultat += '<option value="'+unGenre.categorie+'">'+unGenre.categorie+'</option>';
     }
     document.getElementById('floatingSelect').innerHTML += resultat;
-        
-    document.getElementById('floatingSelect').select.value = selectedCategorie;
 }
 
 
@@ -334,6 +332,12 @@ let relisterProduits =() => {
     document.getElementsByClassName('eHr')[0].style.display = "block";
 }
 
+let montrerProduits = () => {
+    if (pageEnCours == "membre.php") {
+        document.getElementById('pageMembre').style.display = "block";
+        document.getElementById('pageProfil').style.display = "none";
+    }
+}
 
 
 //********************************************

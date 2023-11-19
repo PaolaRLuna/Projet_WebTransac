@@ -17,6 +17,7 @@
                     $ligne2 = $stmt->fetch(PDO::FETCH_OBJ);
                     $_SESSION['prenom'] = $ligne2->prenom;
                     $_SESSION['nom'] = $ligne2->nom;
+                    $_SESSION['id'] = $ligne2->idm;
                     $_SESSION['photo'] = "../membre/photos/".$ligne2->photo;
                     //Si c'est un membre
                     if($ligne->role == 'M'){
