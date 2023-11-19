@@ -176,9 +176,12 @@ const modalCarte = () => {
             </div>`;
 }
 
-// changer le header du site selon la connexion - à garder pour partie 3:MEMBRE
+// changer le header du site selon la connexion
 const switchHeader= (role, prenom, nom, photo) => {
     if (role === "M") {
+        document.getElementById('pageMembre').style.display = "block";
+        document.getElementById('pageProfil').style.display = "none";
+
         let switch1 = document.getElementById('optionHeader1'); 
         let switch2 = document.getElementById('optionHeader2'); 
         switch1.setAttribute("href","javascript:afficherEtModifierMembre()");

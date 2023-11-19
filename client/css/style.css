@@ -439,6 +439,14 @@ body {
     margin-bottom: 20px;
 
   }
+  
+  #imageDuMembre {
+    height: 100px;
+  }
+
+  #pageProfil {
+      margin-bottom: 200px;
+  }
 
   /*--------------------------------------------------------------
   # PAGE ADMIN

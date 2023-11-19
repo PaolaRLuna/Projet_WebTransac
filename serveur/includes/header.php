@@ -24,7 +24,7 @@
                 <li><a class="active" href="index.php">Accueil</a></li>
                 <li class="dropdown"><a href="#"><span>À propos</span> <i class="bi bi-chevron-down"></i></a>
 
-                <li class="dropdown"><a href="#"><span>Produits</span> <i class="bi bi-chevron-right"></i></a>
+                <li class="dropdown"><a href="javascript:montrerProduits();"><span>Produits</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                     <li><a href="#">Pâtes fraîches</a></li>
                     <li><a href="#">Sauces</a></li>
