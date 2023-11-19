@@ -70,7 +70,81 @@ class DaoGestionMembre{
           //unset($connexion);
           return json_encode($this->reponse);
     } 
+
     
+    }
+
+    function MdlM_chargerMembre($idMembre) {
+        // Préparez la requête SQL pour récupérer les informations du membre spécifique
+        $requete = "SELECT * FROM membres m INNER JOIN connexion c ON m.idm = c.idm WHERE m.idm = ?";
     
-    }}
+        try {
+            // Obtenez l'instance du modèle de données
+            $instanceModele = modeleDonnees::getInstanceModele();
+            // Exécutez la requête avec l'ID du membre
+            $stmt = $instanceModele->executer($requete, [$idMembre]);
+    
+            // Si les données sont récupérées avec succès
+            if ($ligne = $stmt->fetch(PDO::FETCH_OBJ)) {
+                // Stockez les données du membre dans le tableau de réponse
+                $this->reponse['OK'] = true;
+                $this->reponse['msg'] = "Opération réussie";
+                $this->reponse['donneesMembre'] = $ligne; // Contiendra les informations du membre
+            } else {
+                // Si aucun membre n'est trouvé avec cet ID
+                $this->reponse['OK'] = false;
+                $this->reponse['msg'] = "Aucun membre trouvé avec l'ID spécifié";
+            }
+        } catch (Exception $e) {
+            // Gestion des erreurs
+            $this->reponse['OK'] = false;
+            $this->reponse['msg'] = "Problème pour obtenir les données du membre: " . $e->getMessage();
+        } finally {
+            // Retournez la réponse sous forme de JSON
+            return json_encode($this->reponse);
+        }
+    }
+
+
+    function MdlM_mettreAJourMembre($idm, $nom, $prenom, $courriel, $sexe, $datenaissance, $photo) {
+        // Assurez-vous que la connexion à la base de données est établie
+        $instanceModele = modeleDonnees::getInstanceModele();
+    
+        // Validation et nettoyage des entrées
+        $idm = filter_var($idm, FILTER_SANITIZE_NUMBER_INT);
+        $nom = filter_var($nom, FILTER_SANITIZE_STRING);
+        $prenom = filter_var($prenom, FILTER_SANITIZE_STRING);
+        $courriel = filter_var($courriel, FILTER_SANITIZE_EMAIL);
+        $sexe = filter_var($sexe, FILTER_SANITIZE_STRING);
+        $datenaissance = filter_var($datenaissance, FILTER_SANITIZE_STRING);
+    
+        // Traitement de la photo si nécessaire
+        // ... (Votre logique de traitement d'image ici)
+    
+        // Préparation de la requête SQL
+        $requete = "UPDATE membres SET nom=?, prenom=?, sexe=?, datenaissance=?, photo=? WHERE idm=?";
+    
+        try {
+            // Exécution de la requête
+            $stmt = $instanceModele->executer($requete, [$nom, $prenom, $sexe, $datenaissance, $photo, $idm]);
+    
+            if ($stmt->rowCount() > 0) {
+                $reponse['OK'] = true;
+                $reponse['msg'] = "Membre mis à jour avec succès";
+            } else {
+                $reponse['OK'] = false;
+                $reponse['msg'] = "Aucune mise à jour nécessaire ou le membre n'existe pas.";
+            }
+        } catch (Exception $e) {
+            $reponse['OK'] = false;
+            $reponse['msg'] = "Erreur lors de la mise à jour des données du membre: " . $e->getMessage();
+        } finally {
+            return json_encode($reponse);
+        }
+    }
+    
+
+}
+
+    
 ?>

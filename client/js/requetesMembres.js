@@ -1,3 +1,120 @@
+//Houssam 
+
+
+function afficherformulaire() {
+    document.getElementsByClassName('container_produits')[0].style.display = "none";
+    document.getElementById('profilConteneur').style.display = "block";
+}
+
+
+
+function afficherEtModifierMembre(idMembre) {
+    // Assurez-vous que l'ID du membre est valide
+    if (!idMembre) {
+        console.error("ID du membre manquant");
+        return;
+    }
+
+    // Requête AJAX pour récupérer les données du membre
+    $.ajax({
+        type: "POST",
+        url: "../../serveur/admin/routesMembres.php",
+        data: { action: "chargerMembre", 'idMembre': idMembre },
+        dataType: "json",
+        success: (dataMembre) => {
+            console.log(dataMembre);
+            // Assurez-vous que les données récupérées sont valides
+            if (!dataMembre.donneesMembre) {
+                console.error("Données du membre non disponibles");
+                return;
+            }
+
+            // Affichage des données du membre
+            document.getElementById('nomMembre').textContent = dataMembre.donneesMembre.nom;
+            document.getElementById('prenomMembre').textContent = dataMembre.donneesMembre.prenom;
+            document.getElementById('sexeMembre').textContent = dataMembre.donneesMembre.sexe;
+            document.getElementById('datenaissanceMembre').textContent = dataMembre.donneesMembre.datenaissance;
+
+            // Remplir le formulaire de modification
+            $('#formModifierProfil #nom').val(dataMembre.donneesMembre.nom);
+            $('#formModifierProfil #prenom').val(dataMembre.donneesMembre.prenom);
+            $('#formModifierProfil #courriel').val(dataMembre.donneesMembre.courriel).prop('disabled', true); 
+            $('input[name="sexe"]').prop('checked', false); 
+            $('input[name="sexe"][value="' + dataMembre.donneesMembre.sexe + '"]').prop('checked', true); 
+            $('#formModifierProfil #datenaissance').val(dataMembre.donneesMembre.datenaissance);        
+
+            // Gestion de la photo de profil
+            if (dataMembre.donneesMembre.photo && dataMembre.donneesMembre.photo !== '') {
+                $('#photoMembre').attr('src', dataMembre.donneesMembre.photo);
+            } else {
+                $('#photoMembre').hide(); // ou définissez une image par défaut
+            }
+        },
+        fail: (err) => {
+            console.error('Erreur lors de la récupération des données du membre', err);
+        }
+    });
+}
+
+
+
+function mettreAJourMembre(idMembre) {
+
+    if (!idMembre) {
+        console.error("ID du membre manquant");
+        return;
+    }
+    let formMembre = new FormData(document.getElementById('formModifierProfil'));
+    formMembre.append('action', 'mettreAJourMembre');
+    formMembre.append('id', idMembre);
+    $.ajax({
+        type: "POST",
+        url: "../../serveur/admin/routesMembres.php",
+        data: formMembre,
+        contentType: false,
+        processData: false,
+        dataType: "json",
+        success: function (reponse) {
+            console.log(reponse);
+            afficherEtModifierMembre(idMembre);
+            if (reponse.success) {
+                console.log('Mise à jour réussie');
+
+            } else {
+                throw new Error('Problème lors de la mise à jour du membre');
+            }
+        },
+        fail: function (err) {
+            console.error('Erreur lors de la mise à jour du membre', err);
+        }
+    });
+}
+
+
+function afficherFormulaireModification() {
+    // Afficher le formulaire de modification
+    document.getElementById('formModifierProfil').style.display = 'block';
+    document.getElementById('nom').value = document.getElementById('nomMembre').textContent;
+    document.getElementById('prenom').value = document.getElementById('prenomMembre').textContent;
+    var sexeActuel = document.getElementById('sexeMembre').textContent;
+
+    if (sexeActuel === 'M') {
+        document.getElementById('sexeM').checked = true;
+    } else if (sexeActuel === 'F') {
+        document.getElementById('sexeF').checked = true;
+    } else if (sexeActuel === 'Autre') {
+        document.getElementById('sexeAutre').checked = true;
+    }
+
+    document.getElementById('datenaissance').value = document.getElementById('datenaissanceMembre').textContent; // Mettez l'ID ou la classe de l'élément contenant la date de naissance actuelle
+    document.getElementById('photoProfil').src = document.getElementById('photoMembre').getAttribute('src'); // Mettez l'ID de l'élément img où la photo est affichée
+    
+}
+
+
+  
+/////////////////////////////////////////////////////////////////////////////////////////
+
 function chargerMembres() {
     document.getElementById('affichercontenuProduits').style.display = "none";
     document.getElementById('contenuProduits').style.display = "none";

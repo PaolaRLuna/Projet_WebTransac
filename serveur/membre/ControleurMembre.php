@@ -28,6 +28,21 @@
         return DaoGestionMembre::getDaoMembre()->MdlM_modifierStatut($idm); 
    }
 
+   function CtrM_chargerMembre(){
+    $idMembre = $_POST['idMembre'];
+    return DaoGestionMembre::getDaoMembre()->MdlM_chargerMembre($idMembre); 
+}
+function CtrM_mettreAJourMembre() {
+    $idm= $_POST['id'];
+    $nom= $_POST['nom'];
+    $prenom= $_POST['prenom'];
+    $courriel= $_POST['courriel'];
+    $sexe= $_POST['sexe'];
+    $datenaissance= $_POST['datenaissance'];
+    $photo= $_POST['photo'];
+    return DaoGestionMembre::getDaoMembre()->MdlM_mettreAJourMembre($idm, $nom, $prenom, $courriel, $sexe, $datenaissance, $photo );
+}
+
     function CtrM_Actions(){ // il est appelé a partir de routes.php
         $action=$_POST['action'];
         switch($action){
@@ -40,6 +55,11 @@
             case "enlever" :
                 //enlever(); 
             break;
+            
+            case "chargerMembre":         
+                return  $this->CtrM_chargerMembre();
+            case "mettreAJourMembre":
+                return $this->CtrM_mettreAJourMembre();
             case "lister" :
                 return $this->CtrM_getAll(); 
         }
