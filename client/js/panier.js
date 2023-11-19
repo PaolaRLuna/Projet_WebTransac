@@ -5,7 +5,7 @@ let listeProduits = null;
 $(document).ready(function() {
     let currentURL = window.location.pathname.split("/").pop()
 
-    if (currentURL != 'index.php'){
+    if (currentURL == "membre.php"){
         chargerProduitsPanier();
     }
     
@@ -120,10 +120,10 @@ let afficherPanier = () => {
     let currentURL = window.location.pathname.split("/").pop()
     //console.log(currentURL);
 
-    if (currentURL == 'index.php'){
+    if (currentURL != 'membre.php'){
         let msg = "Veuillez vous connecter à votre session";
         montrerToast(msg,1);
-    } else {
+    } else if ( currentURL == 'membre.php') {
         //Chercher produits dans localStorage
         let nbart = JSON.parse(localStorage.getItem("panier"));
         let nbartlength = nbart.length;
