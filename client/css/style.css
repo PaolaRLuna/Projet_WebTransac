@@ -1018,3 +1018,38 @@ body {
     background-color: #fff;
     padding: 10px;
   }
+
+       /*--------------------------------------------------------------
+  # Panier
+  --------------------------------------------------------------*/
+
+.closeBtn {
+    color: red;
+    cursor: pointer;
+}
+
+.card-panier{
+    background-color: white;
+}
+
+.modal-body-panier{
+  display: inline;
+  background-color: rgb(252, 211, 196);
+}
+
+.item-1{
+  align-items: center!important;
+  margin-left: 20px;
+  background-color: white!important;
+}
+
+.facture {
+  background-color: rgb(252, 211, 196);
+  outline: solid rgb(252, 211, 196);
+
+}
+
+.paniercontainer{
+  outline: solid #d0e7a2;
+  background-color: white;
+}

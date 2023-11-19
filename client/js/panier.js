@@ -1,43 +1,37 @@
 const TAXES = 0.1556;
 let panier = null;
+let listeProduits = null;
 
-// afficherqteProdPanier();
+$(document).ready(function() {
+    let currentURL = window.location.pathname.split("/").pop()
 
-// let attribuerProduits = () =>{
-//     //Chercher produits dans localStorage
-//     let panier = [];
-//     panier = JSON.parse(localStorage.getItem("panier"));
-//     panier = panier.filter(item => item.quantite != 0);
-//     localStorage.setItem("panier", JSON.stringify(panier));
-//     let panierlen = panier.length;
-//     if ( panierlen == 0){
-//         localStorage.setItem("panier", '[]');
-//     } else {
-//         panier.forEach(element => {
-//             let elementprod = "prod"+element.id;
-//             let nodeQte = document.getElementById(elementprod);
-//             let requirednode = nodeQte.getElementsByTagName('li')[1];
-//             let anode = requirednode.getElementsByClassName("page-link")[0];
-            
-//             let qte = parseInt(element.quantite);
-//             let nouvQte = qte;
-//             anode.textContent = nouvQte;
-//         });
-//     }
-// }
-
-
-// if (localStorage.getItem("panier") == undefined) {
-//     localStorage.setItem("panier", '[]'); //panier vide
-// } else {
-//     $( document ).ready(function() {
-//         attribuerProduits();
-//     });
+    if (currentURL != 'index.php'){
+        chargerProduitsPanier();
+    }
     
-// }
+});
+
+let chargerProduitsPanier = () =>{
+    $.ajax({
+        type : "POST",
+        url  : "../admin/routesProduits.php",
+        data : {action:"lister"},
+        dataType : "json", 
+        success : (reponse) => {//alert(JSON.stringify(reponse['listeProduits']));
+        	listeProduits = reponse['listeProduits'];
+            //alert(listeProduits);
+            
+        },
+        fail : (err) => {
+            console.log(err);
+        }
+    })
+}
+
 
 
 let enleverArticle = (btnClose, idArticleEnlever) => {
+
     let montantArticle;
     if(btnClose.parentNode.previousSibling.nodeType == 3){//Noeud bidon type #text:espace
         montantArticle = parseFloat(btnClose.parentNode.previousSibling.previousSibling.firstChild.nodeValue);
@@ -52,20 +46,27 @@ let enleverArticle = (btnClose, idArticleEnlever) => {
     articleEnleverVisuelPanier.parentNode.remove(articleEnleverVisuelPanier);
 
     //Mise à jour du localStorage
-    panier = JSON.parse(localStorage.getItem("panier"));
-    let nouveauPanier = panier.filter(idArticlePanier => {
-        return idArticlePanier != idArticleEnlever; 
-    })
-    if (nouveauPanier.length == panier.length) {
-        alert("L'article " + idArticleEnlever + " n'existe pas");
+    let panier = JSON.parse(localStorage.getItem("panier"));
+    let items = panier.filter(element => element.id == idArticleEnlever);
+    localStorage.setItem("panier", JSON.stringify(items));
+
+
+    //mise a jour qte arts
+
+    let nbart = JSON.parse(localStorage.getItem("panier"));
+    let nbartlength = nbart.length;
+
+    if (nbartlength != 0){
+        nbtotalart = nbart.reduce(function(_this, val) {
+            return _this + val.quantite
+        }, 0);
     } else {
-        localStorage.setItem("panier", JSON.stringify(nouveauPanier));
-        --nbart;
-        afficherNbart = "(" + nbart + ")";
-        $('#nbart').html(afficherNbart);
-        mettreAJourLaFacture(nouveauTotal);
+        nbtotalart = 0;
     }
-    //document.querySelector("#divRetirer").style.display = 'none';
+    afficherNbart = "(" + nbart + ")";
+    $('#nbart').html(afficherNbart);
+    mettreAJourLaFacture(nouveauTotal);
+    
 }
 
 let mettreAJourLaFacture = (nouveauTotal) => {
@@ -77,6 +78,7 @@ let mettreAJourLaFacture = (nouveauTotal) => {
 }
 
 let ajusterTotalAchat = (elemInput, prix, montantActuel) => {
+
     let ancienMontant;
     let qte = elemInput.value; 
     montantTotalCetArticle = (qte * prix);
@@ -91,88 +93,142 @@ let ajusterTotalAchat = (elemInput, prix, montantActuel) => {
     let ancienTotal = parseFloat(document.getElementById("totalAchat").innerText); 
     let nouveauTotal = (ancienTotal - ancienMontant)+montantTotalCetArticle; 
     mettreAJourLaFacture(nouveauTotal);
+
+    //ajuster local storage
+    let numprod = elemInput.name;
+    let panier = [];
+    panier = JSON.parse(localStorage.getItem("panier"));
+    let item = panier.find(element=> element.id == numprod);
+
+    if(item !== undefined){
+        item.quantite = qte;
+    }
+
+    localStorage.setItem("panier", JSON.stringify(panier));
 } 
 
 let payer = () => {
     document.getElementById("payer").innerHTML = "Merci pour votre paiement.";
+    localStorage.removeItem("panier");
+    let nbart = 0;
+    afficherNbart = "(" + nbart + ")";
+    $('#nbart').html(afficherNbart);
 }
 
 let afficherPanier = () => {
-    let panier = JSON.parse(localStorage.getItem("panier"));
-    let nbArt = panier.length;
-    let vuePanier = `
-        <div class="card">
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="title">
-                        <div class="row">
-                            <div class="col">
-                                <h4><b>Panier d'achats</b></h4>
+
+    let currentURL = window.location.pathname.split("/").pop()
+    //console.log(currentURL);
+
+    if (currentURL == 'index.php'){
+        let msg = "Veuillez vous connecter à votre session";
+        montrerToast(msg,1);
+    } else {
+        //Chercher produits dans localStorage
+        let nbart = JSON.parse(localStorage.getItem("panier"));
+        let nbartlength = nbart.length;
+        let nbtotalart = 0;
+
+        if (nbartlength != 0){
+            nbtotalart = nbart.reduce(function(_this, val) {
+                return _this + val.quantite
+            }, 0);
+        } else {
+            nbtotalart = 0;
+        }
+
+        let panier = JSON.parse(localStorage.getItem("panier"));
+        let vuePanier = `
+            <div class="card-panier">
+                <div class="row row-panier">
+                    <div class="col-md paniercontainer">
+                        <div class="title">
+                            <div class="row">
+                                <div class="col">
+                                    <h4><b>Panier d'achats</b></h4>
+                                </div>
+                                <div class="col align-self-left text-right text-muted">${nbtotalart} articles</div>
                             </div>
-                            <div class="col align-self-center text-right text-muted">${nbArt} articles</div>
+                        </div> 
+            `;
+        let listeArticlesAchetes = [];
+        let listeArticles = listeProduits;
+        panier.forEach(articlels => {
+            let articlepanier = articlels.id;
+            Object(listeArticles).filter(element =>{
+                if(articlepanier == element.IdP){
+                    listeArticlesAchetes.push(element);
+                }
+            } );
+            
+        });
+        //alert(JSON.stringify(listeArticlesAchetes));
+        let totalAchat = 0;
+        let montantTotalCetArticle;
+        let qteart =0;
+        for (let unArticle of listeArticlesAchetes) {
+            panier.forEach(articlepanier => {
+                if (articlepanier.id == unArticle.IdP){
+                    qteart = articlepanier.quantite;
+                };
+                
+            });
+            montantTotalCetArticle = parseFloat(unArticle.prix);
+            vuePanier += ` 
+                <div class="row border-top border-bottom">
+                    <div class="row align-items-center row-panier">
+                        <div class="col-3 item-1"><img class="img-fluid" src="../../client/images/produits/${unArticle.photo}"></div>
+                        <div class="col">
+                            <div class="row text-muted item-2" style="flex-grow: 2">${unArticle.nom}</div>
                         </div>
-                    </div> 
-        `;
-    let listeArticlesAchetes = [];
-    panier.forEach(idArticle => {
-        listeArticlesAchetes.push(listeArticles.find(unArticle => unArticle.ida == idArticle));
-    });
-    let totalAchat = 0;
-    let montantTotalCetArticle;
-    for (let unArticle of listeArticlesAchetes) {
-        montantTotalCetArticle = parseFloat(unArticle.prix);
-        vuePanier += ` 
-            <div class="row border-top border-bottom">
-                <div class="row align-items-center">
-                    <div class="col-2"><img class="img-fluid" src="../../images_articles/${unArticle.imageart}"></div>
-                    <div class="col">
-                        <div class="row text-muted">${unArticle.nomarticle}</div>
+                        <div class="col item-3"> <input type="number" id="qte" name="${unArticle.IdP}" min="1" max="100" value="${qteart}" onChange="ajusterTotalAchat(this,${unArticle.prix}, ${montantTotalCetArticle});"></div>
+                        <div class="col item-4" style="flex-grow: 0.5">${montantTotalCetArticle}$</div>
+                        <div class="col item-5" style="flex-grow: 0.5"><div class="close closeBtn" onClick="enleverArticle(this,${unArticle.IdP});">&#10005;</div></div>
                     </div>
-                    <div class="col"> <input type="number" id="qte" name="qte" min="1" max="100" value=1 onChange="ajusterTotalAchat(this,${unArticle.prix}, ${montantTotalCetArticle});"></div>
-                    <div class="col">${montantTotalCetArticle}$</div>
-                    <div class="col"><div class="close closeBtn" onClick="enleverArticle(this,${unArticle.ida});">&#10005;</div></div>
                 </div>
-            </div>
-        
-        `;
-        totalAchat += montantTotalCetArticle;
+            
+            `;
+            totalAchat += montantTotalCetArticle;
+        }
+
+        let montantTaxes = totalAchat * TAXES;
+        let totalPayer = totalAchat + montantTaxes;
+
+        vuePanier += `
+                </div>
+                        <div class="col-md-4 text-dark facture">
+                            <div>
+                                <h5><b>Facture</b></h5>
+                            </div>
+                            <hr>
+                            <br/>
+                            <div class="row">
+                                <div class="col" style="padding-left:10;">${nbtotalart} ARTICLES</div>
+                                <div id="totalAchat" class="col text-right">${totalAchat.toFixed(2)}$</div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col" style="padding-left:10;">MONTANT TAXES</div>
+                                <div id="idTaxes" class="col text-right">${montantTaxes.toFixed(2)}$</div>
+                            </div>
+                            <br/>
+                            <div class="row">
+                                <div class="col" style="padding-left:10;">MONTANT À PAYER</div>
+                                <div id="totalPayer" class="col text-right">${totalPayer.toFixed(2)}$</div>
+                            </div> 
+                            </br>
+                            <button class="btn btn-dark" onclick="payer();">PAYER</button>
+                            <span id="payer"></span>
+                            <br/> 
+                        </div>
+                    </div>
+                </div>
+            `;
+        $('#contenuPanier').html(vuePanier);
+        document.getElementById("payer").innerHTML = "";
+        let modalPanier = new bootstrap.Modal(document.getElementById('idModPanier'), {});
+        modalPanier.show();
+
     }
     
-    let montantTaxes = totalAchat * TAXES;
-    let totalPayer = totalAchat + montantTaxes;
-
-    vuePanier += `
-            </div>
-                    <div class="col-md-4 bg-info text-dark">
-                        <div>
-                            <h5><b>Facture</b></h5>
-                        </div>
-                        <hr>
-                        <br/>
-                        <div class="row">
-                            <div class="col" style="padding-left:10;">${nbArt} ARTICLES</div>
-                            <div id="totalAchat" class="col text-right">${totalAchat.toFixed(2)}$</div>
-                        </div>
-                        <br/>
-                        <div class="row">
-                            <div class="col" style="padding-left:10;">MONTANT TAXES</div>
-                            <div id="idTaxes" class="col text-right">${montantTaxes.toFixed(2)}$</div>
-                        </div>
-                        <br/>
-                        <div class="row">
-                            <div class="col" style="padding-left:10;">MONTANT À PAYER</div>
-                            <div id="totalPayer" class="col text-right">${totalPayer.toFixed(2)}$</div>
-                        </div> 
-                        </br>
-                        <button class="btn btn-dark" onclick="payer();">PAYER</button>
-                        <span id="payer"></span>
-                        <br/> 
-                    </div>
-                </div>
-            </div>
-        `;
-    $('#contenuPanier').html(vuePanier);
-    document.getElementById("payer").innerHTML = "";
-    let modalPanier = new bootstrap.Modal(document.getElementById('idModPanier'), {});
-    modalPanier.show();
 }

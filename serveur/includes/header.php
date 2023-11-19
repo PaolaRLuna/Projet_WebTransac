@@ -48,7 +48,7 @@
         </nav>
         
         <div class="panier">
-            <a href="panier.php"><img src="<?php echo $panier ?>" alt="voir le panier" id="panier"></a>
+            <a href="javascript:afficherPanier();"><img src="<?php echo $panier ?>" alt="voir le panier" id="panier"></a>
         </div>
         <div class="qteproduits">
             <span id="nbart">(0)</span>
