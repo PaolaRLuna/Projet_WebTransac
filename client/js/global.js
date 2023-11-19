@@ -181,7 +181,7 @@ const switchHeader= (role, prenom, nom, photo) => {
     if (role === "M") {
         let switch1 = document.getElementById('optionHeader1'); 
         let switch2 = document.getElementById('optionHeader2'); 
-        switch1.setAttribute("href","#");
+        switch1.setAttribute("href","javascript:afficherEtModifierMembre()");
         switch1.innerHTML = "Profil";
         switch2.setAttribute("href","javascript:deconnexionPageSpec();");
         switch2.innerHTML = "Déconnexion";
