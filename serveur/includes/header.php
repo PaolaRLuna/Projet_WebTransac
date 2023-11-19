@@ -21,7 +21,7 @@
 
         <nav id="navbar" class="navbar">
             <ul>
-                <li><a class="active" href="index.php">Accueil</a></li>
+                <li><a class="active" href="<?php echo $index ?>">Accueil</a></li>
                 <li class="dropdown"><a href="#"><span>À propos</span> <i class="bi bi-chevron-down"></i></a>
 
                 <li class="dropdown"><a href="javascript:montrerProduits();"><span>Produits</span> <i class="bi bi-chevron-right"></i></a>
