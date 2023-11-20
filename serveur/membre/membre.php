@@ -111,6 +111,12 @@ $idMembre = $_SESSION['id'];//   ?? null;
                             <label for="datenaissance" style="font-weight: bold; font-size: larger; color: blue;">Date de naissance:</label>
                             <input type="date" id="datenaissance" name="datenaissance" class="form-control">
                         </div>
+                        <!-- Aperçu de la nouvelle photo de profil à télécharger -->
+                        <img id="photoProfil" alt="Aperçu de la photo de profil" style="display:none;">
+                        <div class="mb-3" style="max-width: 300px; margin: auto;">
+                            <label for="photo" class="form-label" style="font-weight: bold; font-size: larger; color: blue;">Photo de profil :</label>
+                            <input type="file" id="photo" name="photo" class="form-control" onchange="afficherApercuPhoto(this);">
+                        </div>
                         <div style="text-align: center; margin-top: 20px;">
                             <button type="submit" onclick="javascript:mettreAJourMembre('<?php echo $_SESSION['id']; ?>');">Enregistrer les modifications</button>
                         </div>
