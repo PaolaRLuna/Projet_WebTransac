@@ -437,17 +437,20 @@ body {
   
   .container_produits-membre .card{
     margin-bottom: 20px;
-
   }
   
   #imageDuMembre {
     height: 100px;
   }
 
-  #pageProfil {
+  #pageProfil, #photoProfil {
       margin-bottom: 200px;
   }
 
+  #photoProfil {
+    margin-left: 169px;
+    margin-top: 10px;
+}
   /*--------------------------------------------------------------
   # PAGE ADMIN
   --------------------------------------------------------------*/

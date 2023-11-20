@@ -16,7 +16,7 @@ function afficherEtModifierMembre() {
     // Requête AJAX pour récupérer les données du membre
     $.ajax({
         type: "POST",
-        url: "../../serveur/admin/routesMembres.php",
+        url: "../admin/routesMembres.php",
         data: { action: "chargerMembre", 'idMembre': idMembre },
         dataType: "json",
         success: (dataMembre) => {

@@ -122,26 +122,6 @@ let ajouterauPanier = (idArticle) => {
     afficherqteProdPanier()
 }
     
-    
-// let enleverduPanier = (idArticle) => {
-//     //ajuster quantité
-//     let elementprod = "prod"+idArticle;
-//     let nodeQte = document.getElementById(elementprod);
-//     let requirednode = nodeQte.getElementsByTagName('li')[1];
-//     let anode = requirednode.getElementsByClassName("page-link")[0];
-//     let qte = parseInt(anode.innerHTML);
-//     let nouvQte = qte - 1;
-//     anode.textContent = nouvQte;
-
-//     //ajuster localStorage
-//     let panier = [];
-//     panier = JSON.parse(localStorage.getItem("panier"));
-//     let item = panier.find(el=> el.id == idArticle);
-//     item.quantite >= 1 ? item.quantite -- : item.quantite = 0;
-    
-//     localStorage.setItem("panier", JSON.stringify(panier));
-//     afficherqteProdPanier()
-// }
 
 // afficher carte de localisation
 const montrerCarte= () => {

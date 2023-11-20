@@ -62,7 +62,7 @@ $idMembre = $_SESSION['id'];//   ?? null;
         <!-- page profil -->
         <section id="pageProfil" class="container mt-5">
             <h1 class="text-center mb-4" style="margin-top: 150px;">Profil du Membre</h1>
-            <div class="row">
+            <div class="row centrerForm">
 
                 <!-- Informations du Membre -->
                 <div class="col-md-6">
