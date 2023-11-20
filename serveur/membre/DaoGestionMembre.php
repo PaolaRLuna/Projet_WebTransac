@@ -106,40 +106,82 @@ class DaoGestionMembre{
     }
 
 
+    
     function MdlM_mettreAJourMembre($idm, $nom, $prenom, $courriel, $sexe, $datenaissance, $photo) {
-        // Assurez-vous que la connexion à la base de données est établie
-        $instanceModele = modeleDonnees::getInstanceModele();
-    
-        // Validation et nettoyage des entrées
-        $idm = filter_var($idm, FILTER_SANITIZE_NUMBER_INT);
-        $nom = filter_var($nom, FILTER_SANITIZE_STRING);
-        $prenom = filter_var($prenom, FILTER_SANITIZE_STRING);
-        $courriel = filter_var($courriel, FILTER_SANITIZE_EMAIL);
-        $sexe = filter_var($sexe, FILTER_SANITIZE_STRING);
-        $datenaissance = filter_var($datenaissance, FILTER_SANITIZE_STRING);
-    
-        // Traitement de la photo si nécessaire
-        // ... (Votre logique de traitement d'image ici)
-    
-        // Préparation de la requête SQL
-        $requete = "UPDATE membres SET nom=?, prenom=?, sexe=?, datenaissance=?, photo=? WHERE idm=?";
+        $reponse = array();
     
         try {
-            // Exécution de la requête
-            $stmt = $instanceModele->executer($requete, [$nom, $prenom, $sexe, $datenaissance, $photo, $idm]);
+            // Récupération de la photo actuelle du membre
+            $photoActuelle = DaoGestionMembre::getPhotoMembre($idm);
+            $photoAUpload = null;
     
-            if ($stmt->rowCount() > 0) {
+            // Vérifie si une nouvelle photo a été uploadée
+            if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+                $photoAUpload = DaoGestionMembre::uploadPhotoMembre();
+            }
+    
+            // Détermine la photo à utiliser
+            $photoFinal = $photoAUpload ? $photoAUpload : $photoActuelle;
+    
+            // Préparation de la requête SQL
+            $requete = "UPDATE membres SET nom=?, prenom=?, sexe=?, datenaissance=?, photo=? WHERE idm=?";
+            $parametres = array($nom, $prenom, $sexe, $datenaissance, $photoFinal, $idm);
+    
+            $instanceModele = modeleDonnees::getInstanceModele();
+            $stmt = $instanceModele->executer($requete, $parametres);
+    
+            // Traitement de la réponse
+            if ($stmt && $stmt->rowCount() > 0) {
                 $reponse['OK'] = true;
-                $reponse['msg'] = "Membre mis à jour avec succès";
+                $reponse['msg'] = "Succès de la mise à jour.";
             } else {
                 $reponse['OK'] = false;
-                $reponse['msg'] = "Aucune mise à jour nécessaire ou le membre n'existe pas.";
+                $reponse['msg'] = "Aucune modification nécessaire.";
             }
         } catch (Exception $e) {
             $reponse['OK'] = false;
-            $reponse['msg'] = "Erreur lors de la mise à jour des données du membre: " . $e->getMessage();
+            $reponse['msg'] = "Erreur lors de la mise à jour : " . $e->getMessage();
         } finally {
             return json_encode($reponse);
+        }
+    }
+    function getPhotoMembre($idm) {
+        $instanceModele = modeleDonnees::getInstanceModele();
+        $requete = "SELECT photo FROM membres WHERE idm = ?";
+    
+        try {
+            $stmt = $instanceModele->executer($requete, [$idm]);
+            if ($stmt->rowCount() > 0) {
+                $photo = $stmt->fetch(PDO::FETCH_ASSOC);
+                return $photo['photo'];
+            }
+        } catch (Exception $e) {
+            error_log("Erreur lors de la récupération de la photo : " . $e->getMessage());
+        }
+    
+        return null;
+    }
+        
+    function uploadPhotoMembre() {
+        $targetRepertoire = "../../serveur/membre/photos/";
+        $allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+        $defaultImage = "default-profile.jpg";
+        $photo = $_FILES['photo'];
+    
+        if ($photo['error'] !== UPLOAD_ERR_OK) {
+            return $defaultImage;
+        }
+    
+        $fileType = strtolower(pathinfo($photo['name'], PATHINFO_EXTENSION));
+        if (!in_array($fileType, $allowedTypes)) {
+            return $defaultImage;
+        }
+    
+        $nomFichierUnique = uniqid() . '.' . $fileType;
+        if (move_uploaded_file($photo['tmp_name'], $targetRepertoire . $nomFichierUnique)) {
+            return $nomFichierUnique;
+        } else {
+            return $defaultImage;
         }
     }
     

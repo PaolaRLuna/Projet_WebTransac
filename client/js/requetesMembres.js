@@ -7,7 +7,6 @@ function afficherformulaire() {
 }
 
 
-
 function afficherEtModifierMembre() {
     document.getElementById('pageMembre').style.display = "none";
     document.getElementById('pageProfil').style.display = "block";
@@ -107,8 +106,31 @@ function afficherFormulaireModification() {
     }
 
     document.getElementById('datenaissance').value = document.getElementById('datenaissanceMembre').textContent; // Mettez l'ID ou la classe de l'élément contenant la date de naissance actuelle
-    document.getElementById('photoProfil').src = document.getElementById('photoMembre').getAttribute('src'); // Mettez l'ID de l'élément img où la photo est affichée
-    
+   
+    let photoActuelle = document.getElementById('imageDuMembre').getAttribute('src');
+    if (photoActuelle) {
+        // Mettre à jour l'aperçu de la photo de profil dans le formulaire
+        let photoAffichage = document.getElementById('photoProfil');
+        photoAffichage.src = photoActuelle;
+        photoAffichage.style.display = 'block'; // Assurez-vous que l'élément 'photoProfil' est bien un élément d'image
+    } else {
+        // Si aucune photo n'est disponible, masquez l'élément d'aperçu de la photo
+        let photoAffichage = document.getElementById('photoProfil');
+        photoAffichage.style.display = 'none';
+    }
+   
+    //document.getElementById('photoProfil').src = document.getElementById('imageDuMembre').getAttribute('src'); // Mettez l'ID de l'élément img où la photo est affichée
+}
+
+function afficherApercuPhoto(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.getElementById('photoProfil').src = e.target.result;
+            document.getElementById('photoProfil').style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
 }
 
 
