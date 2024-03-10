@@ -9,3 +9,5 @@
 ### Badr Malouli
 
 ## All rights reserved.
+
+<img width="896" alt="pap" src="https://github.com/PaolaRLuna/Projet_WebTransac-Pate-A-Pouf_ecommerce_website_PHP_XAMPP/assets/116096039/425e2839-2687-44fd-89fe-991a4414983b">
